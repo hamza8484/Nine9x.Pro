@@ -1,0 +1,46 @@
+{% extends "users/base.html" %}
+{% load i18n %}
+
+{% block title %}
+    {{ _('تسجيل الخروج') }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-4">
+        <!-- عرض الرسائل إذا كانت موجودة -->
+        {% if messages %}
+            <div class="alert alert-info" role="alert">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- النموذج الخاص بتسجيل الدخول مرة أخرى -->
+        <div class="card" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{ _('لقد تم تسجيل الخروج') }}</h5>
+                <p class="card-text">
+                    {{ _('شكرًا لك على وقتك، يمكنك التواصل معي إذا كان لديك أي تعليقات أو اقتراحات عبر بريدي الإلكتروني.') }}
+                </p>
+                <br><hr>
+                
+                <!-- نموذج تسجيل الدخول مرة أخرى -->
+                <form action="{% url 'logout' %}" method="POST">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">{{ _('تسجيل الدخول مرة أخرى') }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // التوجيه التلقائي بعد 3 ثوانٍ
+        window.onload = function() {
+            setTimeout(function() {
+                window.location.href = "{% url 'login' %}";
+            }, 3000);  // التوجيه بعد 3 ثوانٍ
+        };
+    </script>
+    
+{% endblock content %}

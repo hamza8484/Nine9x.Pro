@@ -1,0 +1,221 @@
+{%  extends "base.html" %}
+{% load i18n %}
+{% block title %}
+لوحة التحكم
+{% endblock title %}
+
+{% load static %} 
+
+{% block content %}
+
+{% load i18n %}
+
+<!-- مربعات  -->
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box">
+        <span class="info-box-icon bg-info elevation-1"><i class="fas fa-cog"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">CPU Traffic</span>
+          <span class="info-box-number">
+            10
+            <small>%</small>
+          </span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-thumbs-up"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Likes</span>
+          <span class="info-box-number">41,410</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+
+    <!-- fix for small devices only -->
+    <div class="clearfix hidden-md-up"></div>
+
+    <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Sales</span>
+          <span class="info-box-number">760</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+    <div class="col-12 col-sm-6 col-md-3">
+      <div class="info-box mb-3">
+        <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">New Members</span>
+          <span class="info-box-number">2,000</span>
+        </div>
+        <!-- /.info-box-content -->
+      </div>
+      <!-- /.info-box -->
+    </div>
+    <!-- /.col -->
+  </div>
+ <!-- نهاية الكود -->
+
+    <!-- أول بطاقة -->
+    <div class="row">
+      <!-- أول بطاقة -->
+      <div class="col-md-3"> <!-- استخدم col-md-6 لتقسيم المساحة إلى نصفين -->
+        <div class="card">
+          <div class="card-body">
+            <h5>{% trans "إجمالي الفواتير" %}</h5>
+            <p>{{ total_sales }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ثاني بطاقة -->
+      <div class="col-md-3"> <!-- استخدم col-md-6 لتقسيم المساحة إلى نصفين -->
+        <div class="card">
+          <div class="card-body">
+            <h5>{% trans "إجمالي فواتير المبيعات" %}</h5>
+            <p>{{ total_revenue }}</p>
+          </div>
+        </div>
+      </div>
+       <!-- ثاني بطاقة -->
+       <div class="col-md-3"> <!-- استخدم col-md-6 لتقسيم المساحة إلى نصفين -->
+        <div class="card">
+          <div class="card-body">
+            <h5>{% trans "إجمالي فواتير المشتريات" %}</h5>
+            <p>{{ total_revenue }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"> <!-- استخدم col-md-6 لتقسيم المساحة إلى نصفين -->
+        <div class="card">
+          <div class="card-body">
+            <h5>{% trans "إجمالي فواتير المشتريات" %}</h5>
+            <p>{{ total_revenue }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- نهاية الكود -->
+
+    <hr>
+
+  <!-- المربعين في منتصف الصفحة -->
+    <div class="input-group-container">
+      <div class="input-group-append">
+        <div dir="rtl" class="card mb-8">
+          <div class="image-container">
+            <img src="/static/logomain1.jpg" alt="Zatca Logo" loading="lazy" class="responsive-img">
+          </div>
+          <h5>{% trans "نظام ناينوكس للمطاعم" %}</h5>
+          <hr>
+          <p>{% trans "متوافق مع نظام الفوترة الإلكترونية 'فاتورة مبسطة' التابع لهيئة الزكاة والضريبة والجمارك، حتى يتمكّنوا من رفع الفواتير الإلكترونية للهيئة." %}</p>
+          <p>{% trans "لمزيد من التفاصيل يرجى التواصل مع فريق المبيعات." %}</p>
+        </div>
+      </div>
+
+      <div class="input-group-append">
+        <div dir="rtl" class="card mb-8">
+          <div class="image-container">
+            <img src="/static/logomain1.jpg" alt="Zatca Logo" loading="lazy" class="responsive-img">
+          </div>
+          <h5>{% trans "نظام ناينوكس للمطاعم" %}</h5>
+          <hr>
+          <p>{% trans "متوافق مع نظام الفوترة الإلكترونية 'فاتورة مبسطة' التابع لهيئة الزكاة والضريبة والجمارك، حتى يتمكّنوا من رفع الفواتير الإلكترونية للهيئة." %}</p>
+          <p>{% trans "لمزيد من التفاصيل يرجى التواصل مع فريق المبيعات." %}</p>
+        </div>
+      </div>
+    </div>
+  <!-- نهاية الكود -->
+<hr>
+
+    <style>
+      .input-group-container {
+        display: inline-flex;
+        justify-content: space-between; /* يجعل المساحة موزعة بين المربعين */
+        gap: 20px; /* مسافة بين المربعين */
+      }
+
+      .input-group-append {
+        flex: 1; /* يجعل المربعين بنفس الحجم */
+      }
+
+      .card {
+        padding: 5px;
+        border: 0.5px solid #ddd;
+        border-radius: 8px;
+        background-color: #fff;
+      }
+
+      .image-container {
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      .responsive-img {
+        max-width: 30%;
+        height: auto;
+      }
+
+      h5 {
+        margin: 10px 0;
+      }
+
+      p {
+        margin: 10px 0;
+      }
+    </style>
+    <!-- نهاية الكود -->
+
+    <style>
+      .flex-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5px;
+      }
+
+      .contact-info {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .icon {
+        margin-right: 10px;
+      }
+
+      .contact-qr img {
+        border: 5px solid #f76c6c;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+      }
+
+      .contact-qr img:hover {
+        transform: scale(1.05);
+      }
+    </style>
+{% endblock content %}

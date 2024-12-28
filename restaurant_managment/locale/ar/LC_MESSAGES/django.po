@@ -1,0 +1,3681 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) 2024 MyProject
+# This file is distributed under the same license as the MyProject package.
+# FIRST AUTHOR <ahmed@example.com>, 2024.
+#
+# -*- coding: utf-8 -*-
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: MyProject 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-12-03 05:29+0300\n"
+"PO-Revision-Date: 2024-12-03 12:00+0300\n"
+"Last-Translator: Hamzajarrar  <hamzajarrar84@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: .\CompanyInfo\models.py:6
+msgid "إسم الشركة"
+msgstr ""
+
+#: .\CompanyInfo\models.py:7 .\CompanyInfo\templates\add_company_info.html:43
+#: .\purchases\templates\purchases\Supplier\Supplier.html:21
+#: .\purchases\templates\purchases\Supplier\Supplier.html:83
+#: .\sales\models.py:21 .\sales\templates\sales\customer\customer.html:20
+#: .\sales\templates\sales\customer\customer.html:84
+msgid "الرقم الضريبي"
+msgstr ""
+
+#: .\CompanyInfo\models.py:8 .\configrate\forms.py:29 .\users\forms.py:23
+#: .\users\templates\users\password_reset.html:32
+#: .\users\templates\users\register.html:64
+msgid "الإيميل"
+msgstr ""
+
+#: .\CompanyInfo\models.py:9 .\CompanyInfo\templates\add_company_info.html:56
+msgid "السجل التجاري"
+msgstr ""
+
+#: .\CompanyInfo\models.py:10 .\CompanyInfo\templates\add_company_info.html:62
+msgid "الدولة"
+msgstr ""
+
+#: .\CompanyInfo\models.py:11 .\CompanyInfo\templates\add_company_info.html:68
+msgid "المدينة"
+msgstr ""
+
+#: .\CompanyInfo\models.py:12 .\CompanyInfo\templates\add_company_info.html:75
+#: .\sales\models.py:22 .\sales\templates\sales\customer\customer.html:21
+msgid "رقم الهاتف"
+msgstr ""
+
+#: .\CompanyInfo\models.py:13 .\CompanyInfo\templates\add_company_info.html:80
+#: .\sales\models.py:23 .\sales\templates\sales\customer\customer.html:22
+msgid "رقم الجوال"
+msgstr ""
+
+#: .\CompanyInfo\models.py:14 .\CompanyInfo\templates\add_company_info.html:88
+#: .\purchases\models.py:50 .\purchases\models.py:73
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:153
+msgid "ملاحظات"
+msgstr ""
+
+#: .\CompanyInfo\models.py:15 .\CompanyInfo\templates\add_company_info.html:94
+#: .\purchases\models.py:22
+#: .\purchases\templates\purchases\Supplier\Supplier.html:24
+#: .\purchases\templates\purchases\Supplier\Supplier.html:110
+#: .\sales\Customer\forms.py:31 .\sales\models.py:24
+#: .\sales\templates\sales\customer\customer.html:23
+#: .\sales\templates\sales\customer\customer.html:111
+msgid "العنوان"
+msgstr ""
+
+#: .\CompanyInfo\models.py:16 .\CompanyInfo\templates\add_company_info.html:101
+msgid "الشعار"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:6
+msgid "معلومات المؤسسة"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:24
+msgid "تعديل المعلومات"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:26
+msgid "إضافة المعلومات"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:36
+msgid "اسم المؤسسة / الشركة"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:48 .\support\forms.py:6
+msgid "البريد الإلكتروني"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:108
+#: .\configrate\Unit\views.py:111 .\configrate\itemtype\views.py:124
+#: .\configrate\views.py:117 .\expense\templates\expense\expense_list.html:39
+#: .\input\Category\views.py:107 .\input\Items\views.py:221
+#: .\input\templates\input\inventory\inventory_list.html:107
+#: .\pos\session\views.py:124 .\purchases\Supplier\views.py:121
+#: .\purchases\views.py:324 .\sales\Customer\views.py:121 .\sales\views.py:328
+msgid "تعديل"
+msgstr ""
+
+#: .\CompanyInfo\templates\add_company_info.html:110
+#: .\expense\templates\expense\add_expense.html:47
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:127
+msgid "إضافة"
+msgstr ""
+
+#: .\CompanyInfo\templates\company_info_success.html:7
+msgid "نجاح حفظ البيانات"
+msgstr ""
+
+#: .\CompanyInfo\templates\company_info_success.html:53
+msgid "تم حفظ معلومات المؤسسة بنجاح!"
+msgstr ""
+
+#: .\CompanyInfo\templates\company_info_success.html:55
+msgid "عودة إلى صفحة إضافة أو تعديل المعلومات"
+msgstr ""
+
+#: .\CompanyInfo\views.py:23
+msgid "تم حفظ المعلومات بنجاح!"
+msgstr ""
+
+#: .\CompanyInfo\views.py:26
+msgid "حدث خطأ أثناء حفظ البيانات. الرجاء التحقق من المدخلات."
+msgstr ""
+
+#: .\TaxApp\forms.py:11 .\TaxApp\models.py:5
+#: .\TaxApp\templates\tax_app\add_tax.html:43
+#: .\TaxApp\templates\tax_app\list_taxes.html:13
+msgid "اسم الضريبة"
+msgstr ""
+
+#: .\TaxApp\forms.py:12 .\TaxApp\models.py:6
+#: .\TaxApp\templates\tax_app\add_tax.html:49
+#: .\TaxApp\templates\tax_app\list_taxes.html:14
+msgid "نسبة الضريبة"
+msgstr ""
+
+#: .\TaxApp\forms.py:15
+msgid "أدخل اسم الضريبة هنا"
+msgstr ""
+
+#: .\TaxApp\forms.py:16
+msgid "أدخل نسبة الضريبة هنا (مثال: 5 أو 10)"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:8
+#: .\TaxApp\templates\tax_app\add_tax.html:29
+msgid "تعديل الضريبة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:10
+msgid "إضافة ضريبة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:31
+msgid "إضافة ضريبة جديدة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:57
+#: .\expense\templates\expense\expense_edit.html:50
+msgid "حفظ التعديلات"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:59
+msgid "حفظ الضريبة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:64
+msgid "عرض الضرائب المضافة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\add_tax.html:74
+msgid "هل أنت متأكد أنك تريد تعديل الضريبة؟"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\list_taxes.html:5
+msgid "ضريبة القيمة المضافة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\list_taxes.html:9
+msgid "الضريبة المضافة"
+msgstr ""
+
+#: .\TaxApp\templates\tax_app\list_taxes.html:27
+msgid "رجوع لصفحة الضريبة"
+msgstr ""
+
+#: .\TaxApp\views.py:18
+msgid "تم تعديل الضريبة بنجاح!"
+msgstr ""
+
+#: .\TaxApp\views.py:30
+msgid "تم إضافة الضريبة بنجاح!"
+msgstr ""
+
+#: .\configrate\Unit\views.py:51 .\configrate\store\views.py:33
+#: .\input\Category\views.py:49 .\pos\device\views.py:59
+#: .\pos\session\views.py:53
+msgid "تم الحفظ"
+msgstr ""
+
+#: .\configrate\Unit\views.py:56 .\input\Category\views.py:54
+#: .\pos\device\views.py:64 .\pos\session\views.py:58
+msgid "خطاء في الحفظ"
+msgstr ""
+
+#: .\configrate\Unit\views.py:66 .\input\Category\views.py:64
+#: .\input\Items\views.py:171 .\pos\device\views.py:79
+#: .\pos\session\views.py:68
+msgid "تم الحذف"
+msgstr ""
+
+#: .\configrate\Unit\views.py:69 .\input\Category\views.py:67
+#: .\pos\device\views.py:82 .\pos\session\views.py:71 .\purchases\views.py:261
+msgid "خطاء بالحذف"
+msgstr ""
+
+#: .\configrate\Unit\views.py:72 .\input\Category\views.py:70
+#: .\input\Items\views.py:177 .\pos\device\views.py:85
+#: .\pos\session\views.py:74 .\sales\Customer\views.py:74
+msgid "لا يوجد الصنف"
+msgstr ""
+
+#: .\configrate\Unit\views.py:111 .\configrate\itemtype\views.py:125
+#: .\configrate\views.py:117 .\input\Category\views.py:107
+#: .\input\Items\views.py:221 .\pos\session\views.py:124
+#: .\purchases\Supplier\views.py:121
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:235
+#: .\purchases\views.py:324 .\sales\Customer\views.py:121 .\sales\views.py:328
+msgid "حذف"
+msgstr ""
+
+#: .\configrate\forms.py:15 .\users\templates\users\register.html:40
+msgid "الإسم الأول"
+msgstr ""
+
+#: .\configrate\forms.py:20 .\users\forms.py:16
+#: .\users\templates\users\register.html:48
+msgid "الإسم الثاني"
+msgstr ""
+
+#: .\configrate\forms.py:25 .\users\forms.py:20 .\users\forms.py:46
+#: .\users\templates\users\login.html:40
+#: .\users\templates\users\register.html:58
+msgid "إسم المستخدم"
+msgstr ""
+
+#: .\configrate\forms.py:34
+msgid "كلمية المرور"
+msgstr ""
+
+#: .\configrate\forms.py:41 .\users\forms.py:33
+msgid "تأكيد كلمة المرور"
+msgstr ""
+
+#: .\configrate\itemtype\views.py:51 .\configrate\views.py:48
+#: .\purchases\Supplier\views.py:54 .\sales\Customer\views.py:55
+msgid "تمت عملية الحفظ"
+msgstr ""
+
+#: .\configrate\itemtype\views.py:56
+msgid "خطأ في عملية الحفظ"
+msgstr ""
+
+#: .\configrate\itemtype\views.py:66 .\configrate\views.py:64
+#: .\purchases\Supplier\views.py:67 .\sales\Customer\views.py:68
+msgid "تمت عملية الحذف"
+msgstr ""
+
+#: .\configrate\itemtype\views.py:69 .\configrate\views.py:67
+#: .\purchases\Supplier\views.py:70 .\sales\Customer\views.py:71
+#: .\sales\views.py:244
+msgid "خطأ في عملية الحذف"
+msgstr ""
+
+#: .\configrate\itemtype\views.py:72 .\configrate\views.py:70
+msgid "لا يوجد أصناف"
+msgstr ""
+
+#: .\configrate\models.py:5 .\configrate\models.py:13 .\configrate\models.py:20
+#: .\configrate\templates\configrate\itemstype\items_type.html:58
+#: .\configrate\templates\configrate\store\store.html:17
+#: .\configrate\templates\configrate\store\store.html:50
+msgid "الاسم عربي"
+msgstr ""
+
+#: .\configrate\models.py:6 .\configrate\models.py:14 .\configrate\models.py:21
+#: .\configrate\templates\configrate\Items\Items.html:21
+#: .\configrate\templates\configrate\Items\Items.html:66
+#: .\configrate\templates\configrate\store\store.html:18
+#: .\configrate\templates\configrate\store\store.html:56
+#: .\configrate\templates\configrate\unit\unit_item.html:18
+#: .\purchases\templates\purchases\Supplier\Supplier.html:73
+msgid "الاسم الاجنبي"
+msgstr ""
+
+#: .\configrate\models.py:7
+msgid "رمز الوحدة"
+msgstr ""
+
+#: .\configrate\models.py:22 .\pos\models.py:19
+msgid "مغلق"
+msgstr ""
+
+#: .\configrate\store\views.py:38
+msgid "خطأ في الحفظ"
+msgstr ""
+
+#: .\configrate\store\views.py:69 .\input\Category\views.py:103
+msgid "مفعل"
+msgstr ""
+
+#: .\configrate\store\views.py:71 .\input\Category\views.py:105
+msgid "موقف"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:5
+msgid "شاشة الاصناف"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:10
+#: .\pos\templates\device\device.html:12
+#: .\pos\templates\session\session.html:13
+msgid "جديد"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:17
+#: .\input\Items\forms.py:38 .\input\templates\input\Items\Items.html:22
+#: .\input\templates\input\Items\Items.html:87
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:133
+#: .\sales\forms.py:270
+msgid "الوحدة"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:18
+#: .\configrate\templates\configrate\Items\Items.html:80
+msgid "نوع الصنف"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:19
+#: .\configrate\templates\configrate\Items\Items.html:86
+#: .\input\Items\forms.py:42 .\input\models.py:21
+#: .\input\templates\input\Items\Items.html:26
+#: .\input\templates\input\Items\Items.html:104
+#: .\input\templates\input\inventory\inventory_list.html:80
+msgid "الباركود"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:20
+#: .\configrate\templates\configrate\Items\Items.html:60
+#: .\input\Items\forms.py:35 .\pos\templates\device\device.html:52
+#: .\purchases\templates\purchases\Supplier\Supplier.html:66
+msgid "الاسم المحلي"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:22
+#: .\configrate\templates\configrate\itemstype\items_type.html:19
+#: .\configrate\templates\configrate\unit\unit_item.html:20
+#: .\input\templates\input\Category\category.html:21
+#: .\pos\templates\device\device.html:20
+#: .\pos\templates\session\session.html:24
+#: .\purchases\templates\purchases\Supplier\Supplier.html:26
+#: .\sales\templates\sales\customer\customer.html:25
+msgid "الاحداث"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:33
+#: .\input\templates\input\Items\Items.html:38
+msgid "إضافة الاصناف"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:74
+msgid "الوحدة الرئيسية"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:92
+#: .\configrate\templates\configrate\itemstype\items_type.html:74
+#: .\configrate\templates\configrate\store\store.html:72
+#: .\configrate\templates\configrate\unit\unit_item.html:81
+#: .\configrate\templates\configrate\users.html:98
+#: .\input\templates\input\Category\category.html:72
+#: .\input\templates\input\Items\Items.html:142
+#: .\pos\templates\device\device.html:59
+#: .\pos\templates\session\session.html:75
+#: .\purchases\templates\purchases\Supplier\Supplier.html:128
+#: .\sales\templates\sales\customer\customer.html:134
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:191
+#: .\users\templates\users\profile.html:58
+msgid "حفظ"
+msgstr ""
+
+#: .\configrate\templates\configrate\Items\Items.html:151
+#: .\configrate\templates\configrate\itemstype\items_type.html:136
+#: .\configrate\templates\configrate\unit\unit_item.html:139
+#: .\configrate\templates\configrate\users.html:161
+#: .\input\templates\input\Category\category.html:128
+#: .\input\templates\input\Items\Items.html:236
+#: .\pos\templates\device\device.html:120
+#: .\pos\templates\session\session.html:150
+#: .\purchases\templates\purchases\Supplier\Supplier.html:191
+#: .\sales\templates\sales\customer\customer.html:212
+msgid "هل حقا تريد الحذف؟"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:5
+msgid "شاشة انواع الاصناف"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:10
+msgid "إضافة نوع جديد للصنف"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:16
+#: .\configrate\templates\configrate\store\store.html:16
+#: .\configrate\templates\configrate\unit\unit_item.html:16
+#: .\configrate\templates\configrate\users.html:17
+#: .\input\templates\input\Category\category.html:17
+#: .\input\templates\input\Items\Items.html:18
+#: .\purchases\templates\purchases\Supplier\Supplier.html:18
+#: .\sales\templates\sales\customer\customer.html:17
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:28
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:91
+msgid "تسلسل"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:17
+#: .\configrate\templates\configrate\users.html:18
+#: .\configrate\templates\configrate\users.html:55
+msgid "الاسم الاول"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:18
+#: .\configrate\templates\configrate\users.html:19
+msgid "الاسم الثاني"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:28
+msgid "إضافة أنواع الأصناف"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:65
+msgid "الاسم إنجليزي"
+msgstr ""
+
+#: .\configrate\templates\configrate\itemstype\items_type.html:73
+#: .\configrate\templates\configrate\unit\unit_item.html:80
+#: .\users\templates\users\login.html:66
+msgid "إلغاء"
+msgstr ""
+
+#: .\configrate\templates\configrate\store\store.html:5
+msgid "شاشة المخازن"
+msgstr ""
+
+#: .\configrate\templates\configrate\store\store.html:10
+msgid "إضافة مخزن جديد"
+msgstr ""
+
+#: .\configrate\templates\configrate\store\store.html:19
+#: .\configrate\templates\configrate\store\store.html:64
+#: .\input\templates\input\Category\category.html:65
+#: .\sales\templates\sales\customer\customer.html:124
+msgid "تفعيل"
+msgstr ""
+
+#: .\configrate\templates\configrate\store\store.html:28
+msgid "إضافة المخازن"
+msgstr ""
+
+#: .\configrate\templates\configrate\store\store.html:75
+#: .\configrate\templates\configrate\users.html:99
+#: .\sales\templates\sales\customer\customer.html:137
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:41
+msgid "إغلاق"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:5
+msgid "شاشة الوحدات"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:10
+msgid "إضافة وحدة جديدة للصنف"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:17
+#: .\pos\templates\device\device.html:19
+msgid "الاشم المحلي"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:19
+#: .\configrate\templates\configrate\unit\unit_item.html:55
+msgid "الكود"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:29
+msgid "إضافة الوحدات"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:64
+msgid "الاسم الوحدة عربي"
+msgstr ""
+
+#: .\configrate\templates\configrate\unit\unit_item.html:71
+msgid "اسم الوحدة انجليزي"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:6
+msgid "شاشة المستخدمين"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:11
+msgid "إضافة مستخدم جديد"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:20
+msgid "المستخدم"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:21
+msgid "ادوات"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:30
+msgid "إضافة المستخدمين"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:61
+msgid "الاسم الاخير"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:70
+msgid "اسم المستخدم"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:76
+msgid "الايميل"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:85 .\users\forms.py:27
+#: .\users\forms.py:50 .\users\templates\users\login.html:48
+msgid "كلمة المرور"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:91
+msgid "إعادة كتابة كلمة المرور"
+msgstr ""
+
+#: .\configrate\templates\configrate\users.html:114
+msgid "يجب عليك التحقق من الباسورد"
+msgstr ""
+
+#: .\expense\forms.py:14
+msgid "إسم المصروف"
+msgstr ""
+
+#: .\expense\forms.py:15 .\expense\models.py:15
+#: .\expense\templates\expense\add_expense.html:36
+msgid "المبلغ"
+msgstr ""
+
+#: .\expense\forms.py:16 .\expense\models.py:19
+msgid "تاريخ المصروف"
+msgstr ""
+
+#: .\expense\models.py:9 .\expense\templates\expense\add_expense.html:30
+#: .\expense\templates\expense\expense_edit.html:30
+#: .\expense\templates\expense\expense_list.html:26
+msgid "اسم المصروف"
+msgstr ""
+
+#: .\expense\templates\expense\add_expense.html:6
+#: .\expense\templates\expense\expense_edit.html:6 .\templates\sidebar.html:79
+msgid "المصروفات"
+msgstr ""
+
+#: .\expense\templates\expense\add_expense.html:21
+msgid "إضافة مصروف جديد"
+msgstr ""
+
+#: .\expense\templates\expense\add_expense.html:42
+msgid "تاريخ الإضافة"
+msgstr ""
+
+#: .\expense\templates\expense\expense_edit.html:22
+msgid "تعديل المصروف"
+msgstr ""
+
+#: .\expense\templates\expense\expense_edit.html:37
+#: .\expense\templates\expense\expense_list.html:27 .\sales\forms.py:43
+#: .\sales\forms.py:55
+msgid "القيمة"
+msgstr ""
+
+#: .\expense\templates\expense\expense_edit.html:44
+#: .\expense\templates\expense\expense_list.html:28 .\sales\models.py:33
+msgid "التاريخ"
+msgstr ""
+
+#: .\expense\templates\expense\expense_edit.html:54
+msgid "رجوع إلى قائمة المصاريف"
+msgstr ""
+
+#: .\expense\templates\expense\expense_list.html:6
+msgid "عرض جميع المصروفات"
+msgstr ""
+
+#: .\expense\templates\expense\expense_list.html:17
+msgid "قائمة المصاريف"
+msgstr ""
+
+#: .\expense\templates\expense\expense_list.html:21
+msgid "رجوع إلى إضافة مصروف"
+msgstr ""
+
+#: .\expense\templates\expense\expense_list.html:29
+msgid "التعديل"
+msgstr ""
+
+#: .\expense\templates\expense\expense_list.html:44
+msgid "لا توجد مصاريف حالياً."
+msgstr ""
+
+#: .\expense\views.py:12
+msgid "تم إضافة المصروف بنجاح"
+msgstr ""
+
+#: .\expense\views.py:15
+msgid "حدث خطأ أثناء إضافة المصروف"
+msgstr ""
+
+#: .\input\Items\forms.py:36
+msgid "الاسم الأجنبي"
+msgstr ""
+
+#: .\input\Items\forms.py:37
+msgid "نوع العنصر"
+msgstr ""
+
+#: .\input\Items\forms.py:39
+#: .\input\templates\input\inventory\inventory_list.html:82
+msgid "الفئة"
+msgstr ""
+
+#: .\input\Items\forms.py:40 .\input\models.py:24 .\input\models.py:36
+#: .\input\templates\input\Items\Items.html:125
+#: .\input\templates\input\inventory\inventory_list.html:85
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:136
+#: .\sales\models.py:90
+msgid "سعر البيع"
+msgstr ""
+
+#: .\input\Items\forms.py:41 .\input\models.py:23 .\input\models.py:37
+#: .\input\templates\input\Items\Items.html:118
+#: .\input\templates\input\inventory\inventory_list.html:84
+#: .\purchases\models.py:122
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:135
+msgid "سعر الشراء"
+msgstr ""
+
+#: .\input\Items\forms.py:43
+msgid "الصورة"
+msgstr ""
+
+#: .\input\Items\forms.py:44
+msgid "إيقاف العنصر"
+msgstr ""
+
+#: .\input\Items\views.py:39 .\printers\views.py:67 .\printers\views.py:68
+#: .\printers\views.py:69
+msgid "N/A"
+msgstr "N/A"
+
+#: .\input\Items\views.py:63
+msgid "الكمية يجب أن تكون قيمة موجبة أو صفر."
+msgstr ""
+
+#: .\input\Items\views.py:75
+msgid "تم تحديث الكمية بنجاح."
+msgstr ""
+
+#: .\input\Items\views.py:77
+msgid "لم يتم العثور على الكمية الحالية لهذا الصنف."
+msgstr ""
+
+#: .\input\Items\views.py:79
+#, python-brace-format
+msgid "حدث خطأ: {e}"
+msgstr ""
+
+#: .\input\Items\views.py:155 .\purchases\views.py:209 .\sales\views.py:191
+msgid "تم التعديل بنجاح"
+msgstr ""
+
+#: .\input\Items\views.py:157 .\purchases\views.py:212 .\sales\views.py:194
+msgid "تم الحفظ بنجاح"
+msgstr ""
+
+#: .\input\Items\views.py:174
+msgid "خطأ في الحذف: "
+msgstr ""
+
+#: .\input\models.py:7
+msgid "اسم المجموعة عربي"
+msgstr ""
+
+#: .\input\models.py:8
+msgid "اسم المجموعة إنجليزي"
+msgstr ""
+
+#: .\input\models.py:16
+msgid "اسم الصنف عربي"
+msgstr ""
+
+#: .\input\models.py:17
+msgid "اسم الصنف إنجليزي"
+msgstr ""
+
+#: .\input\models.py:22 .\input\templates\input\Items\Items.html:134
+msgid "صورة الصنف"
+msgstr ""
+
+#: .\input\models.py:32 .\pos\templates\pos\pos_index.html:2253
+#: .\purchases\models.py:68 .\sales\forms.py:271 .\sales\models.py:64
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:94
+msgid "الكمية"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:6
+msgid "شاشة الاقسام"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:11
+msgid "إضافة قسم جديد"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:18
+#: .\input\templates\input\Category\category.html:53
+msgid "إسم القسم ع"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:19
+#: .\input\templates\input\Category\category.html:59
+msgid "إسم القسم E"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:20
+#: .\pos\templates\session\session.html:23 .\purchases\models.py:32
+#: .\purchases\models.py:33
+#: .\purchases\templates\purchases\Supplier\Supplier.html:25
+#: .\purchases\templates\purchases\Supplier\Supplier.html:120
+#: .\sales\templates\sales\customer\customer.html:24
+msgid "الحالة"
+msgstr ""
+
+#: .\input\templates\input\Category\category.html:30
+msgid "إضافة الاقسام"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:6
+msgid "شاشة الأصناف"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:12
+msgid "إضافة صنف جديد"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:19
+#: .\input\templates\input\Items\Items.html:65
+msgid "إسم الصنف ع"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:20
+#: .\input\templates\input\Items\Items.html:71
+msgid "إسم الصنف E"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:21
+#: .\input\templates\input\Items\Items.html:96
+msgid "المجموعة"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:23
+#: .\input\templates\input\Items\Items.html:80
+msgid "القسم"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:24
+msgid "البيع"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:25
+msgid "الشراء"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:27
+msgid "الإحداث"
+msgstr ""
+
+#: .\input\templates\input\Items\Items.html:108
+msgid "توليد باركود"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:6
+#: .\templates\sidebar.html:36
+msgid "جرد الأصناف"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:33
+msgid "رقم الهاتف:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:33
+msgid "الجوال:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:34
+msgid "البريد الإلكتروني:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:35
+msgid "الرقم الضريبي:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:36
+msgid "ملاحظات:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:46
+msgid "ابحث عن صنف..."
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:50
+msgid "اختيار الفئة"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:57
+msgid "بحث"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:60
+msgid "طباعة جميع الأصناف"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:66
+msgid "عدد الأصناف:"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:73
+msgid "تفاصيل الأصناف"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:81
+msgid "اسم الصنف"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:83
+msgid "وحدة القياس"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:86
+#: .\purchases\models.py:69
+msgid "الكمية المتاحة"
+msgstr ""
+
+#: .\input\templates\input\inventory\inventory_list.html:87
+msgid "تعديل الكمية"
+msgstr ""
+
+#: .\parent\models.py:6
+msgid "تاريخ الإنشاء"
+msgstr ""
+
+#: .\parent\models.py:7
+msgid "تاريخ التعديل"
+msgstr ""
+
+#: .\pos\device\views.py:122
+msgid "Edit"
+msgstr "التعديل"
+
+#: .\pos\device\views.py:123
+msgid "Delete"
+msgstr "الحذف"
+
+#: .\pos\models.py:18 .\pos\session\views.py:117
+msgid "مفتوح"
+msgstr ""
+
+#: .\pos\session\forms.py:12
+msgid "تاريخ البداية"
+msgstr ""
+
+#: .\pos\session\forms.py:19
+msgid "تاريخ الإنهاء"
+msgstr ""
+
+#: .\pos\session\views.py:82
+msgid "تم التعديل"
+msgstr ""
+
+#: .\pos\session\views.py:84
+msgid "not found"
+msgstr "غير موجود"
+
+#: .\pos\session\views.py:119
+msgid "أغلاق"
+msgstr ""
+
+#: .\pos\session\views.py:123
+msgid "تعديل الحالة"
+msgstr ""
+
+#: .\pos\templates\device\device.html:6 .\pos\templates\session\session.html:7
+msgid "شاشة الاجهزة الطرفية"
+msgstr ""
+
+#: .\pos\templates\device\device.html:29
+#: .\pos\templates\session\session.html:33
+msgid "إضافة جهاز"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2106
+msgid "التاريخ والوقت:"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2109
+msgid "اكتب هنا محتوى المنبثقة"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2110
+msgid "معلومات إضافية"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2250
+msgid "الاصناف"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2251
+msgid ""
+"Click <i>product name</i> to edit price, discount & tax. <br/>Click "
+"<i>Comment Icon</i> to enter serial number / IMEI or additional note.<br/"
+"><br/>Click <i>Modifier Icon</i>(if enabled) for modifiers"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2254 .\purchases\models.py:70
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:95
+msgid "السعر"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2255 .\purchases\forms.py:146
+#: .\purchases\models.py:49
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:138
+#: .\sales\forms.py:127
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:98
+msgid "المجموع"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2272
+msgid "عدد الاصناف:"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2275
+msgid "المجموع:"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2282
+msgid "الخصم (-):"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2289
+msgid "الإجمالي:"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2296
+#, python-format
+msgid "الضريبة (15%%):"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2305
+msgid "الإجمالي بعد الضريبة:"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2343
+msgid "البحث باستخدام الباركود"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2347
+msgid "البحث عن المنتجات"
+msgstr ""
+
+#: .\pos\templates\pos\pos_index.html:2398
+msgid "Today's profit"
+msgstr "أرباح اليوم"
+
+#: .\pos\templates\pos\pos_index.html:2408
+msgid "Close"
+msgstr "اغلق"
+
+#: .\pos\templates\session\session.html:20
+msgid "اسم الجهاز"
+msgstr ""
+
+#: .\pos\templates\session\session.html:21
+#: .\pos\templates\session\session.html:62
+msgid "وقت البداية"
+msgstr ""
+
+#: .\pos\templates\session\session.html:22
+#: .\pos\templates\session\session.html:68
+msgid "وقت النهاية"
+msgstr ""
+
+#: .\pos\templates\session\session.html:56
+msgid "الجهاز"
+msgstr ""
+
+#: .\printers\forms.py:16
+msgid "إختر الطابعة "
+msgstr ""
+
+#: .\printers\forms.py:23
+msgid "إسم الطابعة"
+msgstr ""
+
+#: .\printers\models.py:5
+msgid "إسم الطابعة "
+msgstr ""
+
+#: .\printers\models.py:6
+msgid "نوع الطباعة"
+msgstr ""
+
+#: .\printers\models.py:7
+msgid "جودة الطباعة"
+msgstr ""
+
+#: .\printers\models.py:14
+msgid "طابعة ليزر"
+msgstr ""
+
+#: .\printers\models.py:15
+msgid "طابعة انجكت"
+msgstr ""
+
+#: .\printers\models.py:16
+msgid "دوت ماتريكس"
+msgstr ""
+
+#: .\printers\models.py:20
+msgid "A4"
+msgstr "A4"
+
+#: .\printers\models.py:21
+msgid "C8"
+msgstr "C8"
+
+#: .\printers\models.py:25
+msgid "جودة عالية"
+msgstr ""
+
+#: .\printers\models.py:26
+msgid "جودة متوسطة"
+msgstr ""
+
+#: .\printers\models.py:27
+msgid "جودة منخفضة"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:3
+msgid "إعدادات الطابعة"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:20
+msgid "اختيار الطابعة:"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:32
+msgid "حجم الورق:"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:41
+msgid "جودة الطباعة:"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:43
+msgid "مسودة"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:44
+msgid "عادي"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:45
+msgid "عالي"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:50
+msgid "تحديث الإعدادات"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:56
+msgid "معاينة الطباعة"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:60
+msgid "نموذج A4"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:62
+msgid "معاينة الفاتورة بحجم A4."
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:68
+msgid "نموذج C8"
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:70
+msgid "معاينة الفاتورة بحجم C8."
+msgstr ""
+
+#: .\printers\templates\printers\printer_settings.html:79
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:194
+msgid "طباعة"
+msgstr ""
+
+#: .\printers\views.py:29
+msgid "تم تحديث الإعدادات بنجاح!"
+msgstr ""
+
+#: .\printers\views.py:37
+msgid "تم إضافة الإعدادات بنجاح!"
+msgstr ""
+
+#: .\printers\views.py:66
+#, python-format
+msgid "Printer Settings for %s"
+msgstr "إعدادات الطابعة لـ %s"
+
+#: .\printers\views.py:67
+#, python-format
+msgid "إسم الطابعة: %s"
+msgstr ""
+
+#: .\printers\views.py:68
+#, python-format
+msgid "نوع الطباعة: %s"
+msgstr ""
+
+#: .\printers\views.py:69
+#, python-format
+msgid "جودة الطباعة: %s"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:25
+msgid "اسم المورد (باللغة المحلية)"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:26
+msgid "اسم المورد (باللغة الأجنبية)"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:27
+msgid "رقم ضريبة القيمة المضافة"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:28
+msgid "هاتف المورد"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:29
+msgid "الهاتف المحمول"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:30
+msgid "عنوان المورد"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:31
+msgid "هل المورد موقوف؟"
+msgstr ""
+
+#: .\purchases\Supplier\forms.py:37
+msgid "إنشاء"
+msgstr ""
+
+#: .\purchases\Supplier\views.py:49 .\sales\Customer\views.py:50
+msgid "تمت عملية التعديل"
+msgstr ""
+
+#: .\purchases\Supplier\views.py:51
+msgid "هناك خطأ في عملية التعديل"
+msgstr ""
+
+#: .\purchases\Supplier\views.py:56 .\sales\Customer\views.py:57
+msgid "هناك خطأ في عملية الحفظ"
+msgstr ""
+
+#: .\purchases\Supplier\views.py:73
+msgid "لا يوجد صنف"
+msgstr ""
+
+#: .\purchases\forms.py:24
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:83
+#: .\sales\forms.py:24 .\sales\forms.py:69 .\sales\forms.py:276
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:74
+msgid "المخزن"
+msgstr ""
+
+#: .\purchases\forms.py:31 .\purchases\models.py:37 .\purchases\models.py:111
+msgid "المورد"
+msgstr ""
+
+#: .\purchases\forms.py:36
+msgid "إجمالي خصم الاصناف"
+msgstr ""
+
+#: .\purchases\forms.py:43 .\purchases\forms.py:55
+msgid "قيمة"
+msgstr ""
+
+#: .\purchases\forms.py:49 .\purchases\forms.py:150 .\sales\forms.py:131
+msgid "إجمالي بعد الخصم"
+msgstr ""
+
+#: .\purchases\forms.py:61 .\purchases\models.py:31
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:42
+#: .\sales\forms.py:61
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:65
+msgid "تاريخ الفاتورة"
+msgstr ""
+
+#: .\purchases\forms.py:69 .\purchases\models.py:46
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:75
+msgid "تاريخ فاتورة المورد"
+msgstr ""
+
+#: .\purchases\forms.py:147
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:27
+#: .\sales\forms.py:128
+msgid "رقم الفاتورة"
+msgstr ""
+
+#: .\purchases\forms.py:148
+msgid "تخفيض"
+msgstr ""
+
+#: .\purchases\forms.py:149
+msgid "تخفيض %"
+msgstr ""
+
+#: .\purchases\forms.py:151 .\purchases\models.py:39 .\sales\models.py:41
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:167
+msgid "الضريبة"
+msgstr ""
+
+#: .\purchases\models.py:17
+msgid "إسم المورد (ع) "
+msgstr ""
+
+#: .\purchases\models.py:18
+msgid "إسم المورد (E) "
+msgstr ""
+
+#: .\purchases\models.py:19
+msgid "الرقم الضريبي "
+msgstr ""
+
+#: .\purchases\models.py:20
+#: .\purchases\templates\purchases\Supplier\Supplier.html:22
+#: .\purchases\templates\purchases\Supplier\Supplier.html:93
+#: .\sales\Customer\forms.py:29
+#: .\sales\templates\sales\customer\customer.html:95
+msgid "الهاتف"
+msgstr ""
+
+#: .\purchases\models.py:21
+#: .\purchases\templates\purchases\Supplier\Supplier.html:23
+#: .\purchases\templates\purchases\Supplier\Supplier.html:100
+#: .\sales\Customer\forms.py:30
+#: .\sales\templates\sales\customer\customer.html:103
+msgid "الجوال"
+msgstr ""
+
+#: .\purchases\models.py:40
+msgid "التاريخ  "
+msgstr ""
+
+#: .\purchases\models.py:41
+msgid "المبغ"
+msgstr ""
+
+#: .\purchases\models.py:43
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:70
+msgid "رقم فاتورة المورد"
+msgstr ""
+
+#: .\purchases\models.py:48
+msgid "وقف"
+msgstr ""
+
+#: .\purchases\models.py:52
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:97
+#: .\sales\models.py:48
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:149
+msgid "رقم المرجع"
+msgstr ""
+
+#: .\purchases\models.py:54
+msgid "مجموع الفاتورة"
+msgstr ""
+
+#: .\purchases\models.py:55 .\purchases\models.py:75
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:137
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:179
+#: .\sales\forms.py:274 .\sales\models.py:51 .\sales\models.py:69
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:97
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:141
+msgid "الخصم"
+msgstr ""
+
+#: .\purchases\models.py:56 .\purchases\models.py:76
+msgid "نسبة الخصم %"
+msgstr ""
+
+#: .\purchases\models.py:71
+msgid "تاريخ الانتهاء"
+msgstr ""
+
+#: .\purchases\models.py:100
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:111
+msgid "طريقة الدفع"
+msgstr ""
+
+#: .\purchases\models.py:117
+msgid "مجموع "
+msgstr ""
+
+#: .\purchases\models.py:129
+msgid "مجموع تفاصيل الفاتورة"
+msgstr ""
+
+#: .\purchases\templates\purchases\Supplier\Supplier.html:7
+msgid "شاشة الموردين"
+msgstr ""
+
+#: .\purchases\templates\purchases\Supplier\Supplier.html:12
+msgid "إضافة مورد جديد"
+msgstr ""
+
+#: .\purchases\templates\purchases\Supplier\Supplier.html:19
+msgid "إسم المورد (ع)"
+msgstr ""
+
+#: .\purchases\templates\purchases\Supplier\Supplier.html:20
+msgid "إسم المورد (E)"
+msgstr ""
+
+#: .\purchases\templates\purchases\Supplier\Supplier.html:37
+msgid "إضافة الموردين"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:7
+#: .\templates\sidebar.html:55
+msgid "فاتورة المشتريات"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:57
+msgid "إسم المورد"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:102
+msgid "البيان"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:113
+msgid "نقدي"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:114
+msgid "شبكة"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:132
+#: .\sales\forms.py:142 .\sales\forms.py:269
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:92
+msgid "الصنف"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:134
+msgid "كمية"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:139
+msgid "حدث"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:162
+msgid "إضافة صف"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:168
+msgid "إجمالي المشتريات"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:172
+msgid "نوع الخصم"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:174
+msgid "نسبة مئوية"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:175
+msgid "قيمة ثابتة"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:183
+msgid "قيمة الضريبة"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:187
+#, python-format
+msgid "الضريبة (15%%)"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:194
+#: .\sales\forms.py:153
+msgid "المجموع الكلي"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:201
+msgid "حفظ الفاتورة"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:206
+msgid "حفظ وطباعة الفاتورة"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:226
+msgid "صنف 1"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:227
+msgid "صنف 2"
+msgstr ""
+
+#: .\purchases\templates\purchases\purchases\purchase_invoicelocal.html:228
+msgid "صنف 3"
+msgstr ""
+
+#: .\purchases\views.py:119
+#, fuzzy
+#| msgid "Purchase Invoice"
+msgid "Purchase Invoice local"
+msgstr "فاتورة المشتريات"
+
+#: .\purchases\views.py:248 .\sales\views.py:231
+msgid "تم الحذف بنجاح"
+msgstr ""
+
+#: .\purchases\views.py:259 .\sales\views.py:159
+#, fuzzy
+#| msgid "Error"
+msgid "error"
+msgstr "يوجد خطأ"
+
+#: .\sales\Customer\forms.py:26 .\sales\models.py:19
+#: .\sales\templates\sales\customer\customer.html:18
+msgid "إسم العميل ع"
+msgstr ""
+
+#: .\sales\Customer\forms.py:27
+msgid "إسم العميل E"
+msgstr ""
+
+#: .\sales\Customer\forms.py:28
+msgid " الرقم الضريبي"
+msgstr ""
+
+#: .\sales\Customer\forms.py:32
+msgid " الحالة"
+msgstr ""
+
+#: .\sales\Customer\views.py:52
+msgid "هناك خطأ في التعديل"
+msgstr ""
+
+#: .\sales\forms.py:31 .\sales\models.py:39
+msgid "العميل"
+msgstr ""
+
+#: .\sales\forms.py:36
+msgid "إجمالي الخصم "
+msgstr ""
+
+#: .\sales\forms.py:49
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:31
+msgid "إجمالي الفاتورة"
+msgstr ""
+
+#: .\sales\forms.py:129
+msgid "خصم بالمبلغ"
+msgstr ""
+
+#: .\sales\forms.py:130
+msgid "خصم بالنسبة %"
+msgstr ""
+
+#: .\sales\forms.py:132
+msgid "ضريبة 15 %"
+msgstr ""
+
+#: .\sales\forms.py:187
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:96
+msgid "الكمية المتوفرة"
+msgstr ""
+
+#: .\sales\forms.py:272
+msgid "تاريخ انتهاء الصلاحية"
+msgstr ""
+
+#: .\sales\forms.py:273
+msgid "الوصف"
+msgstr ""
+
+#: .\sales\forms.py:275
+msgid "معدل الخصم"
+msgstr ""
+
+#: .\sales\forms.py:277
+msgid "السعر البيع"
+msgstr ""
+
+#: .\sales\forms.py:278
+msgid "مواصفات الصنف"
+msgstr ""
+
+#: .\sales\models.py:20 .\sales\templates\sales\customer\customer.html:19
+msgid "E إسم العميل"
+msgstr ""
+
+#: .\sales\models.py:34
+msgid "هل هو مرحلة؟"
+msgstr ""
+
+#: .\sales\models.py:35
+msgid "هل هو موقوف؟"
+msgstr ""
+
+#: .\sales\models.py:42
+msgid "تاريخ الاستحقاق"
+msgstr ""
+
+#: .\sales\models.py:43
+msgid "قيمة الشيك"
+msgstr ""
+
+#: .\sales\models.py:44
+msgid "إيقاف"
+msgstr ""
+
+#: .\sales\models.py:45
+msgid "إجمالي الفاتورة المحلية"
+msgstr ""
+
+#: .\sales\models.py:46 .\sales\models.py:67
+msgid "بيان"
+msgstr ""
+
+#: .\sales\models.py:50
+msgid "إجمالي المبلغ"
+msgstr ""
+
+#: .\sales\models.py:52 .\sales\models.py:70
+msgid "معدل الخصم %"
+msgstr ""
+
+#: .\sales\models.py:65
+msgid "الكمية المجانية"
+msgstr ""
+
+#: .\sales\models.py:85
+msgid "فاتورة مبيعات محلية"
+msgstr ""
+
+#: .\sales\models.py:97
+msgid "تفاصيل فاتورة مبيعات محلية"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:5
+msgid "شاشة العملاء"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:11
+msgid "إضافة عميل جديد"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:36
+msgid "إضافة العملاء"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:66
+msgid "إسم العميل (عربي)"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:74
+msgid "إسم العميل (English)"
+msgstr ""
+
+#: .\sales\templates\sales\customer\customer.html:121
+msgid "حالة العميل"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:6
+msgid "فاتورة مبيعات"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:10
+#: .\users\templates\users\home.html:4
+msgid "الصفحة الرئيسية"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:18
+msgid "فواتير المبيعات"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:29
+msgid "تاريخ"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:30
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:69
+msgid "اسم العميل"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:32
+msgid "الحدث"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:61
+msgid "كودالفاتورة"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:84
+msgid "تفاصيل الفاتورة"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:93
+msgid "وحدة"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:99
+msgid "أدوات"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:145
+msgid "نسبة الخصم"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:160
+msgid "الإجمالي"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:171
+msgid "الخصم على العناصر"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:175
+msgid "المجموع الصافي"
+msgstr ""
+
+#: .\sales\templates\sales\sales_invoice\sales_invoice.html:185
+msgid "عرض فواتير المبيعات"
+msgstr ""
+
+#: .\sales\views.py:103
+#, fuzzy
+#| msgid "Sales Invoice"
+msgid "Sales Invoice local"
+msgstr "فاتورة البيع"
+
+#: .\sales\views.py:105
+msgid "Add Customer"
+msgstr "إضافة عميل"
+
+#: .\sales\views.py:106
+msgid "Add Store"
+msgstr "هنا إضافة المخازن"
+
+#: .\sales\views.py:109
+#, fuzzy
+#| msgid "Error: GeneralVariables must be initialized in the customer app"
+msgid "Error must initial GeneralVariables in app customer"
+msgstr "خطأ: يجب تهيئة المتغيرات العامة في تطبيق العملاء"
+
+#: .\sales\views.py:186
+msgid "الكمية غير متوفرة بالمخزن"
+msgstr ""
+
+#: .\sales\views.py:203
+msgid "Unexpected error"
+msgstr "خطأ غير متوقع"
+
+#: .\sales\views.py:242
+msgid "خطأ"
+msgstr ""
+
+#: .\support\forms.py:5
+msgid "الاسم"
+msgstr ""
+
+#: .\support\forms.py:7
+msgid "الرسالة"
+msgstr ""
+
+#: .\support\views.py:19
+#, python-brace-format
+msgid "دعم من {name}"
+msgstr ""
+
+#: .\support\views.py:52
+msgid "مرحبًا! كيف يمكنني مساعدتك اليوم؟"
+msgstr ""
+
+#: .\support\views.py:54
+msgid "الساعة الآن 3:00 مساءً."
+msgstr ""
+
+#: .\support\views.py:56
+msgid "شكرًا لك! نحن هنا لمساعدتك."
+msgstr ""
+
+#: .\templates\base.html:23
+msgid "الرئيسي"
+msgstr ""
+
+#: .\templates\base.html:34
+msgid "Search"
+msgstr "هنا البحث"
+
+#: .\templates\base.html:59
+msgid "إعدادات"
+msgstr ""
+
+#: .\templates\base.html:63
+msgid "معلوماتي"
+msgstr ""
+
+#: .\templates\base.html:67 .\users\templates\users\base.html:29
+#: .\users\templates\users\profile.html:6
+msgid "حسابي"
+msgstr ""
+
+#: .\templates\base.html:74
+msgid "تسجيل خروج"
+msgstr ""
+
+#: .\templates\base.html:79 .\users\templates\users\login.html:20
+msgid "تسجيل دخول"
+msgstr ""
+
+#: .\templates\base.html:220
+msgid "جهازك متصل بالإنترنت."
+msgstr ""
+
+#: .\templates\base.html:221
+msgid "جهازك غير متصل بالإنترنت."
+msgstr ""
+
+#: .\templates\base.html:222
+msgid "خطأ في الاتصال بالخادم:"
+msgstr ""
+
+#: .\templates\base.html:223
+msgid "جهازك متصل الآن."
+msgstr ""
+
+#: .\templates\base.html:224
+msgid "جهازك غير متصل الآن."
+msgstr ""
+
+#: .\templates\base.html:236
+msgid "نظام ناينوكس"
+msgstr ""
+
+#: .\templates\base.html:254 .\templates\base.html:259
+msgid "لوحة التحكم"
+msgstr ""
+
+#: .\templates\base.html:297
+msgid "حقوق النشر والنسخ محفوظة لدى"
+msgstr ""
+
+#: .\templates\base.html:300
+msgid "الاصدار"
+msgstr ""
+
+#: .\templates\header.html:6
+msgid "نظام ناينوكس (Nine9X.Pro)"
+msgstr ""
+
+#: .\templates\index.html:19
+msgid "مجموع المبيعات"
+msgstr ""
+
+#: .\templates\index.html:24 .\templates\index.html:38
+#: .\templates\index.html:52 .\templates\index.html:66
+msgid "إظهار التفاصيل"
+msgstr ""
+
+#: .\templates\index.html:33
+msgid "مجموع المشتريات"
+msgstr ""
+
+#: .\templates\index.html:47
+msgid "مجموع المرتجعات"
+msgstr ""
+
+#: .\templates\index.html:61
+msgid "الربح"
+msgstr ""
+
+#: .\templates\index.html:77
+msgid "إجمالي الفواتير"
+msgstr ""
+
+#: .\templates\index.html:87
+msgid "إجمالي فواتير المبيعات"
+msgstr ""
+
+#: .\templates\index.html:96 .\templates\index.html:104
+msgid "إجمالي فواتير المشتريات"
+msgstr ""
+
+#: .\templates\index.html:120 .\templates\index.html:132
+msgid "نظام ناينوكس للمطاعم"
+msgstr ""
+
+#: .\templates\index.html:122 .\templates\index.html:134
+msgid ""
+"متوافق مع نظام الفوترة الإلكترونية 'فاتورة مبسطة' التابع لهيئة الزكاة "
+"والضريبة والجمارك، حتى يتمكّنوا من رفع الفواتير الإلكترونية للهيئة."
+msgstr ""
+
+#: .\templates\index.html:123 .\templates\index.html:135
+msgid "لمزيد من التفاصيل يرجى التواصل مع فريق المبيعات."
+msgstr ""
+
+#: .\templates\sidebar.html:12
+msgid "إدارة البرنامج"
+msgstr ""
+
+#: .\templates\sidebar.html:15
+msgid "إدارة المستخدمين"
+msgstr ""
+
+#: .\templates\sidebar.html:16
+msgid "إدارة المؤسسة"
+msgstr ""
+
+#: .\templates\sidebar.html:17
+msgid "إدارة الطباعة"
+msgstr ""
+
+#: .\templates\sidebar.html:18
+msgid "إدارة الضريبة"
+msgstr ""
+
+#: .\templates\sidebar.html:24 .\templates\sidebar.html:26
+msgid "المخازن"
+msgstr ""
+
+#: .\templates\sidebar.html:32 .\templates\sidebar.html:35
+msgid "الأصناف"
+msgstr ""
+
+#: .\templates\sidebar.html:34
+msgid "المجموعات"
+msgstr ""
+
+#: .\templates\sidebar.html:37
+msgid "الوحدات"
+msgstr ""
+
+#: .\templates\sidebar.html:38
+msgid "الأقسام"
+msgstr ""
+
+#: .\templates\sidebar.html:44
+msgid "الموردين/العملاء"
+msgstr ""
+
+#: .\templates\sidebar.html:46
+msgid "الموردين"
+msgstr ""
+
+#: .\templates\sidebar.html:47
+msgid "العملاء"
+msgstr ""
+
+#: .\templates\sidebar.html:53
+msgid "المشتريات"
+msgstr ""
+
+#: .\templates\sidebar.html:61
+msgid "المبيعات"
+msgstr ""
+
+#: .\templates\sidebar.html:63
+msgid "فاتورة المبيعات"
+msgstr ""
+
+#: .\templates\sidebar.html:69
+msgid "نقطة المبيعات"
+msgstr ""
+
+#: .\templates\sidebar.html:71
+msgid "الأجهزة"
+msgstr ""
+
+#: .\templates\sidebar.html:72
+msgid "الجلسات"
+msgstr ""
+
+#: .\templates\sidebar.html:73
+msgid "نقطة البيع"
+msgstr ""
+
+#: .\templates\sidebar.html:81
+msgid "عرض المصروفات"
+msgstr ""
+
+#: .\templates\sidebar.html:82
+msgid "إضافة مصروف"
+msgstr ""
+
+#: .\templates\sidebar.html:90
+msgid "الدعم"
+msgstr ""
+
+#: .\templates\sidebar.html:96
+msgid "الدعم الفني"
+msgstr ""
+
+#: .\users\forms.py:12
+msgid "الأسم الأول"
+msgstr ""
+
+#: .\users\forms.py:55 .\users\templates\users\login.html:58
+msgid "تذكرني"
+msgstr ""
+
+#: .\users\forms.py:87
+msgid "أخبرنا عن نفسك"
+msgstr ""
+
+#: .\users\forms.py:108
+msgid "إنجليزي"
+msgstr ""
+
+#: .\users\forms.py:109
+msgid "عربي"
+msgstr ""
+
+#: .\users\forms.py:111 .\users\templates\users\settings.html:14
+msgid "اللغة"
+msgstr ""
+
+#: .\users\forms.py:114
+msgid "إضاءة بيضاء"
+msgstr ""
+
+#: .\users\forms.py:115
+msgid "إضاءة سوداء"
+msgstr ""
+
+#: .\users\forms.py:117
+msgid "الخلفية"
+msgstr ""
+
+#: .\users\forms.py:119
+msgid "تغيير الايقونة"
+msgstr ""
+
+#: .\users\forms.py:121
+msgid "تشغيل التنبيهات"
+msgstr ""
+
+#: .\users\templates\users\base.html:22
+msgid "الرئيسية"
+msgstr ""
+
+#: .\users\templates\users\base.html:30 .\users\templates\users\home.html:15
+#: .\users\templates\users\logout.html:4
+msgid "تسجيل الخروج"
+msgstr ""
+
+#: .\users\templates\users\base.html:32 .\users\templates\users\home.html:17
+#: .\users\templates\users\login.html:65
+msgid "تسجيل الدخول"
+msgstr ""
+
+#: .\users\templates\users\change_password.html:6
+#: .\users\templates\users\change_password.html:15
+#: .\users\templates\users\profile.html:41
+msgid "تغيير كلمة المرور"
+msgstr ""
+
+#: .\users\templates\users\change_password.html:36
+msgid "كلمة المرور القديمة"
+msgstr ""
+
+#: .\users\templates\users\change_password.html:39
+msgid "Enter Old Password"
+msgstr "Enter Old Password"
+
+#: .\users\templates\users\change_password.html:48
+#: .\users\templates\users\password_reset_confirm.html:35
+msgid "كلمة المرور الجديدة"
+msgstr ""
+
+#: .\users\templates\users\change_password.html:51
+msgid "Enter New Password"
+msgstr "Enter New Password"
+
+#: .\users\templates\users\change_password.html:60
+#: .\users\templates\users\password_reset_confirm.html:47
+msgid "تأكيد كلمة المرور الجديدة"
+msgstr ""
+
+#: .\users\templates\users\change_password.html:63
+msgid "Confirm New Password"
+msgstr "تأكيد كلمة السر؟ الجديدة"
+
+#: .\users\templates\users\change_password.html:70
+msgid "حفظ التغيرات"
+msgstr ""
+
+#: .\users\templates\users\home.html:8
+msgid "مرحبا, "
+msgstr ""
+
+#: .\users\templates\users\home.html:10
+msgid "This is"
+msgstr ""
+
+#: .\users\templates\users\home.html:10
+msgid "نظام تسجيل المستخدم وتسجيل الدخول"
+msgstr ""
+
+#: .\users\templates\users\login.html:5
+msgid "شاشة تسجيل الدخول"
+msgstr ""
+
+#: .\users\templates\users\login.html:75
+msgid "إذا كان ليس لديك حساب؟إنشئ حساب الأن"
+msgstr ""
+
+#: .\users\templates\users\logout.html:10
+msgid "لقد تم تسجيل الخروج"
+msgstr ""
+
+#: .\users\templates\users\logout.html:12
+msgid ""
+"شكرًا لك على وقتك، يمكنك التواصل معي إذا كان لديك أي تعليقات أو اقتراحات عبر "
+"بريدي الإلكتروني."
+msgstr ""
+
+#: .\users\templates\users\logout.html:19
+msgid "تسجيل الدخول مرة أخرى"
+msgstr ""
+
+#: .\users\templates\users\password_reset.html:12
+msgid "نسيت كلمة السر؟"
+msgstr ""
+
+#: .\users\templates\users\password_reset.html:35
+msgid "Enter email"
+msgstr "أدخل البريد الإلكتروني"
+
+#: .\users\templates\users\password_reset.html:42
+msgid "تأكيد"
+msgstr ""
+
+#: .\users\templates\users\password_reset.html:50
+#: .\users\templates\users\register.html:16
+msgid "إنشاء حساب جديد"
+msgstr ""
+
+#: .\users\templates\users\password_reset.html:51
+msgid "الرجوع إلى صفحة تسجيل الدخول"
+msgstr ""
+
+#: .\users\templates\users\password_reset_complete.html:10
+msgid "لقد تم تعيين كلمة المرور الخاصة بك .يمكنك الدخول الأن"
+msgstr ""
+
+#: .\users\templates\users\password_reset_complete.html:10
+msgid "تسجيل الدخول من هنا"
+msgstr ""
+
+#: .\users\templates\users\password_reset_confirm.html:4
+#: .\users\templates\users\password_reset_confirm.html:14
+msgid "إعادة تعيين كلمة المرور"
+msgstr ""
+
+#: .\users\templates\users\password_reset_confirm.html:38
+msgid "Enter password"
+msgstr "أدخل كلمة المرور"
+
+#: .\users\templates\users\password_reset_confirm.html:50
+msgid "Confirm password"
+msgstr "تأكيد كلمة المرور"
+
+#: .\users\templates\users\password_reset_confirm.html:57
+msgid "إعادة تعيين وحفظ "
+msgstr ""
+
+#: .\users\templates\users\password_reset_confirm.html:66
+msgid ""
+"رابط إعادة تعيين كلمة المرور كان غير صالح، ربما لأنه تم استخدامه بالفعل."
+msgstr ""
+
+#: .\users\templates\users\password_reset_confirm.html:67
+msgid "الرجاء طلب إعادة تعيين كلمة المرور الجديدة."
+msgstr ""
+
+#: .\users\templates\users\profile.html:34
+msgid "اسم المستخدم:"
+msgstr ""
+
+#: .\users\templates\users\profile.html:36
+msgid "الإيميل:"
+msgstr ""
+
+#: .\users\templates\users\profile.html:44
+msgid "نسيت كلمة المرور"
+msgstr ""
+
+#: .\users\templates\users\profile.html:49
+msgid "تغيير الصورة:"
+msgstr ""
+
+#: .\users\templates\users\profile.html:53
+msgid "معلومات حسابي:"
+msgstr ""
+
+#: .\users\templates\users\profile.html:60
+msgid "إعادة ضبط الشاشة"
+msgstr ""
+
+#: .\users\templates\users\register.html:4
+msgid "شاشة الحساب الشخصي"
+msgstr ""
+
+#: .\users\templates\users\register.html:74
+msgid "كلمة المرور "
+msgstr ""
+
+#: .\users\templates\users\register.html:80
+msgid "تأكيد كلمة المرور "
+msgstr ""
+
+#: .\users\templates\users\register.html:90
+msgid "السيرة الذاتية"
+msgstr ""
+
+#: .\users\templates\users\register.html:100
+msgid "صورة الملف الشخصي"
+msgstr ""
+
+#: .\users\templates\users\register.html:108
+msgid "التسجيل"
+msgstr ""
+
+#: .\users\templates\users\register.html:116
+msgid "يوجد لديك حساب سابق اذهب الى صفحة تسجيل الدخول"
+msgstr ""
+
+#: .\users\templates\users\settings.html:3
+#: .\users\templates\users\settings.html:7
+msgid "إعدادات التطبيق"
+msgstr ""
+
+#: .\users\templates\users\settings.html:20
+msgid "السمة"
+msgstr ""
+
+#: .\users\templates\users\settings.html:26
+msgid "أيقونة التطبيق"
+msgstr ""
+
+#: .\users\templates\users\settings.html:32
+msgid "تمكين التنبيهات"
+msgstr ""
+
+#: .\users\templates\users\settings.html:36
+msgid "حفظ الإعدادات"
+msgstr ""
+
+#: .\users\views.py:42
+#, python-format
+msgid "تم لإنشاء الحساب ل : %(username)s"
+msgstr ""
+
+#: .\users\views.py:65
+msgid ""
+"لقد أرسلنا إليك تعليمات عبر البريد الإلكتروني لإعداد كلمة المرور الخاصة بك، "
+"إذا كان هناك حساب بالبريد الإلكتروني الذي أدخلته. يجب أن تستقبلهم قريبا. إذا "
+"لم تتلق بريدًا إلكترونيًا، فيرجى التأكد من إدخال العنوان الذي قمت بالتسجيل به،"
+"وتحقق من مجلد الرسائل غير المرغوب فيها."
+msgstr ""
+
+#: .\users\views.py:74
+msgid "تم تغيير كلمة المرور بنجاح"
+msgstr ""
+
+#: .\users\views.py:87
+msgid "تم تحديث الصفحة "
+msgstr ""
+
+#: .\users\views.py:101
+msgid "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول."
+msgstr ""
+
+#: .\restaurant_managment\settings.py:104
+msgid "English"
+msgstr "!اإنجليزي"
+
+#: .\restaurant_managment\settings.py:105
+msgid "Arabic"
+msgstr "!عربي"
+
+#: .\restaurant_managment\views.py:27
+msgid "Language not recognized, reverting to default language."
+msgstr "اللغة غير معترف بها، سيتم العودة إلى اللغة الافتراضية."
+
+#~ msgid "Company Name"
+#~ msgstr "إسم المؤسسة"
+
+#~ msgid "Tax's Number"
+#~ msgstr "الرقم الضريبي"
+
+#~ msgid "EMAIL"
+#~ msgstr "الإيميل"
+
+#~ msgid "commercial register"
+#~ msgstr "السجل التجاري"
+
+#~ msgid "State"
+#~ msgstr "الدولة"
+
+#~ msgid "City"
+#~ msgstr "المدينة"
+
+#~ msgid "Phone Number"
+#~ msgstr "رقم الهاتف"
+
+#~ msgid "Mobile Number"
+#~ msgstr "رقم الجوال"
+
+#~ msgid "Notes"
+#~ msgstr "ملاحظات"
+
+#~ msgid "Address"
+#~ msgstr "العنوان"
+
+#~ msgid "Logo"
+#~ msgstr "الشعار"
+
+#~ msgid "Company Information"
+#~ msgstr "معلومات المؤسسة"
+
+#~ msgid "Edit Information"
+#~ msgstr "تعديل المعلومات"
+
+#~ msgid "Add Information"
+#~ msgstr "إضافة المعلومات"
+
+#~ msgid "Company / Name"
+#~ msgstr "اسم المؤسسة / الشركة"
+
+#~ msgid "e-mail"
+#~ msgstr "البريد الإلكتروني"
+
+#~ msgid "Add"
+#~ msgstr "إضافة"
+
+#~ msgid "Data saving success"
+#~ msgstr "نجاح حفظ البيانات"
+
+#~ msgid "Enterprise information has been saved successfully!"
+#~ msgstr "تم حفظ معلومات المؤسسة بنجاح!"
+
+#~ msgid "Return to the Add or Edit Information page"
+#~ msgstr "عودة إلى صفحة إضافة أو تعديل المعلومات"
+
+#~ msgid "Information saved successfully!"
+#~ msgstr "تم حفظ المعلومات بنجاح!"
+
+#~ msgid "An error occurred while saving data. Please check your input."
+#~ msgstr "حدث خطأ أثناء حفظ البيانات. الرجاء التحقق من المدخلات."
+
+#~ msgid "Tax Name"
+#~ msgstr "اسم الضريبة"
+
+#~ msgid "Tax Value"
+#~ msgstr "نسبة الضريبة"
+
+#~ msgid "Add Tax Name Here"
+#~ msgstr "أدخل اسم الضريبة هنا"
+
+#~ msgid "Enter tax rate here (example: 5 or 10)"
+#~ msgstr "أدخل نسبة الضريبة هنا (مثال: 5 أو 10)"
+
+#~ msgid "Tax Edit"
+#~ msgstr "تعديل الضريبة"
+
+#~ msgid "Add Tax"
+#~ msgstr "إضافة ضريبة"
+
+#~ msgid "Add New Tax"
+#~ msgstr "إضافة ضريبة جديدة"
+
+#~ msgid "Save Editing"
+#~ msgstr "حفظ التعديلات"
+
+#~ msgid "saving"
+#~ msgstr "حفظ الضريبة"
+
+#~ msgid "Show Tax"
+#~ msgstr "عرض الضرائب المضافة"
+
+#~ msgid "Are you sure you want to adjust the tax?"
+#~ msgstr "هل أنت متأكد أنك تريد تعديل الضريبة؟"
+
+#~ msgid "Value Added Tax"
+#~ msgstr "ضريبة القيمة المضافة"
+
+#~ msgid "Added Tax"
+#~ msgstr "الضريبة المضافة"
+
+#~ msgid "Back to Tax Page"
+#~ msgstr "رجوع لصفحة الضريبة"
+
+#~ msgid "Tax updated successfully!"
+#~ msgstr "تم تعديل الضريبة بنجاح!"
+
+#~ msgid "Tax added successfully!"
+#~ msgstr "تم إضافة الضريبة بنجاح!"
+
+#~ msgid "Saved successfully"
+#~ msgstr "تم الحفظ"
+
+#~ msgid "Error saving"
+#~ msgstr "خطاء في الحفظ"
+
+#~ msgid "Deleted successfully"
+#~ msgstr "تمت عمليةالحذف"
+
+#~ msgid "Error deleting"
+#~ msgstr "خطاء بالحذف"
+
+#~ msgid "Item not found"
+#~ msgstr "لا يوجد الصنف"
+
+#~ msgid "First Name"
+#~ msgstr " الإسم الأول لك"
+
+#~ msgid "Last Name"
+#~ msgstr "الإسم الثاني"
+
+#~ msgid "Username"
+#~ msgstr "!اسم المستخدم"
+
+#~ msgid "Password"
+#~ msgstr "كلمة السر"
+
+#~ msgid "Confirm Password"
+#~ msgstr "هنا تأكيد  كلمة السر"
+
+#~ msgid "Save operation completed"
+#~ msgstr "تمت عملية الحفظ"
+
+#~ msgid "Error in save operation"
+#~ msgstr "خطأ في عملية الحفظ"
+
+#~ msgid "Delete operation completed"
+#~ msgstr "تمت عملية الحذف"
+
+#~ msgid "Error in delete operation"
+#~ msgstr "خطأ في عملية الحذف"
+
+#~ msgid "No items available"
+#~ msgstr "لا يوجد أصناف"
+
+#~ msgid "Arabic Name"
+#~ msgstr "!الاسم عربي"
+
+#~ msgid "Foreign Name"
+#~ msgstr "!الاسم الاجنبي"
+
+#~ msgid "Unit Code"
+#~ msgstr "رمز الوحدة"
+
+#~ msgid "Closed"
+#~ msgstr "مغلق"
+
+#~ msgid "Save Error"
+#~ msgstr "خطأ في الحفظ"
+
+#~ msgid "Activated"
+#~ msgstr "!مفعل"
+
+#~ msgid "Status"
+#~ msgstr "التوقف"
+
+#~ msgid "Items Screen"
+#~ msgstr "شاشة الأصناف"
+
+#~ msgid "New"
+#~ msgstr "جديد"
+
+#~ msgid "Unit"
+#~ msgstr "وحدة"
+
+#~ msgid "Item Type"
+#~ msgstr "نوعية الصنف"
+
+#~ msgid "Barcode"
+#~ msgstr "الباركود"
+
+#~ msgid "Local Name"
+#~ msgstr "الاسم المحلي"
+
+#~ msgid "Events"
+#~ msgstr "الاحداث"
+
+#~ msgid "Add Items"
+#~ msgstr "إضافة الاصناف"
+
+#~ msgid "Main Unit"
+#~ msgstr "الوحدة الرئيسية"
+
+#~ msgid "Save"
+#~ msgstr "حفظ"
+
+#~ msgid "you want Delete"
+#~ msgstr "هل حقا تريد الحذف؟"
+
+#~ msgid "Item Types Screen"
+#~ msgstr "شاشة انواع الاصناف"
+
+#~ msgid "Add New Item Type"
+#~ msgstr "إضافة نوع جديد للصنف"
+
+#~ msgid "#"
+#~ msgstr "تسلسل"
+
+#~ msgid "first name"
+#~ msgstr "الاسم الاول"
+
+#~ msgid "Scand Name"
+#~ msgstr "الاسم الثاني"
+
+#~ msgid "Add Item Type"
+#~ msgstr "إضافة أنواع الأصناف"
+
+#~ msgid "English Name"
+#~ msgstr "!الاسم إنجليزي"
+
+#~ msgid "Cancel"
+#~ msgstr "إلغاء"
+
+#~ msgid "Store Screen"
+#~ msgstr "شاشة المخازن"
+
+#~ msgid "Add New Store"
+#~ msgstr "إضافة مخزن جديد"
+
+#~ msgid "Active"
+#~ msgstr "تفعيل"
+
+#~ msgid "Unit Screen"
+#~ msgstr "شاشة الوحدات"
+
+#~ msgid "Add New Unit Item"
+#~ msgstr "إضافة وحدة جديدة للصنف"
+
+#~ msgid "Name"
+#~ msgstr " الوحدة المحلي"
+
+#~ msgid "Code"
+#~ msgstr "الكود"
+
+#~ msgid "Add Unit"
+#~ msgstr "إضافة الوحدات"
+
+#~ msgid "Arabic Names"
+#~ msgstr "الاسم الوحدة عربي"
+
+#~ msgid "English Name!"
+#~ msgstr "اسم الوحدة انجليزي"
+
+#~ msgid "User Screen"
+#~ msgstr "شاشة المستخدمين"
+
+#~ msgid "Add New User"
+#~ msgstr "إضافة مستخدم جديد"
+
+#~ msgid "User"
+#~ msgstr "المستخدم"
+
+#~ msgid "Tools"
+#~ msgstr "ادوات"
+
+#~ msgid "Add users"
+#~ msgstr "إضافة المستخدمين"
+
+#~ msgid "End Name"
+#~ msgstr "الاسم الاخير"
+
+#~ msgid "Username!"
+#~ msgstr "!اسم المستخدم"
+
+#~ msgid "email"
+#~ msgstr "الايميل"
+
+#~ msgid "Password!"
+#~ msgstr "كلمة المرور"
+
+#~ msgid "Re-enter password"
+#~ msgstr "إعادة كتابة كلمة المرور"
+
+#~ msgid "You must verify the password"
+#~ msgstr "يجب عليك التحقق من الباسورد"
+
+#~ msgid "Expense name"
+#~ msgstr "إسم المصروف"
+
+#~ msgid "Amount"
+#~ msgstr "قيمة"
+
+#~ msgid "Expense Date"
+#~ msgstr "تاريخ المصروف"
+
+#~ msgid "Expense Name"
+#~ msgstr "اسم المصروف"
+
+#~ msgid "Expenses"
+#~ msgstr "المصروفات"
+
+#~ msgid "Add New Expense"
+#~ msgstr "إضافة مصروف جديد"
+
+#~ msgid "Date Added"
+#~ msgstr "تاريخ الإضافة"
+
+#~ msgid "Edit Expense"
+#~ msgstr "تعديل المصروف"
+
+#~ msgid "Amount!"
+#~ msgstr "القيمة"
+
+#~ msgid "Date expense "
+#~ msgstr " تاريخ الصرف"
+
+#~ msgid "Back to Expenses List"
+#~ msgstr "رجوع إلى قائمة المصاريف"
+
+#~ msgid "View All Expenses"
+#~ msgstr "عرض جميع المصروفات"
+
+#~ msgid "Expenses List"
+#~ msgstr "قائمة المصاريف"
+
+#~ msgid "Back to Add Expense"
+#~ msgstr "رجوع إلى إضافة مصروف"
+
+#~ msgid "Edit!"
+#~ msgstr "التعديل"
+
+#~ msgid "No expenses available at the moment."
+#~ msgstr "لا توجد مصاريف حالياً."
+
+#~ msgid "Expense added successfully."
+#~ msgstr "تم إضافة المصروف بنجاح"
+
+#~ msgid "An error occurred while adding the expense."
+#~ msgstr "حدث خطأ أثناء إضافة المصروف"
+
+#~ msgid "Foreign Name!"
+#~ msgstr "الاسم الأجنبي"
+
+#~ msgid "Items Types"
+#~ msgstr "نوع العنصر"
+
+#~ msgid "Category"
+#~ msgstr "الفئات"
+
+#~ msgid "Selling Price"
+#~ msgstr " البيع"
+
+#~ msgid "Purchase Price"
+#~ msgstr "سعر الشراء"
+
+#~ msgid "Image"
+#~ msgstr "الصورة"
+
+#~ msgid "Disable Item"
+#~ msgstr "إيقاف العنصر"
+
+#~ msgid "Quantity must be a positive value or zero."
+#~ msgstr "الكمية يجب أن تكون قيمة موجبة أو صفر."
+
+#~ msgid "Quantity updated successfully."
+#~ msgstr "تم تحديث الكمية بنجاح."
+
+#~ msgid "Current quantity for this item not found."
+#~ msgstr "لم يتم العثور على الكمية الحالية لهذا الصنف."
+
+#, python-brace-format
+#~ msgid "An error occurred: {e}"
+#~ msgstr "حدث خطأ: {e}"
+
+#~ msgid "Successfully updated."
+#~ msgstr "تم التعديل بنجاح"
+
+#~ msgid "Successfully saved."
+#~ msgstr "تم الحفظ بنجاح"
+
+#~ msgid "Error in deletion: "
+#~ msgstr "خطأ في الحذف: "
+
+#~ msgid "Group Name (Arabic)"
+#~ msgstr "اسم المجموعة عربي"
+
+#~ msgid "Group Name (English)"
+#~ msgstr "اسم المجموعة إنجليزي"
+
+#~ msgid "Item Name (Arabic)"
+#~ msgstr "اسم الصنف ع"
+
+#~ msgid "Item Name (English)"
+#~ msgstr "اسم الصنف إنجليش"
+
+#~ msgid "Item Image"
+#~ msgstr "صورة الصنف"
+
+#~ msgid "Quantity"
+#~ msgstr "كمية"
+
+#~ msgid "Categories Screen"
+#~ msgstr "شاشة الاقسام"
+
+#~ msgid "Add New Category"
+#~ msgstr "إضافة قسم جديد"
+
+#~ msgid "Category Name (Arabic)"
+#~ msgstr "إسم القسم ع"
+
+#~ msgid "Category Name (English)"
+#~ msgstr "إسم القسم E"
+
+#~ msgid "Statu'S"
+#~ msgstr "الحالة"
+
+#~ msgid "Add Categories"
+#~ msgstr "إضافة الاقسام"
+
+#~ msgid "Screen Item "
+#~ msgstr "شاشة الأصناف"
+
+#~ msgid "Add New Item"
+#~ msgstr "إضافة صنف جديد"
+
+#~ msgid "Items Name (Arabic)"
+#~ msgstr "إسم الصنف ع"
+
+#~ msgid "items Name (English)"
+#~ msgstr "إسم الصنف E"
+
+#~ msgid "Group"
+#~ msgstr "المجموعة"
+
+#~ msgid "Categorys"
+#~ msgstr "القسم"
+
+#~ msgid "Sale"
+#~ msgstr "البيع"
+
+#~ msgid "Purchase"
+#~ msgstr "الشراء"
+
+#~ msgid "Event"
+#~ msgstr "حركة"
+
+#~ msgid "Generate Barcode"
+#~ msgstr "توليد باركود"
+
+#~ msgid "Items Inventory"
+#~ msgstr "جرد الأصناف"
+
+#~ msgid "Phone Number:"
+#~ msgstr "رقم الهاتف:"
+
+#~ msgid "Mobile:"
+#~ msgstr "الجوال:"
+
+#~ msgid "Email:"
+#~ msgstr "البريد الإلكتروني:"
+
+#~ msgid "Tax Number:"
+#~ msgstr "الرقم الضريبي:"
+
+#~ msgid "Notes:"
+#~ msgstr "ملاحظات:"
+
+#~ msgid "Search for an item..."
+#~ msgstr "ابحث عن صنف..."
+
+#~ msgid "Select Category"
+#~ msgstr "اختيار الفئة"
+
+#~ msgid "Print All Items"
+#~ msgstr "طباعة جميع الأصناف"
+
+#~ msgid "Number of Items:"
+#~ msgstr "أعدد الأصناف:"
+
+#~ msgid "Item Details"
+#~ msgstr "تفاصيل الأصناف"
+
+#~ msgid "Item Name"
+#~ msgstr "اسم الصنف"
+
+#~ msgid "Unit of Measure"
+#~ msgstr "وحدة القياس"
+
+#~ msgid "Available Quantity"
+#~ msgstr "الكمية المتوفرة"
+
+#~ msgid "Edit Quantity"
+#~ msgstr "تعديل الكمية"
+
+#~ msgid "Creation Date"
+#~ msgstr "تاريخ الإنشاء"
+
+#~ msgid "Modification Date"
+#~ msgstr "تاريخ التعديل"
+
+#~ msgid "Edits"
+#~ msgstr "تعديل"
+
+#~ msgid "Deletes"
+#~ msgstr "حذف"
+
+#~ msgid "Open"
+#~ msgstr "مفتوح"
+
+#~ msgid "Start Date"
+#~ msgstr "تاريخ البداية"
+
+#~ msgid "End Date"
+#~ msgstr "تاريخ الإنهاء"
+
+#~ msgid "Updated"
+#~ msgstr "تم التعديل"
+
+#~ msgid "close"
+#~ msgstr "أغلاق"
+
+#~ msgid "Edit Status"
+#~ msgstr "تعديل الحالة"
+
+#~ msgid "POS Devices Screen"
+#~ msgstr "شاشة الاجهزة الطرفية"
+
+#~ msgid "Add Device"
+#~ msgstr "إضافة جهاز"
+
+#~ msgid "Date and Time:"
+#~ msgstr "التاريخ والوقت:"
+
+#~ msgid "Write here the popup content"
+#~ msgstr "اكتب هنا محتوى المنبثقة"
+
+#~ msgid "Additional Information"
+#~ msgstr "معلومات إضافية"
+
+#~ msgid "Items"
+#~ msgstr "جميع اصناف"
+
+#~ msgid "Price"
+#~ msgstr "السعر"
+
+#~ msgid "Total"
+#~ msgstr " اجمالي البيع"
+
+#~ msgid "Number Items:"
+#~ msgstr "عدد الاصناف:"
+
+#~ msgid "Total:"
+#~ msgstr "المجموع:"
+
+#~ msgid "Discount (-):"
+#~ msgstr "الخصم (-):"
+
+#~ msgid "Grand Total:"
+#~ msgstr "الإجمالي:"
+
+#, python-format
+#~ msgid "Tax (15%%):"
+#~ msgstr "الضريبة (15%%):"
+
+#~ msgid "Total After Tax:"
+#~ msgstr "الإجمالي بعد الضريبة:"
+
+#~ msgid "Search by Barcode"
+#~ msgstr "البحث باستخدام الباركود"
+
+#~ msgid "Search Products"
+#~ msgstr "بحث المنتجات"
+
+#~ msgid "Close up"
+#~ msgstr "إغلاق"
+
+#~ msgid "Device Name"
+#~ msgstr "اسم الجهاز"
+
+#~ msgid "Start Time"
+#~ msgstr "وقت البداية"
+
+#~ msgid "End Time"
+#~ msgstr "وقت النهاية"
+
+#~ msgid "Device"
+#~ msgstr "الجهاز"
+
+#~ msgid "Select Printer'S"
+#~ msgstr "إختر الطابعة"
+
+#~ msgid "Printer Name"
+#~ msgstr " الطابعة إسم"
+
+#~ msgid "printers Name"
+#~ msgstr "إسم الطابعة"
+
+#~ msgid "Print Type"
+#~ msgstr "نوع الطباعة"
+
+#~ msgid "Print Quality"
+#~ msgstr "جودة الطباعة"
+
+#~ msgid "Laser Printer"
+#~ msgstr "طابعة ليزر"
+
+#~ msgid "Inkjet Printer"
+#~ msgstr "طابعة انجكت"
+
+#~ msgid "Dot Matrix"
+#~ msgstr "دوت ماتريكس"
+
+#~ msgid "High Quality"
+#~ msgstr "جودة عالية"
+
+#~ msgid "Medium Quality"
+#~ msgstr "جودة متوسطة"
+
+#~ msgid "Low Quality"
+#~ msgstr "جودة منخفضة"
+
+#~ msgid "Printer Settings"
+#~ msgstr "إعدادات الطابعة"
+
+#~ msgid "Select Printer:"
+#~ msgstr "اختيار الطابعة:"
+
+#~ msgid "Paper Size:"
+#~ msgstr "حجم الورق:"
+
+#~ msgid "Print Quality:"
+#~ msgstr "جودة الطباعة:"
+
+#~ msgid "Draft"
+#~ msgstr "مسودة"
+
+#~ msgid "Normal"
+#~ msgstr "عادي"
+
+#~ msgid "High"
+#~ msgstr "عالي"
+
+#~ msgid "Update Settings"
+#~ msgstr "تحديث الإعدادات"
+
+#~ msgid "Print Preview"
+#~ msgstr "معاينة الطباعة"
+
+#~ msgid "A4 Template"
+#~ msgstr "نموذج A4"
+
+#~ msgid "Preview invoice in A4 size."
+#~ msgstr "معاينة الفاتورة بحجم A4."
+
+#~ msgid "C8 Template"
+#~ msgstr "نموذج C8"
+
+#~ msgid "Preview invoice in C8 size."
+#~ msgstr "معاينة الفاتورة بحجم C8."
+
+#~ msgid "Print"
+#~ msgstr "طباعة"
+
+#~ msgid "Settings updated successfully!"
+#~ msgstr "تم تحديث الإعدادات بنجاح!"
+
+#~ msgid "Settings added successfully!"
+#~ msgstr "تم إضافة الإعدادات بنجاح!"
+
+#, python-format
+#~ msgid "Printer Name: %s"
+#~ msgstr "إسم الطابعة: %s"
+
+#, python-format
+#~ msgid "Print Type: %s"
+#~ msgstr "نوع الطباعة: %s"
+
+#, python-format
+#~ msgid "Print Quality: %s"
+#~ msgstr "جودة الطباعة: %s"
+
+#~ msgid "Supplier Name (Local Language)"
+#~ msgstr "اسم المورد (باللغة المحلية)"
+
+#~ msgid "Supplier Name (Foreign Language)"
+#~ msgstr "اسم المورد (باللغة الأجنبية)"
+
+#~ msgid "VAT Number"
+#~ msgstr "رقم ضريبة القيمة المضافة"
+
+#~ msgid "Supplier Phone"
+#~ msgstr "هاتف المورد"
+
+#~ msgid "Mobile Phone"
+#~ msgstr "الهاتف المحمول"
+
+#~ msgid "Supplier Address"
+#~ msgstr "عنوان المورد"
+
+#~ msgid "Is the Supplier Suspended?"
+#~ msgstr "هل المورد موقوف؟"
+
+#~ msgid "Create"
+#~ msgstr "إنشاء"
+
+#~ msgid "Update successful"
+#~ msgstr "تمت عملية التعديل"
+
+#~ msgid "There was an error in the update process"
+#~ msgstr "هناك خطأ في عملية التعديل"
+
+#~ msgid "There was an error in the save process"
+#~ msgstr "هناك خطأ في عملية الحفظ"
+
+#~ msgid "No item found"
+#~ msgstr "لا يوجد صنف"
+
+#~ msgid "Warehouse"
+#~ msgstr "المخزن"
+
+#~ msgid "Supplier"
+#~ msgstr "المورد"
+
+#~ msgid "Total Item Discount"
+#~ msgstr "إجمالي خصم الاصناف"
+
+#~ msgid "Value"
+#~ msgstr "قيمة"
+
+#~ msgid "Total After Discount"
+#~ msgstr "إجمالي بعد الخصم"
+
+#~ msgid "Invoice Date"
+#~ msgstr "تاريخ الفاتورة"
+
+#~ msgid "Supplier Invoice Date"
+#~ msgstr "تاريخ فاتورة المورد"
+
+#~ msgid "Invoice Number"
+#~ msgstr "رقم الفاتورة"
+
+#~ msgid "Discount"
+#~ msgstr "الخصم"
+
+#~ msgid "Discount %"
+#~ msgstr "تخفيض %"
+
+#~ msgid "Tax"
+#~ msgstr "الضريبة"
+
+#~ msgid "Supplier Name (Arabic)"
+#~ msgstr " المورد "
+
+#~ msgid "Supplier Name (English)"
+#~ msgstr " مورد (E) "
+
+#~ msgid "Tax Numbers"
+#~ msgstr "الرقم الضريبي "
+
+#~ msgid "Phone"
+#~ msgstr "الهاتف"
+
+#~ msgid "Mobile"
+#~ msgstr "الجوال"
+
+#~ msgid "Date's"
+#~ msgstr "التاريخ  "
+
+#~ msgid "Amount;S"
+#~ msgstr "المبغ"
+
+#~ msgid "Supplier Invoice Number"
+#~ msgstr "رقم فاتورة المورد"
+
+#~ msgid "Suspended"
+#~ msgstr "وقف"
+
+#~ msgid "Reference Number"
+#~ msgstr "رقم المرجع"
+
+#~ msgid "Invoice Total"
+#~ msgstr "مجموع الفاتورة"
+
+#~ msgid "Discount'Sale"
+#~ msgstr "الخصم"
+
+#~ msgid "Discount Percentage %"
+#~ msgstr "نسبة الخصم %"
+
+#~ msgid "Expiration Date"
+#~ msgstr "تاريخ انتهاء"
+
+#~ msgid "Payment Method"
+#~ msgstr "طريقة الدفع"
+
+#~ msgid "Total'S"
+#~ msgstr "مجموع "
+
+#~ msgid "Invoice Details Total"
+#~ msgstr "مجموع تفاصيل الفاتورة"
+
+#~ msgid "Suppliers Screen"
+#~ msgstr "شاشة الموردين"
+
+#~ msgid "Add New Supplier"
+#~ msgstr "إضافة مورد جديد"
+
+#~ msgid "Supplier'S Name'S (Arabic)"
+#~ msgstr "إسم المورد (ع)"
+
+#~ msgid "Supplier Names"
+#~ msgstr "إسم المورد (E)"
+
+#~ msgid "Add Suppliers"
+#~ msgstr "إضافة الموردين"
+
+#~ msgid "Supplier Name"
+#~ msgstr "إسم المورد"
+
+#~ msgid "Statement"
+#~ msgstr "بيان"
+
+#~ msgid "Cash"
+#~ msgstr "نقدي"
+
+#~ msgid "Card"
+#~ msgstr "شبكة"
+
+#~ msgid "Item"
+#~ msgstr "الصنف"
+
+#~ msgid "Quantity'S"
+#~ msgstr "كمية"
+
+#~ msgid "Event'S"
+#~ msgstr "حدث"
+
+#~ msgid "Add Row"
+#~ msgstr "إضافة صف"
+
+#~ msgid "Total Purchases"
+#~ msgstr "إجمالي مجموع المشتريات"
+
+#~ msgid "Discount Type"
+#~ msgstr "نوع الخصم"
+
+#~ msgid "Percentage"
+#~ msgstr "نسبة مئوية"
+
+#~ msgid "Fixed Value"
+#~ msgstr "قيمة ثابتة"
+
+#~ msgid "Tax Amount"
+#~ msgstr "قيمة الضريبة"
+
+#, python-format
+#~ msgid "Tax (15%%)"
+#~ msgstr "الضريبة (15%%)"
+
+#~ msgid "Total Amount"
+#~ msgstr "المجموع الكامل"
+
+#~ msgid "Save Invoice"
+#~ msgstr "حفظ الفاتورة"
+
+#~ msgid "Save and Print Invoice"
+#~ msgstr "حفظ وطباعة الفاتورة"
+
+#~ msgid "Item 1"
+#~ msgstr "صنف 1"
+
+#~ msgid "Item 2"
+#~ msgstr "صنف 2"
+
+#~ msgid "Item 3"
+#~ msgstr "صنف 3"
+
+#~ msgid "Local Purchase Invoice"
+#~ msgstr "فاتورة مشتريات محلية"
+
+#~ msgid "Deleteded successfully"
+#~ msgstr "تم الحذف بنجاح"
+
+#~ msgid "Customer Name (Arabic)"
+#~ msgstr " العميل ع"
+
+#~ msgid "Customer Name (English)"
+#~ msgstr " العميل E"
+
+#~ msgid "Tax Number"
+#~ msgstr " الرقم الضريبي"
+
+#~ msgid "Statu"
+#~ msgstr " الحالة"
+
+#~ msgid "There was an error in the update"
+#~ msgstr "هناك خطأ في التعديل"
+
+#~ msgid "Customer"
+#~ msgstr "العميل"
+
+#~ msgid "Total Discount"
+#~ msgstr "إجمالي الخصم "
+
+#~ msgid "Total Invoice"
+#~ msgstr "إجمالي الفاتورة"
+
+#~ msgid "Amount Discount"
+#~ msgstr "خصم بالمبلغ"
+
+#~ msgid "Percentage Discount"
+#~ msgstr "خصم بالنسبة %"
+
+#~ msgid "15% Tax"
+#~ msgstr "ضريبة 15 %"
+
+#~ msgid "Available'S Quantity"
+#~ msgstr "الكمية المتوفرة"
+
+#~ msgid "Expir Date"
+#~ msgstr "تاريخ انتهاء الصلاحية"
+
+#~ msgid "Description"
+#~ msgstr "الوصف"
+
+#~ msgid "Discount Rate"
+#~ msgstr "معدل الخصم"
+
+#~ msgid "Selling Price'S"
+#~ msgstr "السعر البيع"
+
+#~ msgid "Item Specifications"
+#~ msgstr "مواصفات الصنف"
+
+#~ msgid "Customer Name (E)"
+#~ msgstr "E إسم العميل"
+
+#~ msgid "Is it a stage?"
+#~ msgstr "هل هو مرحلة؟"
+
+#~ msgid "Is it suspended?"
+#~ msgstr "هل هو موقوف؟"
+
+#~ msgid "Due Date"
+#~ msgstr "تاريخ الاستحقاق"
+
+#~ msgid "Cheque Value"
+#~ msgstr "قيمة الشيك"
+
+#~ msgid "Suspend"
+#~ msgstr "إيقاف"
+
+#~ msgid "Total Local Invoice"
+#~ msgstr "إجمالي الفاتورة المحلية"
+
+#~ msgid "Statement'S"
+#~ msgstr "بيان"
+
+#~ msgid "Total'S Amount"
+#~ msgstr "إجمالي المبلغ"
+
+#~ msgid "Discount Rate %"
+#~ msgstr "معدل الخصم %"
+
+#~ msgid "Free Quantity"
+#~ msgstr "الكمية المجانية"
+
+#~ msgid "Local Sales Invoice"
+#~ msgstr "فاتورة المبيعات "
+
+#~ msgid "Local Sales Invoice Details"
+#~ msgstr "تفاصيل فاتورة مبيعات محلية"
+
+#~ msgid "Customer Screen"
+#~ msgstr "شاشة العملاء"
+
+#~ msgid "Add New Customer"
+#~ msgstr "إضافة عميل جديد"
+
+#~ msgid "Add Customers"
+#~ msgstr "إضافة العملاء"
+
+#~ msgid "Customer'S (Arabic)"
+#~ msgstr "إسم العميل (عربي)"
+
+#~ msgid " Name (English)"
+#~ msgstr "إسم العميل (English)"
+
+#~ msgid "Customer Status"
+#~ msgstr "حالة العميل"
+
+#~ msgid "Home Page"
+#~ msgstr "هذه الصفحة الرئيسية"
+
+#~ msgid "Sales Invoices"
+#~ msgstr "فواتير المبيعات"
+
+#~ msgid "Date"
+#~ msgstr "تاريخ"
+
+#~ msgid "Customer Name"
+#~ msgstr "اسم العميل"
+
+#~ msgid "Eventss"
+#~ msgstr "الحدث"
+
+#~ msgid "Invoice Code"
+#~ msgstr "كودالفاتورة"
+
+#~ msgid "Invoice Details"
+#~ msgstr "تفاصيل الفاتورة"
+
+#~ msgid "Unit's"
+#~ msgstr "وحدة"
+
+#~ msgid "Tool's"
+#~ msgstr "أدوات"
+
+#~ msgid "Discount Percentage"
+#~ msgstr "نسبة الخصم"
+
+#~ msgid "totaly"
+#~ msgstr "الإجمالي"
+
+#~ msgid "Item Discount"
+#~ msgstr "الخصم على العناصر"
+
+#~ msgid "Net Total"
+#~ msgstr "المجموع الصافي"
+
+#~ msgid "View Sales Invoices"
+#~ msgstr "عرض فواتير المبيعات"
+
+#~ msgid " the Sales Invoice"
+#~ msgstr "فاتورة مبيعات محلية"
+
+#~ msgid "Add this Store"
+#~ msgstr "إضافة متجر"
+
+#~ msgid "Quantity not available in stock"
+#~ msgstr "الكمية غير متوفرة في المخزن"
+
+#~ msgid "this Error"
+#~ msgstr "خطأ"
+
+#~ msgid "Stores Name"
+#~ msgstr "الاسم"
+
+#~ msgid "Message"
+#~ msgstr "الرسالة"
+
+#, python-brace-format
+#~ msgid "Support from {name}"
+#~ msgstr "دعم من {name}"
+
+#~ msgid "Hello! How can I assist you today?"
+#~ msgstr "مرحبًا! كيف يمكنني مساعدتك اليوم؟"
+
+#~ msgid "The time is now 3:00 PM."
+#~ msgstr "الساعة الآن 3:00 مساءً."
+
+#~ msgid "Thank you! We are here to help you."
+#~ msgstr "شكرًا لك! نحن هنا لمساعدتك."
+
+#~ msgid "Home"
+#~ msgstr "الرئيسية"
+
+#~ msgid "This Search"
+#~ msgstr "بحث"
+
+#~ msgid "Settings"
+#~ msgstr "إعدادات"
+
+#~ msgid "My Information"
+#~ msgstr "معلوماتي"
+
+#~ msgid "My Account"
+#~ msgstr "حسابي"
+
+#~ msgid "Logout from"
+#~ msgstr "تسجيل الخروج"
+
+#~ msgid "Login"
+#~ msgstr "تسجيل الدخول"
+
+#~ msgid "Your device is connected to the internet."
+#~ msgstr "جهازك متصل بالإنترنت."
+
+#~ msgid "Your device is not connected to the internet."
+#~ msgstr "جهازك غير متصل بالإنترنت."
+
+#~ msgid "Error connecting to the server:"
+#~ msgstr "خطأ في الاتصال بالخادم:"
+
+#~ msgid "Your device is now connected."
+#~ msgstr "جهازك متصل الآن."
+
+#~ msgid "Your device is now disconnected."
+#~ msgstr "جهازك غير متصل الآن."
+
+#~ msgid "Nine9X System"
+#~ msgstr "نظام ناينوكس"
+
+#~ msgid "Dashboard"
+#~ msgstr "لوحة التحكم"
+
+#~ msgid "Copyrights &copy; Reserved by"
+#~ msgstr "حقوق النشر والنسخ محفوظة لدى"
+
+#~ msgid "Version"
+#~ msgstr "الاصدار"
+
+#~ msgid "Nine9X System (Nine9X.Pro)"
+#~ msgstr "نظام ناينوكس (Nine9X.Pro)"
+
+#~ msgid "Total Sales"
+#~ msgstr "مجموع المبيعات"
+
+#~ msgid "Show Details"
+#~ msgstr "إظهار التفاصيل"
+
+#~ msgid "Total All Purchases"
+#~ msgstr "مجموع المشتريات"
+
+#~ msgid "Total Returns"
+#~ msgstr "مجموع المرتجعات"
+
+#~ msgid "Profit"
+#~ msgstr "الربح"
+
+#~ msgid "Total Invoices"
+#~ msgstr "إجمالي الفواتير"
+
+#~ msgid "Total Sales Invoices"
+#~ msgstr "إجمالي فواتير المبيعات"
+
+#~ msgid "Total Purchase Invoices"
+#~ msgstr "إجمالي فواتير المشتريات"
+
+#~ msgid "Nine9X Restaurant System"
+#~ msgstr "نظام ناينوكس للمطاعم"
+
+#~ msgid ""
+#~ "Compatible with the Electronic Invoicing System 'Simplified Invoice' of "
+#~ "the Zakat, Tax and Customs Authority, enabling you to upload electronic "
+#~ "invoices to the authority."
+#~ msgstr ""
+#~ "متوافق مع نظام الفوترة الإلكترونية 'فاتورة مبسطة' التابع لهيئة الزكاة "
+#~ "والضريبة والجمارك، حتى يتمكّنوا من رفع الفواتير الإلكترونية للهيئة."
+
+#~ msgid "For more details, please contact the sales team."
+#~ msgstr "لمزيد من التفاصيل يرجى التواصل مع فريق المبيعات."
+
+#~ msgid "Program Management"
+#~ msgstr "إدارة البرنامج"
+
+#~ msgid "User Management"
+#~ msgstr "إدارة المستخدمين"
+
+#~ msgid "Organization Management"
+#~ msgstr "إدارة المؤسسة"
+
+#~ msgid "Printing Management"
+#~ msgstr "إدارة الطباعة"
+
+#~ msgid "Tax Management"
+#~ msgstr "إدارة الضريبة"
+
+#~ msgid "Warehouses"
+#~ msgstr "المخازن"
+
+#~ msgid "Items All"
+#~ msgstr "الأصناف"
+
+#~ msgid "Categories"
+#~ msgstr "المجموعات"
+
+#~ msgid "Units"
+#~ msgstr "الوحدات"
+
+#~ msgid "Departments"
+#~ msgstr "الأقسام"
+
+#~ msgid "Suppliers/Customers"
+#~ msgstr "الموردين/العملاء"
+
+#~ msgid "Suppliers"
+#~ msgstr "الموردين"
+
+#~ msgid "Customers"
+#~ msgstr "العملاء"
+
+#~ msgid "Purchases"
+#~ msgstr "المشتريات"
+
+#~ msgid "Sales"
+#~ msgstr "المبيعات"
+
+#~ msgid "Sale Invoice's"
+#~ msgstr "فاتورة المبيعات"
+
+#~ msgid "Point of Sale"
+#~ msgstr "نقطة المبيعات"
+
+#~ msgid "Devices"
+#~ msgstr "الأجهزة"
+
+#~ msgid "Sessions"
+#~ msgstr "الجلسات"
+
+#~ msgid "POS Terminal"
+#~ msgstr "نقطة البيع"
+
+#~ msgid "View Expenses"
+#~ msgstr "عرض المصروفات"
+
+#~ msgid "Add Expense"
+#~ msgstr "إضافة مصروف"
+
+#~ msgid "Support"
+#~ msgstr "الدعم"
+
+#~ msgid "Technical Support"
+#~ msgstr "الدعم الفني"
+
+#~ msgid "Your First Name"
+#~ msgstr "الأسم الأول"
+
+#~ msgid "Remember Me"
+#~ msgstr "تذكرني"
+
+#~ msgid "Tell us about yourself"
+#~ msgstr "أخبرنا عن نفسك"
+
+#~ msgid "Language"
+#~ msgstr "اللغة"
+
+#~ msgid "Light Mode"
+#~ msgstr "إضاءة بيضاء"
+
+#~ msgid "Dark Mode"
+#~ msgstr "إضاءة سوداء"
+
+#~ msgid "Background"
+#~ msgstr "الخلفية"
+
+#~ msgid "Change Icon"
+#~ msgstr "تغيير الايقونة"
+
+#~ msgid "Enable Notifications"
+#~ msgstr " التنبيهات"
+
+#~ msgid "This Home Page"
+#~ msgstr "الرئيسية"
+
+#~ msgid "Log'S out"
+#~ msgstr "تسجيل الخروج"
+
+#~ msgid "Log in To"
+#~ msgstr "تسجيل الدخول"
+
+#~ msgid "Change Password"
+#~ msgstr "تغيير كلمة المرور"
+
+#~ msgid "Old Password"
+#~ msgstr "كلمة المرور القديمة"
+
+#~ msgid "New Password"
+#~ msgstr "كلمة المرور الجديدة"
+
+#~ msgid "Confirmaition Password"
+#~ msgstr "تأكيد كلمات السر"
+
+#~ msgid "Save Changes"
+#~ msgstr "حفظ التغيرات"
+
+#~ msgid "Hello, "
+#~ msgstr "مرحبا, "
+
+#~ msgid "هذا هو"
+#~ msgstr "This is"
+
+#~ msgid "User Registration and Login System"
+#~ msgstr "نظام تسجيل المستخدم وتسجيل الدخول"
+
+#~ msgid "Login Screen"
+#~ msgstr "شاشة تسجيل الدخول"
+
+#~ msgid "If you don't have an account, create one now"
+#~ msgstr "إذا كان ليس لديك حساب؟إنشئ حساب الأن"
+
+#~ msgid "You have been logged out"
+#~ msgstr "لقد تم تسجيل الخروج"
+
+#~ msgid ""
+#~ "Thank you for your time, you can contact me if you have any feedback or "
+#~ "suggestions via my email."
+#~ msgstr ""
+#~ "شكرًا لك على وقتك، يمكنك التواصل معي إذا كان لديك أي تعليقات أو اقتراحات "
+#~ "عبر بريدي الإلكتروني."
+
+#~ msgid "Log in again"
+#~ msgstr "تسجيل الدخول مرة أخرى"
+
+#~ msgid "Forgot Password?"
+#~ msgstr "نسيت كلمة السر؟"
+
+#~ msgid "Confirm"
+#~ msgstr "تأكيد"
+
+#~ msgid "Create a New Account"
+#~ msgstr "إنشاء حساب جديد"
+
+#~ msgid "Back to the Login Page"
+#~ msgstr "الرجوع إلى صفحة تسجيل الدخول"
+
+#~ msgid "Your password has been set. You can log in now."
+#~ msgstr "لقد تم تعيين كلمة المرور الخاصة بك .يمكنك الدخول الأن"
+
+#~ msgid "Log in here"
+#~ msgstr "تسجيل الدخول من هنا"
+
+#~ msgid "Reset Password"
+#~ msgstr "إعادة تعيين كلمة المرور"
+
+#~ msgid "Reset and Save"
+#~ msgstr "إعادة تعيين وحفظ "
+
+#~ msgid ""
+#~ "The password reset link was invalid, possibly because it has already been "
+#~ "used."
+#~ msgstr ""
+#~ "رابط إعادة تعيين كلمة المرور كان غير صالح، ربما لأنه تم استخدامه بالفعل."
+
+#~ msgid "Please request a new password reset."
+#~ msgstr "الرجاء طلب إعادة تعيين كلمة المرور الجديدة."
+
+#~ msgid "Username:"
+#~ msgstr "اسم المستخدم:"
+
+#~ msgid "Email'S:"
+#~ msgstr "الإيميل:"
+
+#~ msgid "Forgot Password"
+#~ msgstr "نسيت كلمة المرور"
+
+#~ msgid "Change Picture:"
+#~ msgstr "تغيير الصورة:"
+
+#~ msgid "My Account Information:"
+#~ msgstr "معلومات حسابي:"
+
+#~ msgid "Reset Screen"
+#~ msgstr "إعادة ضبط الشاشة"
+
+#~ msgid "Personal Account Screen"
+#~ msgstr "شاشة الحساب الشخصي"
+
+#~ msgid "Password ٍs"
+#~ msgstr "كلمة المرور "
+
+#~ msgid "Confirm Password's"
+#~ msgstr "تأكيد كلمة المرور "
+
+#~ msgid "Biography"
+#~ msgstr "السيرة الذاتية"
+
+#~ msgid "Profile Picture"
+#~ msgstr "صورة الملف الشخصي"
+
+#~ msgid "Register"
+#~ msgstr "التسجيل"
+
+#~ msgid "Already have an account? Go to the login page"
+#~ msgstr "يوجد لديك حساب سابق اذهب الى صفحة تسجيل الدخول"
+
+#~ msgid "App Settings"
+#~ msgstr "إعدادات التطبيق"
+
+#~ msgid "Theme"
+#~ msgstr "السمة"
+
+#~ msgid "App Icon"
+#~ msgstr "أيقونة التطبيق"
+
+#~ msgid " Notifications"
+#~ msgstr "تمكين التنبيهات"
+
+#~ msgid "Save Settings"
+#~ msgstr "حفظ الإعدادات"
+
+#, python-format
+#~ msgid "Account created for: %(username)s"
+#~ msgstr "تم لإنشاء الحساب ل : %(username)s"
+
+#~ msgid ""
+#~ "We have sent instructions to your email to set your password if there is "
+#~ "an account with the email you entered. You should receive them soon. If "
+#~ "you don't receive an email, please make sure you entered the correct "
+#~ "email address, and check your spam folder."
+#~ msgstr ""
+#~ "لقد أرسلنا إليك تعليمات عبر البريد الإلكتروني لإعداد كلمة المرور الخاصة "
+#~ "بك، إذا كان هناك حساب بالبريد الإلكتروني الذي أدخلته. يجب أن تستقبلهم "
+#~ "قريبا. إذا لم تتلق بريدًا إلكترونيًا، فيرجى التأكد من إدخال العنوان الذي "
+#~ "قمت بالتسجيل به،وتحقق من مجلد الرسائل غير المرغوب فيها."
+
+#~ msgid "Password changed successfully"
+#~ msgstr "تم تغيير كلمة المرور بنجاح"
+
+#~ msgid "Page updated"
+#~ msgstr "تم تحديث الصفحة "
+
+#~ msgid "Account successfully created! You can now log in."
+#~ msgstr "تم إنشاء الحساب بنجاح! يمكنك الآن تسجيل الدخول."
+
+#~ msgid "Hello %(name)s"
+#~ msgstr "مرحبًا %(name)s"

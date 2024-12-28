@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "إعدادات التطبيق" %}{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>{% trans "إعدادات التطبيق" %}</h2>  <!-- ترجمة "إعدادات التطبيق" -->
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <!-- حقل اللغة -->
+            <div class="form-group">
+                <label for="language">{% trans "اللغة" %}</label> <!-- ترجمة "اللغة" -->
+                {{ form.language }}
+            </div>
+
+            <!-- حقل السمة -->
+            <div class="form-group">
+                <label for="theme">{% trans "السمة" %}</label> <!-- ترجمة "السمة" -->
+                {{ form.theme }}
+            </div>
+
+            <!-- حقل أيقونة التطبيق -->
+            <div class="form-group">
+                <label for="app_icon">{% trans "أيقونة التطبيق" %}</label> <!-- ترجمة "أيقونة التطبيق" -->
+                {{ form.app_icon }}
+            </div>
+
+            <!-- حقل التنبيهات -->
+            <div class="form-group">
+                <label for="notifications_enabled">{% trans "تمكين التنبيهات" %}</label> <!-- ترجمة "تمكين التنبيهات" -->
+                {{ form.notifications_enabled }}
+            </div>
+
+            <button type="submit" class="btn btn-primary">{% trans "حفظ الإعدادات" %}</button> <!-- ترجمة "حفظ الإعدادات" -->
+        </form>
+    </div>
+{% endblock %}

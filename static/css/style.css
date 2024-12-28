@@ -1,0 +1,144 @@
+/* Add user Screen */
+
+
+/* استخدام الفئة table-responsive لتحسين التفاعل:*/
+.modal-body .form-group {
+    margin-bottom: 20px;
+}
+
+.modal-body input, .modal-body select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #0066ff;
+}
+
+.modal-body input:focus, .modal-body select:focus {
+    border-color: #30353a;
+}
+
+/*  تحسين الأزرار داخل النموذج */
+.modal-footer .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+}
+
+.modal-footer .btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.modal-footer .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+
+/* تنسيق التنبيهات */
+.alert {
+    padding: 15px;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.alert-danger {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+}
+
+.alert-dismissible .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+}
+
+/* إضافة تأثيرات للـ Modal */
+.modal.fade .modal-dialog {
+    transform: translate(0, -50%);
+    transition: transform 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0);
+}
+ /* تحسين تنسيق الأزرار داخل الجدول */
+ .action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.action-buttons .edit_row,
+.action-buttons .delete_row {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.edit_row {
+    background-color: #ffc107;
+    color: white;
+}
+
+.delete_row {
+    background-color: #dc3545;
+    color: white;
+}
+
+.edit_row:hover, .delete_row:hover {
+    opacity: 0.8;
+}
+
+/* إضافة تأثيرات للمحتوى الديناميكي داخل الجدول */
+
+
+table.dataTable {
+width: 100%;
+border-collapse: collapse;
+margin: 20px 0;
+}
+
+table.dataTable thead {
+background-color: #007bff;
+color: #fff;
+font-size: 16px;
+}
+
+table.dataTable th, table.dataTable td {
+padding: 12px 15px;
+text-align: center;
+border: 1px solid #ddd;
+}
+
+table.dataTable tbody tr:nth-child(odd) {
+background-color: #f9f9f9;
+}
+
+table.dataTable tbody tr:hover {
+background-color: #f1f1f1;
+}
+
+.btn-primary {
+background-color: #007bff;
+border-color: #007bff;
+}
+
+.modal-header {
+background-color: #007bff;
+color: #fff;
+}
+
+.modal-footer .btn-primary {
+background-color: #28a745;
+border-color: #28a745;
+}
+
+/* التحكم بحجم الفورم لل Add user */
+.modal-lg {
+    max-width: 70%; /* يحدد الحد الأقصى للعرض */
+    margin: 30px auto; /* المسافة العلوية والسفلية */
+}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% load widget_tweaks %}
+
+{% load static %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans  "تفاصيل السند رقم " %}    {{ voucher.voucher_number }}
+{% endblock %}
+
+{% block content %}
+
+
+<!-- جدول عرض السندات -->
+<table>
+    <thead>
+        <tr>
+            <th>{% trans " رقم السند " %} </th>
+            <th>{% trans  "المورد" %}</th>
+            <th>{% trans "الإجراءات" %}</th>
+        </tr>
+    </thead>   
+    <tbody>
+        {% for voucher in payment_vouchers %}
+        <tr>
+            <td>{{ voucher.voucher_number }}</td>
+            <td>{{ voucher.supplier.name }}</td>
+            <td>
+                <a href="{% url 'supplier_voucher_detail' voucher_number=voucher.voucher_number %}">{% trans "عرض تفاصيل السند " %} </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

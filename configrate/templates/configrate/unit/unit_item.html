@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %} 
+{% block title %}
+    {{ _("شاشة الوحدات") }}
+{% endblock title %}
+
+{% block content %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg" style="margin-bottom: 20px;">
+    {{ _("إضافة وحدة جديدة للصنف") }}
+</button>
+
+<table id="example" class="display datatable" style="width:100%">
+    <thead>
+        <tr>
+            <th style="width: 8px; text-align: right; padding: 8px; border: 1px solid #ddd;">{{ _("تسلسل") }}</th>
+            <th style="width: 130px; text-align: right; padding: 8px; border: 1px solid #ddd;">{{ _("الاشم المحلي") }}</th>
+            <th style="width: 130px; text-align: right; padding: 8px; border: 1px solid #ddd;">{{ _("الاسم الاجنبي") }}</th>
+            <th style="width: 70px; text-align: right; padding: 8px; border: 1px solid #ddd;">{{ _("الكود") }}</th>
+            <th style="width: 40px; text-align: right; padding: 8px; border: 1px solid #ddd;">{{ _("الاحداث") }}</th>          
+        </tr>
+    </thead>
+</table>
+
+<div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h4 class="modal-title">{{ _("إضافة الوحدات") }}</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <form method="POST" id="id_form" action="{% url 'unit' %}">
+              <input type="text" name="id" class="hidden" style="display: none;">
+              {% csrf_token %}
+
+              {% if form.errors %}
+              <div class="alert alert-danger alert-dismissible" role="alert">
+                  <div id="form_errors">
+                      {% for key, value in form.errors.items %}
+                      <strong>{{ value }}</strong>
+                      {% endfor %}
+                  </div>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              {% endif %}
+
+              <div class="modal-body">
+                <div class="form-row">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                          <label class="small mb-1" for="codeUnit">{{ _("الكود") }}</label>
+                          {{ filed.codeUnit }}
+                      </div>
+                  </div>
+              </div>
+
+                  <div class="form-row">
+                      <div class="col-md-8">
+                          <div class="form-group">
+                              <label class="small mb-1" for="name_lo">{{ _("الاسم الوحدة عربي") }}</label>
+                              {{ filed.name_lo }}
+                          </div>
+                      </div>
+
+                      <div class="col-md-8">
+                          <div class="form-group">
+                              <label class="small mb-1" for="name_fk">{{ _("اسم الوحدة انجليزي") }}</label>
+                              {{ filed.name_fk }}
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ _("إلغاء") }}</button>
+                <button type="submit" class="btn btn-dark col-md-6">{{ _("حفظ") }}</button>
+            </div>
+            
+          </form>
+      </div>
+  </div>
+</div>
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+let csrf = '{{ csrf_token }}';
+$("#id_form").on("submit", function(e){
+  e.preventDefault();
+      
+  $.ajax({
+    method: "post",
+    data: $(this).serialize(),
+    url: $(this).attr('action'),
+    beforeSend: function (xhr) {
+        xhr.setRequestHeader("X-CSRFToken", csrf);
+    },
+    success: function(data) {
+        if(data.status == "1") {
+            alert(data.message);
+            $('.datatable').DataTable().ajax.reload();
+            $('#modal-lg').modal('hide');
+        } else {
+            alert(data.message);
+        }
+    }
+  })
+})
+
+$(document).on('click', '.edit_row', function(){
+  $.ajax({
+    url: $(this).data('url'),
+    data: {'id': $(this).data('id')},
+    type: 'GET',
+    success: function (data) {
+        let resp = JSON.parse(data.data);
+        if (data.status == 1) {
+            $(`input[name="id"]`).val(resp[0].pk);
+            $.each(resp[0].fields, function(i, value){
+                $(`input[name="${i}"]`).val(value);
+                $(`select[name="${i}"] option[value="${value}"]`).attr('selected', 'selected');
+            });
+            $('#modal-lg').modal('show');
+        } else {
+            console.log(data.error);
+        }
+    },
+    error: function(data) {}
+  });
+});
+
+$(document).on('click', '.delete_row', function(){
+  if(confirm('{{ _("هل حقا تريد الحذف؟") }}')) {
+    let id_row = $(this).data('id');
+    $.ajax({
+        url: $(this).data('url'),
+        data: {'id': id_row},
+        method: 'DELETE',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
+        success: function (data) {
+            if(data.status == 1) {
+                alert(data.message);
+                $('.datatable').DataTable().ajax.reload();
+            }
+            if(data.status == 0)
+                alert(data.message);
+        },
+        error: function(data) {}
+    });
+  }
+});
+
+$(document).ready(function () {
+    var oTable = $('.datatable').dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{% url 'UnitJson' %}"
+    });
+});
+</script>
+{% endblock scripts %}

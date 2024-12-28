@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+{% load i18n %}
+
+{% load static %}
+
+
+
+{% get_current_language as current_language %}
+<html lang="{{ current_language }}">
+
+{% include "header.html" %}
+<link id="theme-link" rel="stylesheet" href="{% static 'css/light.css' %}">
+
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+            <!-- Navbar -->
+            <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+                <div class="container-fluid d-flex justify-content-between align-items-center w-100">
+                    
+                    <!-- الجزء الخاص باليمين (البحث والرابط إلى الصفحة الرئيسية والاتصال) -->
+                    <div class="d-flex align-items-center">
+                        <!-- زر القائمة الجانبية (Push Menu) -->
+                            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+                        <!-- رابط إلى الصفحة الرئيسية -->
+                        <li class="nav-item d-none d-sm-inline-block ml-3">
+                            <a href="{% url 'index' %}" class="nav-link">{% trans "الرئيسي" %}</a>
+                        </li>
+                        
+                        <!-- رابط الاتصال -->
+                        <li class="nav-item d-none d-sm-inline-block ml-3">
+                            <a href="#" class="nav-link">Contact</a>
+                        </li>
+                        
+                        <!-- مربع البحث -->
+                        <form class="form-inline ml-3">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control form-control-navbar" type="search" placeholder="{% trans 'Search' %}" aria-label="{% trans 'Search' %}">
+                                <div class="input-group-append">
+                                    <button class="btn btn-navbar" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            
+                    <!-- مسافة طويلة بين العناصر -->
+                    <div class="flex-grow-1"></div>
+            
+                    <!-- الجزء الخاص باليسار (الإعدادات واختيار اللغة) -->
+                    <div class="d-flex align-items-center">
+                        <!-- زر الإعدادات -->
+                        <div class="btn-group ml-3">
+                            <button type="button" class="btn btn-default">{% trans 'إعدادات' %}</button>
+                            
+                            <!-- زر Toggle لفتح القائمة المنسدلة -->
+                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            
+                            <!-- القائمة المنسدلة -->
+                            <div class="dropdown-menu" role="menu">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{% url 'users-profile' %}">
+                                    <i class="fas fa-user mr-2"></i> {% trans 'حسابي' %}
+                                </a>
+                                <a class="dropdown-item" href="{% url 'users-register' %}">
+                                    <i class="fas fa-user-plus mr-2"></i> {% trans 'فتح حساب' %}
+                                </a>
+                                {% if user.is_authenticated %}
+                                    <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                                        {% csrf_token %}
+                                        <button type="submit" class="dropdown-item text-danger">
+                                            <i class="fas fa-sign-out-alt mr-2"></i>{% trans 'تسجيل خروج' %}
+                                        </button>
+                                    </form>
+                                {% else %}
+                                    <a class="dropdown-item" href="{% url 'login' %}" role="button">
+                                        <i class="fas fa-sign-in-alt mr-2"></i>{% trans 'تسجيل دخول' %}
+                                    </a>
+                                {% endif %}
+                            </div>
+                        </div>
+                        
+                   
+                        
+                        
+                        
+                       
+                    </div>
+                      <!-- قائمة اللغة -->
+                      <div class="ml-3">
+                        <form action="" method="get" class="d-flex align-items-center">
+                            {% csrf_token %}
+                            <label for="language-select" class="mr-2 font-weight-bold"></label>
+                            <select name="language" id="language-select" onchange="this.form.submit()" class="form-control custom-select">
+                                <option value="en" {% if request.session.django_language == 'en' %}selected{% endif %}>
+                                    <i class="fas fa-language mr-2"></i> English
+                                </option>
+                                <option value="ar" {% if request.session.django_language == 'ar' %}selected{% endif %}>
+                                    <i class="fas fa-language mr-2"></i> Arabic
+                                </option>
+                            </select>
+                        </form>
+                        
+                    </div>
+            
+                 </div>
+            </nav>
+            <!-- Navbar -->
+            
+            
+            
+            
+                <!-- رسالة حالة الاتصال بالإنترنت -->          
+                
+                <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+                <script>
+                // دالة للتحقق من حالة الاتصال بالإنترنت والخادم
+                function checkConnectionStatus() {
+                    // التحقق من حالة الاتصال بالإنترنت
+                    if (navigator.onLine) {
+                        // إذا كان متصلاً بالإنترنت، تحقق من حالة الخادم
+                        fetch("{% url 'check_server_connection' %}")
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.status === "online") {
+                                    // إذا كان الخادم متصلًا
+                                    showToast("السيرفر متصل", "green");
+                                } else {
+                                    // إذا كان الخادم غير متصل
+                                    showToast("السيرفر غير متصل", "red");
+                                }
+                            })
+                            .catch(error => {
+                                // إذا كان هناك خطأ في التحقق من الاتصال بالخادم
+                                showToast("حدث خطأ أثناء التحقق من الاتصال بالسيرفر", "orange");
+                            });
+                    } else {
+                        // إذا كان الجهاز غير متصل بالإنترنت
+                        showToast("جهازك غير متصل بالإنترنت", "red");
+                    }
+                }
+            
+                // دالة لعرض التنبيهات (Toast) باستخدام مكتبة Toastify
+                function showToast(message, color) {
+                    Toastify({
+                        text: message,
+                        backgroundColor: color,
+                        duration: 10000,  // مدة ظهور التنبيه (3 ثوانٍ)
+                        position: "left",  // موقع التنبيه على الجهة اليسرى             
+                        gravity: "top",  // تحديد الموقع في الأسفل
+                        offset: {
+                            x: 5,  // المسافة من اليسار
+                            y: 10   // المسافة من الأسفل
+                        }
+                    }).showToast();
+                }
+            
+                // التحقق من الاتصال عند تحميل الصفحة
+                window.onload = checkConnectionStatus;
+            
+                // الاستماع لتغييرات حالة الاتصال
+                window.addEventListener('online', () => {
+                    showToast("جهازك متصل بالإنترنت", "green");
+                    checkConnectionStatus();
+                });
+            
+                window.addEventListener('offline', () => {
+                    showToast("جهازك غير متصل بالإنترنت", "red");
+                    checkConnectionStatus();
+                });
+            </script>
+            
+
+            <!-- إضافة النصوص المترجمة باستخدام Django -->
+            <script>
+                var internetMessage = "{% trans 'جهازك متصل بالإنترنت.' %}";
+                var noInternetMessage = "{% trans 'جهازك غير متصل بالإنترنت.' %}";
+                var serverErrorMessage = "{% trans 'خطأ في الاتصال بالخادم:' %}";
+                var onlineMessage = "{% trans 'جهازك متصل الآن.' %}";
+                var offlineMessage = "{% trans 'جهازك غير متصل الآن.' %}";
+            </script>
+
+            <!-- رسالة حالة الاتصال بالإنترنت -->
+
+            
+                <!-- Main Sidebar Container -->
+                <aside class="main-sidebar sidebar-blue elevation-4">
+                    <!-- Brand Logo -->
+                    <a href="{% url 'index' %}" class="brand-link">
+                        <img src="/static/logomain1.jpg" alt="" class="brand-image img-circle elevation-3" style="opacity: .9">
+                        <span class="brand-text font-weight-light" style="color: #ffffff;">{% trans 'نظام ناينوكس' %}</span>
+                    </a>
+                    {% include "sidebar.html" %}
+                </aside>
+
+                <style>
+                    /* تغيير اللون الأزرق للشريط الجانبي */
+                    .main-sidebar {
+                        background-color: #0568d1 !important;  /* اللون الأزرق */
+                        color: #ffffff;  /* النصوص باللون الأبيض */
+                    }
+
+                    /* تغيير لون النصوص في الشريط الجانبي */
+                    .main-sidebar .nav-link {
+                        color: #ffffff !important;  /* النصوص باللون الأبيض */
+                    }
+
+                    /* تغيير اللون عند التمرير على الروابط */
+                    .main-sidebar .nav-link:hover {
+                        color: #3e3bff !important;  /* لون النص عند التمرير (لون فاتح) */
+                    }
+
+                    /* تغيير اللون الأزرق للأيقونات */
+                    .main-sidebar .nav-icon {
+                        color: #ffffff !important;  /* الأيقونات باللون الأبيض */
+                    }
+
+                    /* تغيير لون النصوص في قائمة "النوافذ المنسدلة" */
+                    .main-sidebar .nav-treeview .nav-link {
+                        color: #3e3bff !important;  /* النصوص باللون الأبيض في القوائم المنسدلة */
+                    }
+
+                    /* تغيير اللون عند التمرير على العناصر في القوائم المنسدلة */
+                    .main-sidebar .nav-treeview .nav-link:hover {
+                        color: #4e44da !important;  /* لون النص عند التمرير في القوائم المنسدلة */
+                    }
+
+                    /* تغيير خلفية العناصر في الشريط الجانبي عند التمرير */
+                    .main-sidebar .nav-link.active {
+                        background-color: #0056b3 !important;  /* خلفية داكنة عند التمرير على العنصر النشط */
+                    }
+
+                    /* تغيير خلفية العناوين داخل الشريط الجانبي */
+                    .main-sidebar .nav-header {
+                        background-color: #004085 !important;  /* خلفية أغمق للعناوين */
+                        color: #5949ee !important;  /* النص باللون الأبيض */
+                    }
+                </style>
+
+        
+          <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+
+            
+              <!-- رأس الصفحة -->
+                <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-4">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">
+                                {% block title %}{% trans 'لوحة التحكم' %}{% endblock %}
+                            </h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="{% url 'index' %}">{% trans 'لوحة التحكم' %}</a></li>
+                                <!-- breadcrumb يتم تحديثه حسب الصفحة -->
+                                <li class="breadcrumb-item active">
+                                    {% block breadcrumb %} <!-- إضافة محتوى breadcrumb هنا -->
+                                        <!-- يمكنك إضافة محتوى الـ breadcrumb هنا مثل اسم الصفحة أو الرابط الحالي -->
+                                    {% endblock %}
+                                </li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+                    </div>
+                <!-- نهاية كود رأس الصفحة -->
+          
+
+          
+        
+                    <!-- محتوى الصفحة  -->
+                    <section class="content">
+                        <div class="container-fluid">
+                            <!-- Small boxes (Stat box) -->
+                            {% block content %}
+                
+                            {% endblock content %}
+                        </div>
+                    </section>
+                    <!-- نهاية محتوى الصفحة -->
+          
+            </div>
+          
+                <!-- /.content-wrapper -->
+                <footer class="main-footer">           
+                    <strong>{% trans 'حقوق النشر والنسخ محفوظة لدى' %} &copy; 
+                        <a href="#">ناينوكس الأصدار 2024</a></strong>
+                    <div class="float-right d-none d-sm-inline-block">
+                    <b>{% trans 'الاصدار' %}</b>© Copyright Nine9x.Pro All Rights Reserved Designed by HamzaJarrar
+                    </div> 
+                </footer>
+               
+                
+        </div>   
+        {% include "footer.html" %}
+        {% block scripts %}
+       
+        
+        {% endblock scripts %}
+    </body>
+</html>

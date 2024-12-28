@@ -1,0 +1,147 @@
+{% load i18n %}
+<!-- تحميل Font Awesome -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<div class="sidebar" id="sidebar">
+  <!-- القائمة الرئيسية -->
+  <nav class="mt-2">
+    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+      <!-- إدارة البرنامج -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-cogs"></i>
+          <p>{% trans "إدارة البرنامج" %}<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'register' %}" class="nav-link"><i class="fas fa-users nav-icon"></i><p>{% trans "إدارة المستخدمين" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'CompanyInfo:add_company_info' %}" class="nav-link"><i class="fas fa-building nav-icon"></i><p>{% trans "إدارة المؤسسة" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'taxapp:list_taxes' %}" class="nav-link"><i class="fas fa-percent nav-icon"></i><p>{% trans "إدارة الضريبة" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- الطابعات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-print"></i><p>{% trans "الطابعات" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'printsettings:printer_settings' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "إعدادات الطابعة الرئيسية  " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'printsettings:add_printer' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "إعدادات طابعات المطبخ  " %}</p></a></li>
+        </ul>
+      </li>
+
+       <!-- الموظفين -->
+       <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-print"></i><p>{% trans "الموظفين" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " إضافة موظف " %}</p></a></li>
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " قائمة الموظفين " %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- المخازن -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-warehouse"></i><p>{% trans "المخازن" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'store' %}" class="nav-link"><i class="fas fa-box nav-icon"></i><p>{% trans "إدارة المخازن" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- الأصناف -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-boxes"></i><p>{% trans "الأصناف" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'Itemstype' %}" class="nav-link"><i class="fas fa-th-large nav-icon"></i><p>{% trans "مجموعات الأصناف" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'Items' %}" class="nav-link"><i class="fas fa-cogs nav-icon"></i><p>{% trans "إضافة الأصناف" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'inventory_list' %}" class="nav-link"><i class="fas fa-archive nav-icon"></i><p>{% trans "جرد الأصناف" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'unit' %}" class="nav-link"><i class="fas fa-ruler nav-icon"></i><p>{% trans "إضافة الوحدات" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'category_view' %}" class="nav-link"><i class="fas fa-tags nav-icon"></i><p>{% trans "إضافة الأقسام" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- إعدادات الباركود -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-barcode"></i><p>{% trans "إعدادات الباركود" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-cogs nav-icon"></i><p>{% trans "إعدادات طباعة الباركود" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- الموردين والعملاء -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
+          <p>{% trans "الموردين/العملاء" %}<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'Supplier' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "الموردين" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'add_customer' %}" class="nav-link"><i class="fas fa-user nav-icon"></i><p>{% trans "إضافة العميل" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'customer_list' %}" class="nav-link"><i class="fas fa-users nav-icon"></i><p>{% trans "عرض العملاء" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- السندات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+          <i class="nav-icon fas fa-money-check-alt"></i>
+          <p>{% trans "السندات" %}<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'add_payment_voucher' %}" class="nav-link"><i class="fas fa-money-check-alt nav-icon"></i><p>{% trans " سند دفع للمورد" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'payment_voucher_list' %}" class="nav-link"><i class="fas fa-credit-card nav-icon"></i><p>{% trans "عرض سندات المورد" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'voucher_list' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "عرض جميع السندات " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'add_receipt_voucher' %}" class="nav-link"><i class="fas fa-receipt nav-icon"></i><p>{% trans " سند قبض للعميل" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'receipt_voucher_list' %}" class="nav-link"><i class="fas fa-hand-holding-usd nav-icon"></i><p>{% trans "عرض سندات العميل" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- المشتريات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-shopping-cart"></i><p>{% trans "المشتريات" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'create_invoice' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "فاتورة المشتريات" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'invoice_list' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "عرض فواتير المشتريات " %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- المبيعات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-cash-register"></i><p>{% trans "المبيعات" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'SalesInvoice' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "فاتورة المبيعات" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- نقطة المبيعات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-store"></i><p>{% trans "نقطة المبيعات" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'device' %}" class="nav-link"><i class="fas fa-laptop nav-icon"></i><p>{% trans "الأجهزة" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'session' %}" class="nav-link"><i class="fas fa-clock nav-icon"></i><p>{% trans "الجلسات" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'pos' %}" class="nav-link"><i class="fas fa-cash-register nav-icon"></i><p>{% trans "نقطة البيع" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- المصروفات -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-credit-card"></i><p>{% trans "المصروفات" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'add_expense' %}" class="nav-link"><i class="fas fa-plus nav-icon"></i><p>{% trans "إضافة مصروف" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'expense_list' %}" class="nav-link"><i class="fas fa-list-ul nav-icon"></i><p>{% trans "عرض المصروفات" %}</p></a></li>
+        </ul>
+      </li>
+
+      <!-- الدعم الفني -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-headset"></i><p>{% trans "الدعم" %}<i class="fas fa-angle-left right"></i></p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a href="#" class="nav-link"><i class="fas fa-wrench nav-icon"></i><p>{% trans "الدعم الفني" %}</p></a>
+            </li>
+        </ul>
+      </li>
+
+    </ul>
+  </nav>
+</div>

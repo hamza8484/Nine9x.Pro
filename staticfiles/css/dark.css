@@ -1,0 +1,137 @@
+/* الوضع الداكن */
+body {
+    background-color: #333;  /* خلفية داكنة */
+    color: white;  /* نص أبيض */
+}
+
+button {
+    background-color: #555;  /* خلفية أغمق للأزرار */
+    color: white;  /* نص أبيض للأزرار */
+}
+
+a {
+    color: #ddd;  /* الروابط باللون الرمادي الفاتح */
+}
+
+a:hover {
+    color: #fff;  /* لون الرابط عند التمرير فوقه */
+}
+
+.navbar {
+    background-color: #222;  /* شريط التنقل بلون داكن */
+    color: white;
+}
+
+.navbar .nav-link {
+    color: #bbb;  /* الروابط داخل الشريط بألوان فاتحة */
+}
+
+.navbar .nav-link:hover {
+    color: white;  /* لون الروابط عند التمرير فوقها */
+}
+
+.main-sidebar {
+    background-color: #1a1a1a;  /* الشريط الجانبي بلون داكن */
+}
+
+.main-sidebar .nav-link {
+    color: #ccc;  /* النصوص في الشريط الجانبي بلون فاتح */
+}
+
+.main-sidebar .nav-link:hover {
+    color: white;  /* النصوص عند التمرير عليها باللون الأبيض */
+}
+
+.card {
+    background-color: #444;  /* خلفية الداكنة للبطاقات */
+    color: white;  /* النصوص باللون الأبيض */
+}
+
+.card-header {
+    background-color: #555;  /* خلفية داكنة لرأس البطاقة */
+    color: white;
+}
+
+.card-footer {
+    background-color: #555;  /* خلفية داكنة لأسفل البطاقة */
+    color: white;
+}
+
+footer {
+    background-color: #222;  /* خلفية داكنة للتذييل */
+    color: white;
+}
+
+footer a {
+    color: #bbb;  /* روابط التذييل بلون فاتح */
+}
+
+footer a:hover {
+    color: #fff;  /* لون الروابط عند التمرير فوقها */
+}
+
+.text-white {
+    color: white !important;
+}
+
+input, select, textarea {
+    background-color: #555;  /* خلفية داكنة للحقول */
+    color: white;  /* نص أبيض */
+    border: 1px solid #666;  /* حدود الحقول بلون فاتح */
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #888;  /* حدود الحقول عند التمرير عليها باللون الرمادي الفاتح */
+}
+
+.toastify {
+    background-color: #444;  /* لون خلفية الرسائل */
+    color: white;  /* النص باللون الأبيض */
+}
+
+.dropdown-menu {
+    background-color: #444;  /* خلفية داكنة للقوائم المنسدلة */
+    color: white;  /* نص أبيض */
+}
+
+.dropdown-item {
+    color: #bbb;  /* النص داخل العناصر في القائمة المنسدلة */
+}
+
+.dropdown-item:hover {
+    color: white;  /* اللون عند التمرير فوق العناصر في القائمة */
+    background-color: #555;  /* الخلفية عند التمرير فوق العناصر */
+}
+
+/* الشريط الجانبي في الوضع الداكن */
+.main-sidebar {
+    background-color: #1a1a1a;  /* خلفية داكنة للشريط الجانبي */
+    color: white;  /* النصوص باللون الأبيض */
+}
+
+/* الروابط في الشريط الجانبي */
+.main-sidebar .nav-link {
+    color: #ccc;  /* النصوص باللون الرمادي الفاتح */
+}
+
+/* الروابط عند التمرير فوقها */
+.main-sidebar .nav-link:hover {
+    color: white;  /* النصوص باللون الأبيض عند التمرير */
+    background-color: #444;  /* الخلفية عند التمرير */
+}
+
+/* الروابط التي تحتوي على أشجار قائمة (فرعية) */
+.main-sidebar .nav-treeview {
+    background-color: #333;  /* خلفية داكنة للقوائم الفرعية */
+}
+
+/* الروابط داخل القوائم الفرعية */
+.main-sidebar .nav-treeview .nav-link {
+    color: #bbb;  /* النصوص داخل القوائم الفرعية باللون الرمادي الفاتح */
+}
+
+/* الروابط عند التمرير فوق القوائم الفرعية */
+.main-sidebar .nav-treeview .nav-link:hover {
+    color: white;  /* النصوص باللون الأبيض عند التمرير */
+    background-color: #555;  /* الخلفية عند التمرير */
+}

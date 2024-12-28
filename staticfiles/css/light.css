@@ -1,0 +1,137 @@
+/* الوضع الفاتح */
+body {
+    background-color: white;  /* خلفية فاتحة */
+    color: black;  /* نص أسود */
+}
+
+button {
+    background-color: #f0f0f0;  /* خلفية فاتحة للأزرار */
+    color: black;  /* نص أسود للأزرار */
+}
+
+a {
+    color: #333;  /* الروابط باللون الأسود الفاتح */
+}
+
+a:hover {
+    color: #000;  /* لون الرابط عند التمرير فوقه */
+}
+
+.navbar {
+    background-color: #fff;  /* شريط التنقل بلون فاتح */
+    color: black;
+}
+
+.navbar .nav-link {
+    color: #333;  /* الروابط داخل الشريط بألوان داكنة */
+}
+
+.navbar .nav-link:hover {
+    color: #000;  /* لون الروابط عند التمرير فوقها */
+}
+
+.main-sidebar {
+    background-color: #e0e0e0;  /* الشريط الجانبي بلون فاتح */
+}
+
+.main-sidebar .nav-link {
+    color: #555;  /* النصوص في الشريط الجانبي بلون داكن */
+}
+
+.main-sidebar .nav-link:hover {
+    color: black;  /* النصوص عند التمرير عليها باللون الأسود */
+}
+
+.card {
+    background-color: #f9f9f9;  /* خلفية فاتحة للبطاقات */
+    color: black;  /* النصوص باللون الأسود */
+}
+
+.card-header {
+    background-color: #f1f1f1;  /* خلفية فاتحة لرأس البطاقة */
+    color: black;
+}
+
+.card-footer {
+    background-color: #f1f1f1;  /* خلفية فاتحة لأسفل البطاقة */
+    color: black;
+}
+
+footer {
+    background-color: #fff;  /* خلفية فاتحة للتذييل */
+    color: black;
+}
+
+footer a {
+    color: #555;  /* روابط التذييل بلون داكن */
+}
+
+footer a:hover {
+    color: #000;  /* لون الروابط عند التمرير فوقها */
+}
+
+.text-black {
+    color: black !important;
+}
+
+input, select, textarea {
+    background-color: #f0f0f0;  /* خلفية فاتحة للحقول */
+    color: black;  /* نص أسود */
+    border: 1px solid #ccc;  /* حدود الحقول بلون فاتح */
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: #999;  /* حدود الحقول عند التمرير عليها باللون الرمادي الفاتح */
+}
+
+.toastify {
+    background-color: #f0f0f0;  /* لون خلفية الرسائل */
+    color: black;  /* النص باللون الأسود */
+}
+
+.dropdown-menu {
+    background-color: #f0f0f0;  /* خلفية فاتحة للقوائم المنسدلة */
+    color: black;  /* نص أسود */
+}
+
+.dropdown-item {
+    color: #555;  /* النص داخل العناصر في القائمة المنسدلة */
+}
+
+.dropdown-item:hover {
+    color: black;  /* اللون عند التمرير فوق العناصر في القائمة */
+    background-color: #ddd;  /* الخلفية عند التمرير فوق العناصر */
+}
+
+/* الشريط الجانبي في الوضع الفاتح */
+.main-sidebar {
+    background-color: #f4f4f4;  /* خلفية فاتحة للشريط الجانبي */
+    color: black;  /* النصوص باللون الأسود */
+}
+
+/* الروابط في الشريط الجانبي */
+.main-sidebar .nav-link {
+    color: #555;  /* النصوص باللون الداكن */
+}
+
+/* الروابط عند التمرير فوقها */
+.main-sidebar .nav-link:hover {
+    color: black;  /* النصوص باللون الأسود عند التمرير */
+    background-color: #ddd;  /* الخلفية عند التمرير */
+}
+
+/* الروابط التي تحتوي على أشجار قائمة (فرعية) */
+.main-sidebar .nav-treeview {
+    background-color: #f0f0f0;  /* خلفية فاتحة للقوائم الفرعية */
+}
+
+/* الروابط داخل القوائم الفرعية */
+.main-sidebar .nav-treeview .nav-link {
+    color: #333;  /* النصوص داخل القوائم الفرعية باللون الداكن */
+}
+
+/* الروابط عند التمرير فوق القوائم الفرعية */
+.main-sidebar .nav-treeview .nav-link:hover {
+    color: black;  /* النصوص باللون الأسود عند التمرير */
+    background-color: #ccc;  /* الخلفية عند التمرير */
+}

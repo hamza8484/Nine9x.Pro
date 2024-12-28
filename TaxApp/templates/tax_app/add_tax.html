@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load static %}
+{% load i18n %}  <!-- تأكد من تحميل مكتبة الترجمة -->
+
+{% block title %}
+    {% if is_edit %}
+        {% trans "تعديل الضريبة" %}
+    {% else %}
+        {% trans "إضافة ضريبة" %}
+    {% endif %}
+{% endblock title %}
+
+{% block content %}
+
+{% if messages %}
+<ul class="alert alert-success">
+    {% for message in messages %}
+        <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+<!-- صندوق جميل يحتوي على الحقول -->
+<div class="card shadow-sm p-3 mb-5 bg-white rounded">
+    <div class="card-header">
+        <h5 class="card-title">
+            {% if is_edit %}
+                {% trans "تعديل الضريبة" %}
+            {% else %}
+                {% trans "إضافة ضريبة جديدة" %}
+            {% endif %}
+        </h5>
+    </div>
+    <div class="card-body">
+        <!-- بدء النموذج -->
+        <form method="POST" id="tax-form">
+            {% csrf_token %}
+            
+            <div class="form-row">
+                <!-- حقل اسم الضريبة -->
+                <div class="form-group col-md-4">
+                    <label for="{{ form.name.id_for_label }}">{% trans "اسم الضريبة" %}</label>
+                    {{ form.name|add_class:"form-control" }}  
+                </div>
+
+                <!-- حقل نسبة الضريبة -->
+                <div class="form-group col-md-4">
+                    <label for="{{ form.rate.id_for_label }}">{% trans "نسبة الضريبة" %}</label>
+                    {{ form.rate|add_class:"form-control" }}  
+                </div>
+            </div>
+            <!-- زر الحفظ -->
+            <div class="form-group d-flex justify-content-between">
+                <button type="button" class="btn btn-primary" onclick="confirmSave()">
+                    {% if is_edit %}
+                        {% trans "حفظ التعديلات" %}
+                    {% else %}
+                        {% trans "حفظ الضريبة" %}
+                    {% endif %}
+                </button>
+
+                <a href="{% url 'taxapp:list_taxes' %}" class="btn btn-secondary">
+                    {% trans "عرض الضرائب المضافة" %}
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function confirmSave() {
+        // عرض نافذة التأكيد عند تعديل الضريبة
+        var isConfirmed = confirm("{% trans 'هل أنت متأكد أنك تريد تعديل الضريبة؟' %}");
+        if (isConfirmed) {
+            // إذا وافق المستخدم، يتم إرسال النموذج
+            document.getElementById('tax-form').submit();
+        }
+    }
+</script>
+
+{% endblock content %}

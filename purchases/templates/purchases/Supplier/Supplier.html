@@ -1,0 +1,339 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}  <!-- تحميل الترجمة -->
+
+{% block title %}
+    {% trans "شاشة الموردين" %}
+{% endblock title %}
+
+{% block content %}
+    <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-lg">
+        {% trans "إضافة مورد جديد" %}
+    </button>
+
+    <table id="example" class="display datatable table table-striped table-bordered" style="width:100%">
+        <thead style="background-color: #007bff; color: white;">
+            <tr>
+                <th style="width: 5%; text-align: center;">{% trans "تسلسل" %}</th>
+                <th style="text-align: center;">{% trans "إسم المورد (ع)" %}</th>
+                <th style="text-align: center;">{% trans "إسم المورد (E)" %}</th>
+                <th style="text-align: center;">{% trans "الرقم الضريبي" %}</th>
+                <th style="text-align: center;">{% trans "الهاتف" %}</th>
+                <th style="text-align: center;">{% trans "الجوال" %}</th>
+                <th style="text-align: center;">{% trans "العنوان" %}</th>
+                <th style="text-align: center;">{% trans "الرصيد" %}</th> <!-- إضافة عمود الرصيد -->
+                <th style="text-align: center;">{% trans "الحالة" %}</th>
+                <th style="text-align: center;">{% trans "الاحداث" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- البيانات سيتم تحميلها عبر DataTables -->
+        </tbody>
+    </table>
+    
+    <!-- إضافة التنسيق للأزرار -->
+    <style>
+        /* تنسيق الجدول */
+        .datatable {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+    
+        .datatable th, .datatable td {
+            padding: 12px 15px;
+            text-align: center;
+        }
+    
+        .datatable th {
+            font-size: 16px;
+        }
+    
+        .datatable td {
+            font-size: 14px;
+        }
+    
+        .datatable tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    
+        /* تنسيق الأزرار */
+        .btn {
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    
+        .btn-warning {
+            background-color: #ffc107;
+            border: none;
+        }
+    
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+    
+        .btn-danger {
+            background-color: #dc3545;
+            border: none;
+        }
+    
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+    
+        .btn-sm {
+            font-size: 12px;
+            padding: 6px 10px;
+        }
+    
+        .btn:focus {
+            outline: none;
+            box-shadow: none;
+        }
+    </style>
+    
+    <!-- Modal Add Supplier -->
+    <div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="card card-warning">
+                    <div class="modal-header">
+                        <div class="card-header">
+                            <h3 class="card-title">{% trans "إضافة الموردين" %}</h3>
+                        </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <form method="POST" role="form" id="id_form" action="{% url 'Supplier' %}">
+                            <input type="text" name="id" class="hidden" style="display: contents;">
+                            {% csrf_token %}
+
+                            {% if form.errors %}
+                                <div class="alert alert-danger alert-dismissible" role="alert">
+                                    <div id="form_errors">
+                                        {% for key, value in form.errors.items %}
+                                            <strong>{{ value }}</strong>
+                                        {% endfor %}
+                                    </div>
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            {% endif %}
+
+                            <!-- الاسم المحلي و الاسم الاجنبي -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الاسم ع" %}</label>
+                                        {{ filed.name_lo }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الاسم E" %}</label>
+                                        {{ filed.name_fk }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الرقم الضريبي -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الرقم الضريبي" %}</label>
+                                        {{ filed.VatNumber }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الهاتف والجوال -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الهاتف" %}</label>
+                                        {{ filed.TelPhone }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الجوال" %}</label>
+                                        {{ filed.phone }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الرصيد" %}</label>
+                                        {{ filed.balance }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- العنوان -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "العنوان" %}</label>
+                                        {{ filed.Address }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- الحالة -->
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label>{% trans "الحالة" %}</label>
+                                        {{ filed.is_stop }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- زر حفظ -->
+                            <div class="form-group">
+                                <button type="submit" id="btnsubmit" class="col-md-12 btn btn-primary">{% trans "حفظ" %}</button><br><br>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+<script>
+        let csrf = '{{ csrf_token }}';
+
+        // Submit the form via AJAX for creating/updating a supplier
+        $("#id_form").on("submit", function(e) {
+            e.preventDefault(); // منع الإرسال التقليدي للنموذج
+            $.ajax({
+                method: "POST",  // إرسال البيانات عبر POST
+                data: $(this).serialize(),  // تجميع البيانات من النموذج
+                url: $(this).attr('action'),  // تحديد الـ URL للتعامل مع الـ POST
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf); // إضافة CSRF Token
+                },
+                success: function(data) {
+                    if (data.status == "1") {
+                        alert(data.message); // إذا كانت عملية الإضافة ناجحة
+                        $('.datatable').DataTable().ajax.reload();  // تحديث الجدول
+                        $('#modal-lg').modal('hide'); // إغلاق نافذة المودال
+                        $('#id_form').trigger("reset"); // إعادة تعيين النموذج
+                    } else {
+                        alert(data.error);  // إذا حدث خطأ في الإضافة
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error: " + error);  // معالجة الأخطاء
+                }
+            });
+        });
+
+        // Edit row via AJAX
+        $(document).on('click', '.edit_row', function() {
+            $.ajax({
+                url: $(this).data('url'),
+                data: {'id': $(this).data('id')},
+                type: 'GET',
+                success: function(data) {
+                    let resp = JSON.parse(data.data);
+                    if (data.status == 1) {
+                        // تعبئة الحقول بالبيانات المحفوظة
+                        $(`input[name="id"]`).val(resp[0].pk); // تعبئة ID المورد
+                        $.each(resp[0].fields, function(i, value) {
+                            $(`input[name="${i}"]`).val(value); // تعبئة الحقول النصية
+                            if ($(`select[name="${i}"]`).length > 0) {
+                                $(`select[name="${i}"] option[value="${value}"]`).attr('selected', 'selected'); // تعبئة الحقول المكونة من Select
+                            }
+                        });
+                        $('#modal-lg').modal('show'); // إظهار نافذة التعديل
+                    } else {
+                        console.log(data.error);
+                    }
+                },
+                error: function(data) {
+                    console.log("Error:", data);  // طباعة الأخطاء في الـ console
+                }
+            });
+        });
+
+        // Delete row via AJAX
+        $(document).on('click', '.delete_row', function() {
+            if (confirm('{% trans "هل حقا تريد الحذف؟" %}')) {
+                let id_row = $(this).data('id');
+                $.ajax({
+                    url: $(this).data('url'),
+                    data: {
+                        'id': id_row,
+                    },
+                    method: 'DELETE',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader("X-CSRFToken", csrf); // إضافة CSRF Token
+                    },
+                    success: function(data) {
+                        if (data.status == 1) {
+                            alert(data.message);
+                            $('.datatable').DataTable().ajax.reload(); // تحديث الجدول بعد الحذف
+                            $('#id_form')[0].reset(); // مسح الحقول بعد الحذف
+                        }
+                        if (data.status == 0) {
+                            alert(data.message);  // في حالة حدوث خطأ
+                        }
+                    },
+                    error: function(data) {
+                        console.log("Error:", data);  // طباعة الأخطاء في الـ console
+                    }
+                });
+            }
+        });
+
+        $(document).ready(function() {
+            var oTable = $('.datatable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{% url 'SupplierJson' %}", // تحميل البيانات من الـ JSON
+                "columns": [
+                    { "data": "id" },
+                    { "data": "name_lo" },
+                    { "data": "name_fk" },
+                    { "data": "VatNumber" },
+                    { "data": "TelPhone" },
+                    { "data": "phone" },
+                    { "data": "Address" },
+                    { "data": "balance" },
+                    { "data": "is_stop" },
+                    {
+                        "data": "action",  // عمود الأزرار
+                        "render": function(data, type, row) {
+                            return `
+                                <button class="btn btn-warning btn-sm edit_row" data-id="${row.id}" data-url="/supplier/edit/${row.id}/">تعديل</button>
+                                <button class="btn btn-danger btn-sm delete_row" data-id="${row.id}" data-url="/supplier/delete/${row.id}/">حذف</button>
+                            `;
+                        }
+                    }
+                ],
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.20/i18n/Arabic.json"
+                }
+            });
+        });
+    </script>
+
+{% endblock scripts %}

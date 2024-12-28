@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %} 
+{% block title %}
+    {{ _("شاشة الاصناف") }}
+{% endblock title %}
+
+{% block content %}
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+    {{ _("جديد") }}
+</button>
+
+<table id="example" class="display datatable" style="width:100%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>{{ _("الوحدة") }}</th>
+            <th>{{ _("نوع الصنف") }}</th>
+            <th>{{ _("الباركود") }}</th>
+            <th>{{ _("الاسم المحلي") }}</th>
+            <th>{{ _("الاسم الاجنبي") }}</th>
+            <th>{{ _("الاحداث") }}</th>
+        </tr>
+    </thead>
+</table>
+
+<div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="card card-warning">
+                <div class="modal-header">
+                    <div class="card-header">
+                        <h3 class="card-title">{{ _("إضافة الاصناف") }}</h3>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <form method="POST" role="form" id ="id_form" action="{% url 'Items' %}">
+                        <input type="text" name="id" class="hidden" style="display: contents;">
+                        {% csrf_token %}
+
+                        {% if form.errors %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div id="form_errors">
+                                    {% for key, value in form.errors.items %}
+                                        <strong>{{ value }}</strong>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ _("الاسم المحلي") }}</label>
+                                    {{ filed.name_lo }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ _("الاسم الاجنبي") }}</label>
+                                    {{ filed.name_fk }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ _("الوحدة الرئيسية") }}</label>
+                                    {{ filed.unit }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ _("نوع الصنف") }}</label>
+                                    {{ filed.items_type }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{{ _("الباركود") }}</label>
+                                    {{ filed.barcode }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" id="btnsubmit" class="col-md-12 btn btn-primary">{{ _("حفظ") }}</button><br><br>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+let csrf = '{{ csrf_token }}';
+$("#id_form").on("submit", function(e) {
+    e.preventDefault();
+
+    $.ajax({
+        method: "post",
+        data: $(this).serialize(),
+        url: $(this).attr('action'),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+        },
+        success: function(data) {
+            if(data.status == "1") {
+                alert(data.message);
+                $('.datatable').DataTable().ajax.reload();
+                $('#modal-lg').modal('hide');
+                $('#id_form').trigger("reset");
+            } else {
+                alert(data.error);
+            }
+        }
+    })
+})
+
+$(document).on('click', '.edit_row', function() {
+    $.ajax({
+        url: $(this).data('url'),
+        data: {'id': $(this).data('id')},
+        type: 'GET',
+        success: function (data) {
+            let resp = JSON.parse(data.data);
+            if(data.status == 1){
+                $(`input[name="id"]`).val(resp[0].pk);
+                $.each(resp[0].fields, function(i, value) {
+                    $(`input[name="${i}"]`).val(value);
+                    $(`select[name="${i}"] option[value="${value}"]`).attr('selected', 'selected');
+                });
+                $('#modal-lg').modal('show');
+            } else {
+                console.log(data.error);
+            }
+        },
+        error: function(data) {}
+    });
+});
+
+$(document).on('click', '.delete_row', function() {
+    if (confirm('{{ _("هل حقا تريد الحذف؟") }}')) {
+        let id_row = $(this).data('id');
+        $.ajax({
+            url: $(this).data('url'),
+            data: {
+                'id': id_row,
+            },
+            method: 'DELETE',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrf);
+            },
+            success: function (data) {
+                if (data.status == 1) {
+                    alert(data.message);
+                    $('.datatable').DataTable().ajax.reload();
+                }
+                if (data.status == 0) {
+                    alert(data.message);
+                }
+            },
+            error: function(data) {}
+        });
+    }
+});
+
+$(document).ready(function () {
+    var oTable = $('.datatable').dataTable({
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{% url 'ItemsJson' %}"
+    });
+});
+</script>
+{% endblock scripts %}

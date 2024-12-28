@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans "تعديل الطابعة" %}
+{% endblock %}
+
+{% block content %}
+    <h2>   {% trans  "تعديل الطابعة " %} </h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">{% trans   "تحديث" %}</button>
+    </form>
+{% endblock %}

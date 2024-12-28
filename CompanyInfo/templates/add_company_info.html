@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("معلومات المؤسسة") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<div class="container mt-4">
+   <!-- عرض الرسائل (رسالة نجاح أو خطأ) -->
+    {% if messages %}
+    <div class="alert alert-success">
+        {% for message in messages %}
+            <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+<h1 class="mb-4">
+    {% if form.instance.pk %}
+        <h4>{{ _("تعديل المعلومات") }}</h4>
+    {% else %}
+       <h4>{{ _("إضافة المعلومات") }}</h4> 
+    {% endif %}
+</h1>
+<hr>
+
+<!-- نموذج إضافة أو تعديل معلومات الشركة -->
+ 
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <!-- حقل اسم المؤسسة -->
+    <div class="form-group">
+        <label for="company_name">{{ _("اسم المؤسسة / الشركة") }}</label>
+        {{ form.company_name|add_class:"form-control" }}        
+    </div>
+    
+    <!-- صف الحقول -->
+    <div class="form-row">
+        <!-- حقل الرقم الضريبي -->
+        <div class="form-group col-md-5">
+            <label for="tax_number">{{ _("الرقم الضريبي") }}</label>
+            {{ form.tax_number|add_class:"form-control" }}
+        </div>
+
+        <!-- حقل البريد الإلكتروني -->
+        <div class="form-group col-md-7">
+            <label for="email">{{ _("البريد الإلكتروني") }}</label>
+            {{ form.email|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <!-- صف الحقول -->
+    <div class="form-row">
+        <!-- حقل السجل التجاري -->
+        <div class="form-group col-md-5">
+            <label for="commercial">{{ _("السجل التجاري") }}</label>
+            {{ form.commercial|add_class:"form-control" }}
+        </div>
+    
+        <!-- حقل الدولة -->
+        <div class="form-group col-md-4">
+            <label for="state">{{ _("الدولة") }}</label>
+            {{ form.state|add_class:"form-control" }}
+        </div>
+    
+        <!-- حقل المدينة -->
+        <div class="form-group col-md-3">
+            <label for="city">{{ _("المدينة") }}</label>
+            {{ form.city|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <!-- صف الحقول -->
+    <div class="form-row">
+        <!-- حقل رقم الهاتف -->
+        <div class="form-group col-md-6">
+            <label for="telephone_number">{{ _("رقم الهاتف") }}</label>
+            {{ form.telephone_number|add_class:"form-control" }}
+        </div>
+    
+        <!-- حقل رقم الجوال -->
+        <div class="form-group col-md-6">
+            <label for="mobile_number">{{ _("رقم الجوال") }}</label>
+            {{ form.mobile_number|add_class:"form-control" }}
+        </div>      
+    </div>
+
+    <!-- صف الحقول -->
+    <div class="form-row">
+        <!-- حقل الملاحظات -->
+        <div class="form-group col-md-6">
+            <label for="note">{{ _("ملاحظات") }}</label>
+            {{ form.note|add_class:"form-control" }}
+        </div>
+    
+        <!-- حقل العنوان -->
+        <div class="form-group col-md-6">
+            <label for="address">{{ _("العنوان") }}</label>
+            {{ form.address|add_class:"form-control" }}
+        </div>
+    </div>
+
+    <!-- حقل الشعار -->
+    <div class="form-group">
+        <label for="logo">{{ _("الشعار") }}</label>
+        {{ form.logo|add_class:"form-control-file" }}
+    </div>
+
+    <!-- زر حفظ -->
+    <div class="form-group text-center">
+        <button type="submit" class="btn btn-primary">
+            {% if form.instance.pk %}
+                {{ _("تعديل") }}
+            {% else %}
+                {{ _("إضافة") }}
+            {% endif %}
+        </button>
+    </div>
+</form>
+
+
+
+</div>
+<style>
+    .btn-primary {
+        background-color: #007bff; /* اللون الأزرق الأساسي */
+        border: none; /* إزالة الحدود الافتراضية */
+        padding: 12px 25px; /* حشوة داخلية لجعل الزر أكبر */
+        font-size: 1.2em; /* زيادة حجم النص داخل الزر */
+        border-radius: 20px; /* جعل الزر ذو حواف مستديرة */
+        color: #fff; /* النص باللون الأبيض */
+        cursor: pointer; /* تغيير المؤشر ليصبح مؤشر يد عند التمرير */
+        transition: all 0.3s ease; /* إضافة تأثير عند التفاعل مع الزر */
+        box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* إضافة ظل خفيف أسفل الزر */
+        width: 200px; /* تحديد عرض الزر */
+        height: 50px; /* تحديد ارتفاع الزر */
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3; /* تغيير اللون عند المرور بالماوس */
+        box-shadow: 0 6px 12px rgba(0, 123, 255, 0.5); /* تعزيز الظل عند المرور */
+    }
+
+    .btn-primary:active {
+        background-color: #004085; /* تغيير اللون عند الضغط */
+        box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3); /* تقليل الظل عند النقر */
+        transform: translateY(2px); /* تأثير الضغط على الزر */
+    }
+</style>
+{% endblock content %}

@@ -1,0 +1,179 @@
+{% extends "users/base.html" %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "إنشاء حساب جديد" %}
+{% endblock title %}
+
+{% block content %}
+    <div class="form-content">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 col-md-10 col-sm-12">
+                    <div class="card shadow-lg border-2 rounded-lg mt-5 mb-5">
+                        <div class="card-header text-center">
+                            <h3 class="font-weight-light my-2">{% trans "إنشاء حساب جديد" %}</h3>
+                        </div>
+
+                        <div class="card-body">
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+
+                                {% if form.errors %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        <ul>
+                                            {% for field in form %}
+                                                {% for error in field.errors %}
+                                                    <li><strong>{{ error }}</strong></li>
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </ul>
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                {% endif %}
+
+                                <!-- حقل الإسم الأول والإسم الثاني -->
+                                <div class="form-row mb-4" style="direction: rtl;">
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_first_name">{% trans "الإسم الأول" %}</label>
+                                            {{ form.first_name }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_last_name">{% trans "الإسم الثاني" %}</label>
+                                            {{ form.last_name }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- حقل إسم المستخدم والبريد الإلكتروني -->
+                                <div class="form-row mb-4" style="direction: rtl;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_username">{% trans "إسم المستخدم" %}</label>
+                                            {{ form.username }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_email">{% trans "الإيميل" %}</label>
+                                            {{ form.email }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- حقل الرقم السري وتأكيد الرقم السري -->
+                                <div class="form-row mb-4" style="direction: rtl;">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_password1">{% trans "كلمة المرور" %}</label>
+                                            {{ form.password1 }}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_password2">{% trans "تأكيد كلمة المرور" %}</label>
+                                            {{ form.password2 }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- حقل السيرة الذاتية -->
+                                <div class="form-row mb-4" style="direction: rtl;">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_bio">{% trans "السيرة الذاتية" %}</label>
+                                            {{ form.bio }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- حقل صورة الملف الشخصي -->
+                                <div class="form-row mb-4" style="direction: rtl;">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label class="small mb-1" for="id_avatar">{% trans "صورة الملف الشخصي" %}</label>
+                                            {{ form.avatar }}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- زر التسجيل -->
+                                <div class="form-group mt-2 mb-4">
+                                    <button type="submit" class="btn btn-dark btn-block">{% trans "التسجيل" %}</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- روابط التوجيه -->
+                        <div class="card-footer text-center">
+                            <div class="col-lg-12">
+                                <a href="{% url 'login' %}">{% trans "هل لديك حساب؟ اذهب إلى صفحة تسجيل الدخول" %}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* تنسيق الشكل العام للنموذج */
+        .form-content .card {
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        /* الحقول داخل النموذج */
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            text-align: right; /* جعل النص يبدأ من اليمين */
+            direction: rtl; /* تحديد اتجاه الكتابة من اليمين */
+        }
+
+        /* الحقول عند التركيز */
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            border-color: #007BFF;
+            outline: none;
+        }
+
+        /* الزر */
+        .btn-dark {
+            background-color: #343a40;
+            border-color: #343a40;
+        }
+
+        .btn-dark:hover {
+            background-color: #23272b;
+            border-color: #1d2124;
+        }
+
+        /* رابط تسجيل الدخول */
+        .card-footer a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        .card-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* تحسين تنسيق الحقول في الشاشات الصغيرة */
+        @media (max-width: 767px) {
+            .form-row .col-md-6 {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+{% endblock content %}

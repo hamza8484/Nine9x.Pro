@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans  "تفاصيل السند رقم " %}    {{ voucher.voucher_number }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5 text-center"> <!-- إضافة text-center لتوسيط النصوص داخل الحاوية -->
+        <!-- العنوان -->
+        <h5 class="mb-4"> {% trans "الرقم " %}-  {{ voucher.voucher_number }}</h5>
+
+        <!-- جدول تفاصيل السند -->
+        <table class="table table-bordered table-striped table-hover mx-auto" style="width: 80%;"> <!-- إضافة mx-auto لجعل الجدول في المنتصف -->
+            <thead class="thead-light">
+                <tr>
+                    <th style="width: 30%;">{% trans  "الخاصية" %}</th>
+                    <th style="width: 70%;">{% trans "القيمة" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>  {% trans  " المورد :" %}  </strong></td>
+                    <td>{{ voucher.customer.name_lo }}</td>
+                </tr>
+                <tr>
+                    <td><strong>  {% trans  " المبلغ:" %}  </strong></td>
+                    <td>{{ voucher.amount }} ريال</td>
+                </tr>
+                <tr>
+                    <td><strong>  {% trans  " تاريخ الإنشاء:" %}  </strong></td>
+                    <td>{{ voucher.date_created|date:"Y-m-d H:i" }}</td>
+                </tr>
+                <tr>
+                    <td><strong>  {% trans  " الوصف:" %}  </strong></td>
+                    <td>{{ voucher.description }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- أزرار التحكم -->
+        <div class="row justify-content-center">
+            <!-- زر الطباعة -->
+            <div class="col-md-4 text-center">
+                <button onclick="printVoucher()" class="btn btn-success btn-lg w-100">  {% trans " طباعة السند " %} </button>
+            </div>
+            <!-- زر الرجوع إلى القائمة -->
+            <div class="col-md-4 text-center mt-3 mt-md-0">
+                <a href="{% url 'receipt_voucher_list' %}" class="btn btn-primary btn-lg w-100">  {% trans  " رجوع إلى قائمة السندات " %} </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- سكربت طباعة السند -->
+    <script>
+        function printVoucher() {
+            var content = document.querySelector('.container').innerHTML; // محتوى السند
+            var printWindow = window.open('', '', 'height=600,width=800');
+            
+            printWindow.document.write('<html><head><title>طباعة السند</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write('body { font-family: Arial, sans-serif; direction: rtl; text-align: center; }');
+            printWindow.document.write('h3 { color: #333; }');
+            printWindow.document.write('table { width: 80%; margin: 0 auto; border-collapse: collapse; }');
+            printWindow.document.write('th, td { padding: 10px; text-align: right; border: 1px solid #ddd; }');
+            printWindow.document.write('th { background-color: #f8f9fa; }');
+            printWindow.document.write('.btn { display: none; }'); // إخفاء الأزرار أثناء الطباعة
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write(content); // إضافة محتوى السند
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+{% endblock %}

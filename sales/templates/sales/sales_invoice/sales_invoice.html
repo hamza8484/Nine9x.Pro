@@ -1,0 +1,397 @@
+{% extends "base.html" %}  <!-- تمديد قالب base.html لتوريث الهيكل العام للصفحة -->
+{% load static %}  <!-- تحميل ملفات الاستايل أو الجافا سكربت الثابتة (مثل CSS أو JS) من الدليل static -->
+{% load i18n %} <!-- تحميل مكتبة الترجمة -->
+
+{% block title %}
+    {% trans "فاتورة مبيعات" %}  <!-- تحديد عنوان الصفحة الذي سيظهر في شريط العنوان -->
+{% endblock title %}
+
+{% block breadcrumb %}
+    <a href="{% url 'index' %}">{% trans "الصفحة الرئيسية" %}</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #007bff; color: white;">
+                <h5 class="modal-title" id="exampleModalLabel">{% trans "فواتير المبيعات" %}</h5>  <!-- عنوان نافذة المودال -->
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>  <!-- زر إغلاق المودال -->
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <table class="datatable_list" style="width:100%; font-family: 'Arial', sans-serif; border-collapse: collapse;">
+                    <thead class="text-center" style="background-color: #f8f9fa; color: #333;">
+                        <tr>
+                            <th>{% trans "تسلسل" %}</th>
+                            <th>{% trans "تاريخ" %}</th>
+                            <th>{% trans "اسم العميل" %}</th>
+                            <th>{% trans "إجمالي الفاتورة" %}</th>
+                            <th>{% trans "الحدث" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody class="show_Operation">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-secondary" data-dismiss="modal">{% trans "إغلاق" %}</button>  <!-- زر لإغلاق المودال -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- نموذج لإدخال بيانات الفاتورة -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <form method="post" id="myform_invoic" action="{{ url }}" class="needs-validation" accept-charset="utf-8">
+                {% csrf_token %}  <!-- تضمين التوكن الخاص بـ CSRF لأمان النموذج -->
+                <input type="text" id="id_purchase_invo1" name="id_sales_invo" class="head">  <!-- حقل مخفي لتخزين معرّف الفاتورة -->
+
+                <div class="box-body">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="row">
+                                <!-- الحقول الأساسية للفاتورة -->
+                                <div class="col-md-2">
+                                    <label for="{{ form.code.id_for_label }}">{% trans "كودالفاتورة" %}</label>
+                                    {{ form.code }}  <!-- حقل إدخال رمز الفاتورة -->
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="{{ form.date.id_for_label }}">{% trans "تاريخ الفاتورة" %}</label>
+                                    {{ form.date }}  <!-- حقل إدخال تاريخ الفاتورة -->
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="{{ form.customer.id_for_label }}">{% trans "اسم العميل" %}</label>
+                                    {{ form.customer }}  <!-- حقل اختيار اسم العميل -->
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="{{ form.customer.id_for_label }}">{% trans "رصيد العميل" %}</label>
+                                    <input type="text" class="form-control" id="balance" value="{{ form.customer.value.balance }}" readonly />
+                                </div>
+                                                               
+                
+                                <div class="col-md-2">
+                                    {% if form.store in form %}
+                                        <label for="{{ form.store.id_for_label }}">{% trans "المخزن" %}</label>
+                                        {{ form.store }}  <!-- حقل اختيار المخزن إذا كان موجوداً -->
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- تفاصيل الفاتورة مع المنتجات -->
+                    <div class="panel">
+                        <h5 class="text-left" style="color: #28a745; font-weight: bold;">{% trans "تفاصيل الفاتورة" %}</h5>
+                        <hr>
+                        <div id="load_div">
+                            {{ formset.management_form }}  <!-- حقل إدارة الفورم لتتبع التغييرات في الحقول -->
+                            <table id="tblProducts" class="table" style="width: 100%; border-collapse: collapse;">
+                                <thead class="text-center" style="background-color: #f1f1f1; color: #333;">
+                                    <tr>
+                                        <th>{% trans "تسلسل" %}</th>
+                                        <th>{% trans "الصنف" %}</th>
+                                        <th>{% trans "وحدة" %}</th>
+                                        <th>{% trans "الكمية" %}</th>
+                                        <th>{% trans "السعر" %}</th>
+                                        <th>{% trans "الكمية المتوفرة" %}</th>
+                                        <th>{% trans "الخصم" %}</th>
+                                        <th>{% trans "المجموع" %}</th>
+                                        <th>{% trans "أدوات" %}</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="add">
+                                    {% for work in formset %}
+                                        <tr class="form-row-purshess text-center">
+                                            <td style="width: 50px; text-align: center; font-size: 14px;">{{ forloop.counter }}</td>
+                                            <td style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.item }}</td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.unit }}</td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.qty }}</td>
+                                            <td style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.selling_price }}</td>
+                                            <td style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.qty_store }}</td>
+                                            <td style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.discount }}</td>
+                                            <td style="max-width: 120px; overflow: hidden; text-overflow: ellipsis; font-size: 14px;">{{ work.total_price }}</td> 
+                                            <!-- الزر لإزالة المنتج من الفاتورة -->
+                                            <td>
+                                                <button type="button" class="remove" style="background-color: #dc3545; border-radius: 5px; font-size: 14px; padding: 5px 10px;">
+                                                    <span class="fa fa-trash fa-lg"></span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="9" class="text-right">
+                                            <button type="button" class="add_row" id="{{ formset.prefix }}" style="background-color: #28a745; color: white; border-radius: 6px; font-size: 14px; padding: 10px 20px;">
+                                                <i class="fa fa-plus" aria-hidden="true"></i> {% trans "إضافة" %}
+                                            </button>  <!-- زر لإضافة صف جديد للمنتج -->
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- تفاصيل إضافية للفاتورة مثل الخصم والضرائب -->
+                <div class="box-footer">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="{{ form.discount.id_for_label }}">{% trans "الخصم" %}</label>
+                            {{ form.discount }}  <!-- حقل إدخال الخصم -->
+                        </div>
+                        <div class="col-md-2">
+                            <label for="{{ form.discount_rate.id_for_label }}">{% trans "نسبة الخصم" %}</label>
+                            {{ form.discount_rate }}  <!-- حقل إدخال نسبة الخصم -->
+                        </div>
+                        <div class="col-md-2">
+                            <label for="{{ form.reference_number.id_for_label }}">{% trans "رقم المرجع" %}</label>
+                            {{ form.reference_number }}  <!-- حقل إدخال رقم المرجع -->
+                        </div>
+                        <div class="col-md-4">
+                            <label for="{{ form.statement.id_for_label }}">{% trans "ملاحظات" %}</label>
+                            {{ form.statement }}  <!-- حقل ملاحظات إضافية -->
+                        </div>      
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label for="{{ form.total_amount.id_for_label }}">{% trans "الإجمالي" %}</label>
+                            {{ form.total_amount }}  <!-- حقل إجمالي الفاتورة -->
+                            {% if form.total_amount.help_text %}
+                                <sup>{{ form.total_amount.help_text }}</sup>  <!-- نص مساعد إذا كان موجوداً -->
+                            {% endif %}
+                        </div>
+                        <div class="col-md-2">
+                            <label for="{{ form.tax.id_for_label }}">{% trans "الضريبة" %}</label>
+                            {{ form.tax }}  <!-- حقل إدخال الضريبة -->
+                        </div>
+                        <div class="col-md-2">
+                            <label for="{{ form.discount_item.id_for_label }}">{% trans "الخصم على الصنف" %}</label>
+                            {{ form.discount_item }}  <!-- حقل إدخال الخصم على العناصر -->
+                        </div>
+                        <div class="col-md-4">
+                            <label for="{{ form.total_net_bill.id_for_label }}">{% trans "المجموع الصافي" %}</label>
+                            {{ form.total_net_bill }}  <!-- حقل المجموع الصافي للفاتورة -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-buttons" style="padding-top: 20px; margin-top: 30px;">
+                    <div class="row">
+                        <div class="col-md-6 text-left">
+                            <button type="button" class="btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg" style="font-size: 16px; padding: 10px 20px; border-radius: 8px; background-color: #007bff; color: white;">
+                                {% trans "عرض فواتير المبيعات" %}
+                            </button>  <!-- زر لعرض فواتير المبيعات في مودال -->
+                        </div>
+
+                        <div class="col-md-4 text-right">
+                            <button type="submit" class="btn-success" style="font-size: 16px; padding: 10px 20px; border-radius: 8px; background-color: #28a745; color: white;">
+                                {% trans "حفظ" %}
+                            </button>  <!-- زر حفظ الفاتورة -->
+                            <button type="button" class="btn-info" onclick="printInvoice()" style="font-size: 16px; padding: 10px 20px; border-radius: 8px; background-color: #17a2b8; color: white;">
+                                {% trans "طباعة" %}
+                            </button>  <!-- زر للطباعة -->
+                            <button onclick="previewInvoice()">معاينة الفاتورة</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    let csrf = '{{ csrf_token }}';  //<!-- استخدام توكن CSRF في السكربتات -->
+</script>
+
+<script src="{% static 'js/sales/sales_invoice.js'%}"></script>  <!-- إضافة ملف جافا سكربت خاص بالفواتير -->
+<script src="{% static 'js/sales/formsets.js' %}"></script>  <!-- إضافة ملف جافا سكربت لإدارة المجموعات في الفورمات -->
+
+{% block extra_js %}
+<!-- وظيفة لتحديث رصيد العميل --> 
+<script type="text/javascript">
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const customerSelect = document.getElementById("id_customer");  // حقل اختيار العميل
+        const balanceField = document.getElementById("balance");  // حقل رصيد العميل
+
+        // وظيفة لتحديث رصيد العميل عند تغيير الاختيار
+        customerSelect.addEventListener('change', function() {
+            const customerId = this.value;  // الحصول على id العميل المختار
+            
+            if (customerId) {
+                // إرسال طلب AJAX لجلب رصيد العميل
+                fetch(`/get_balance/${customerId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        balanceField.value = data.balance || 0;  // تحديث الحقل بالقيمة التي تم إرجاعها
+                    })
+                    .catch(error => {
+                        console.error('Error fetching balance:', error);
+                        balanceField.value = 0;  // في حال حدوث خطأ، نعرض صفر
+                    });
+            } else {
+                balanceField.value = '';  // إذا لم يتم اختيار عميل، إفراغ الحقل
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+ <!-- تنسيق الجدول وعناصر النموذج -->
+ <style>
+    table, th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        vertical-align: middle;
+    }
+
+    .datatable_list {
+        font-family: 'Arial', sans-serif;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .remove {
+        background-color: #dc3545;
+        border-radius: 5px;
+        padding: 5px 10px;
+        font-size: 14px;
+    }
+
+    .remove:hover {
+        background-color: #c82333;
+    }
+
+    .add_row {
+        background-color: #28a745;
+        color: white;
+        border-radius: 8px;
+        font-size: 16px;
+    }
+
+    .add_row:hover {
+        background-color: #218838;
+    }
+</style>
+
+<script>
+            // استخدام JavaScript لتحديث رصيد العميل ديناميكيًا
+        document.querySelector("#tblProducts").addEventListener("change", function () {
+            let totalAmount = 0;
+            // حساب إجمالي المبلغ من جميع العناصر في الفاتورة
+            document.querySelectorAll(".form-row-purshess").forEach(function (row) {
+                let qty = parseFloat(row.querySelector(".qty").value) || 0;
+                let price = parseFloat(row.querySelector(".selling_price").value) || 0;
+                let discount = parseFloat(row.querySelector(".discount").value) || 0;
+                let total = (qty * price) - discount;
+                totalAmount += total;
+            });
+
+            // تحديث الرصيد (افترض أن الرصيد موجود في عنصر مع id "balance")
+            let balanceElement = document.querySelector("#id_balance");
+            balanceElement.value = balanceElement.dataset.initialBalance - totalAmount;
+        });
+
+</script>
+
+
+<script>
+    //<!-- URL لجلب بيانات الفواتير -->
+    url = "{% url 'SalesListJson' %}";  
+    $(document).ready(function () {
+        var oTable = $('.datatable_list').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": url  //<!-- تفعيل تحميل بيانات الفواتير من الخادم -->
+        });
+    });
+</script>
+
+<style>
+    /* إخفاء الأزرار عند الطباعة */
+    @media print {
+        .button-save, .button-print, .button-view {
+            display: none;
+        }
+    }
+
+</style>
+
+<script>
+    function previewInvoice() {
+        // تحديد العنصر الذي يحتوي على محتوى الفاتورة
+        var invoiceContent = document.querySelector('form#myform_invoic');
+
+        // إخفاء الأزرار داخل الفاتورة فقط
+        var buttons = invoiceContent.querySelectorAll('.button-save, .button-print, .button-view');
+        buttons.forEach(function(button) {
+            button.style.display = 'none';
+        });
+
+        // فتح نافذة جديدة للمعاينة
+        var previewWindow = window.open('', '', 'width=800,height=600');
+
+        // إضافة المحتوى إلى نافذة المعاينة
+        previewWindow.document.write('<html><head><title>معاينة الفاتورة</title>');
+        previewWindow.document.write('<style>');
+        
+        // إضافة محاذاة النص من اليمين واستخدام الخط "Purview" (أو أي خط آخر)
+        previewWindow.document.write('body { direction: rtl; text-align: right; font-family: "Purview", "Arial", sans-serif; }');
+        
+        // تنسيق الجدول والحقول
+        previewWindow.document.write('table, th, td { border: 1px solid #ddd; padding: 10px; vertical-align: middle; border-collapse: collapse; }');
+        previewWindow.document.write('.text-center { text-align: center; }');
+        previewWindow.document.write('h1, h2, h3, h4 { text-align: right; }');
+        
+        // تحسين تنسيق الحقول في الأعلى باستخدام flexbox لجعلها بجانب بعضها
+        previewWindow.document.write('.invoice-summary { display: flex; justify-content: space-between; gap: 15px; padding: 20px; }');
+        previewWindow.document.write('.invoice-summary .field { flex: 1; min-width: 150px; box-sizing: border-box; }');
+        previewWindow.document.write('.invoice-summary .field label { display: block; font-weight: bold; margin-bottom: 5px; }');
+        previewWindow.document.write('.invoice-summary .field input, .invoice-summary .field span { width: 100%; padding: 8px; border: 1px solid #ddd; font-size: 14px; }');
+        previewWindow.document.write('.invoice-summary .field input:read-only { background-color: #f8f8f8; }');
+
+        // زر للطباعة داخل نافذة المعاينة
+        previewWindow.document.write('.print-button { margin-top: 20px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; font-size: 16px; border-radius: 5px; text-align: center; }');
+        previewWindow.document.write('.print-button:hover { background-color: #45a049; }');
+        
+        previewWindow.document.write('</style>');
+        previewWindow.document.write('</head><body>');
+        
+        // إضافة محتوى الفاتورة إلى النافذة الجديدة
+        previewWindow.document.write(invoiceContent.innerHTML);
+        
+        // إضافة زر للطباعة في نافذة المعاينة
+        previewWindow.document.write('<button class="print-button" onclick="window.print()">طباعة الفاتورة</button>');
+        
+        // إغلاق الوثيقة لإظهار المحتوى في النافذة الجديدة
+        previewWindow.document.write('</body></html>');
+        
+        // الانتظار حتى يتم تحميل المحتوى في نافذة المعاينة
+        previewWindow.document.close();
+        previewWindow.focus();
+
+        // إظهار الأزرار مرة أخرى بعد فتح نافذة المعاينة
+        buttons.forEach(function(button) {
+            button.style.display = 'inline-block'; // إعادة إظهار الأزرار
+        });
+    }
+</script>
+
+
+{% endblock %}

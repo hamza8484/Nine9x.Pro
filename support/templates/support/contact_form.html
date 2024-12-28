@@ -1,0 +1,28 @@
+<!-- support/templates/support/contact_form.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دعم فني</title>
+</head>
+<body>
+    <h2>اتصل بنا</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">إرسال</button>
+    </form>
+
+    <p>أو تواصل معنا عبر:</p>
+    <a href="https://wa.me/0540629629?text=مرحبا%20أريد%20الدعم" target="_blank">
+        <button>التواصل عبر WhatsApp</button>
+    </a>
+    <a href="mailto:your_email@example.com">
+        <button>التواصل عبر البريد الإلكتروني</button>
+    </a>
+    <a href="https://anydesk.com/en/downloads" target="_blank">
+        <button>تحميل AnyDesk</button>
+    </a>
+</body>
+</html>

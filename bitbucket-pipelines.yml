@@ -1,0 +1,11 @@
+image: python:3.9  # استخدام صورة Docker لـ Python
+
+pipelines:
+  default:
+    - step:
+        name: Install dependencies and run tests
+        caches:
+          - pip  # تخزين التبعيات لتسريع العملية
+        script:
+          - pip install -r requirements.txt  # تثبيت التبعيات من ملف requirements.txt
+          - pytest  # تشغيل الاختبارات باستخدام pytest

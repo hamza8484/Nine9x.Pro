@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}  <!-- إضافة تحميل الترجمة هنا -->
+{% block title %}
+
+{% trans "عرض جميع المصروفات" %}
+{% endblock title %}
+
+{% load static %} 
+
+{% block content %}
+
+<body dir="rtl"> <!-- ضبط الاتجاه من اليمين لليسار -->
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header text-end"> <!-- محاذاة النص لليمين داخل رأس البطاقة -->
+                <h3 class="card-title">{% trans "قائمة المصاريف" %}</h3> 
+            </div>
+            <div class="card-body">
+                <!-- زر الرجوع إلى صفحة إضافة المصروف -->
+                <a href="{% url 'add_expense' %}" class="btn btn-primary mb-3">{% trans "رجوع إلى إضافة مصروف" %}</a> 
+
+                <table class="table table-bordered table-striped table-hover text-end"> <!-- محاذاة النص لليمين -->
+                    <thead>
+                        <tr class="table-dark">
+                            <th class="text-center">{% trans "اسم المصروف" %}</th>
+                            <th class="text-center">{% trans "القيمة" %}</th>
+                            <th class="text-center">{% trans "التاريخ" %}</th>
+                            <th class="text-center">{% trans "التعديل" %}</th> <!-- عمود التعديل -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for expense in expenses %}
+                            <tr>
+                                <td class="text-center">{{ expense.name }}</td>
+                                <td class="text-center">{{ expense.amount }}</td>
+                                <td class="text-center">{{ expense.date }}</td>
+                                <td class="text-center">
+                                    <a href="{% url 'expense_edit' expense.id %}" class="btn btn-warning btn-sm">{% trans "تعديل" %}</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">{% trans "لا توجد مصاريف حالياً." %}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+{% endblock content %}

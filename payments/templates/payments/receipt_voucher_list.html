@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block title %}
+    {% trans " قائمة سندات القبض "}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+       
+        <!-- جدول لعرض السندات -->
+        <table class="table table-bordered table-striped text-center">
+            <thead>
+                <tr>
+                    <th>{% trans "تسلسل" %} </th>
+                    <th>{% trans رقم السند  %}  </th>
+                    <th>{% trans "العميل" %} </th>
+                    <th>{% trans "المبلغ" %}</th>
+                    <th>{% trans "الإجراءات" %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for voucher in receipt_vouchers %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>                     
+                        <td>{{ voucher.voucher_number }}</td>
+                        <td>{{ voucher.customer.name_lo  }}</td>
+                        <td>{{ voucher.amount }} {% trans "ريال" %}</td>
+                        <td>{{ voucher.date_created|date:"Y-m-d H:i" }}</td>
+                        <td>
+                            <!-- يمكن إضافة أزرار أو روابط لتفاصيل السند أو الطباعة -->
+                            <a href="{% url 'voucher_detail' voucher.id %}" class="btn btn-info btn-sm">{% trans"تفاصيل" %}</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center text-danger">{% trans "لا توجد سندات قبض حالياً."  %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <!-- رسالة إذا كانت القائمة فارغة -->
+        {% if not receipt_vouchers %}
+            <div class="alert alert-warning text-center">
+                {%  trans "لا توجد سندات قبض حالياً." % }
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}
+

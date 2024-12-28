@@ -1,0 +1,298 @@
+{% extends "base.html" %}
+
+{% load i18n %} <!-- تحميل مكتبة الترجمة -->
+
+{% block title %}
+{% trans "شاشة الأصناف" %}
+{% endblock title %}
+
+{% block content %}
+
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-lg">
+    {% trans "إضافة صنف جديد" %}
+</button>
+
+<table id="example" class="display datatable" style="width:100%">
+    <thead>
+        <tr>
+            <th>{% trans "تسلسل" %}</th>
+            <th>{% trans "إسم الصنف ع" %}</th>
+            <th>{% trans "إسم الصنف E" %}</th>       
+            <th>{% trans "المجموعة" %}</th>
+            <th>{% trans "الوحدة" %}</th>
+            <th>{% trans "القسم" %}</th>
+            <th>{% trans "البيع" %}</th>
+            <th>{% trans "الشراء" %}</th>
+            <th>{% trans "الباركود" %}</th>       
+            <th>{% trans "الإحداث" %}</th>
+        </tr>
+    </thead>
+</table>
+
+<div class="modal fade" id="modal-lg" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="card card-warning">
+                <div class="modal-header">
+                    <div class="card-header">
+                        <h3 class="card-title">{% trans "إضافة الاصناف" %}</h3>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'Items' %}" id="id_form" method="post" class="needs-validation" accept-charset="utf-8">
+                        <input type="text" name="id" class="hidden" style="display: contents;">
+                        {% csrf_token %}
+
+                        {% if form.errors %}
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <div id="form_errors">
+                                {% for key, value in form.errors.items %}
+                                <strong>{{ value }}</strong>
+                                {% endfor %}
+                            </div>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endif %}
+
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "إسم الصنف ع" %}</label>
+                                    {{ filed.name_lo }}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "إسم الصنف E" %}</label>
+                                    {{ filed.name_fk }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "القسم" %}</label>
+                                    {{ filed.category }}
+                                </div>
+                            </div>
+                        
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "الوحدة" %}</label>
+                                    {{ filed.unit }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "المجموعة" %}</label>
+                                    {{ filed.items_type }}
+                                </div>
+                            </div>
+                        
+                            <!-- حقل الباركود مع الزر -->
+                            <div class="col-sm-6">
+                                <div class="form-group d-flex align-items-center">
+                                    <label class="mr-3">{% trans "الباركود" %}</label>
+                                    <div class="input-group">
+                                        {{ filed.barcode }}
+                                        <div class="input-group-append">
+                                            <button type="button" class="btn btn-info" id="generate-barcode">{% trans "توليد باركود" %}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "سعر الشراء" %}</label>
+                                    {{ filed.purch_price }}
+                                </div>
+                            </div>
+                        
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "سعر البيع" %}</label>
+                                    {{ filed.salse_price }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>{% trans "صورة الصنف" %}</label>
+                                    {{ filed.image }}
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- input states -->
+                        <div class="form-group">
+                            <button type="submit" id="btnsubmit" class="col-md-12 btn btn-primary">{% trans "حفظ" %}</button><br><br>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- JavaScript لتوليد الباركود غير المكرر -->
+<script>
+  // متغير لتخزين الرقم التسلسلي
+  var currentBarcodeValue = 1000000; // القيمة الأولى للباركود
+  
+  // مصفوفة لتخزين الأرقام التي تم توليدها مسبقًا
+  var generatedBarcodes = [];
+
+  document.getElementById('generate-barcode').addEventListener('click', function() {
+      // توليد الرقم التسلسلي للباركود
+      var barcodeValue = currentBarcodeValue;
+      
+      // التأكد من أن الباركود غير مكرر
+      while (generatedBarcodes.includes(barcodeValue)) {
+          currentBarcodeValue++; // زيادة الرقم التسلسلي
+          barcodeValue = currentBarcodeValue;
+      }
+
+      // إضافة الرقم الذي تم توليده إلى المصفوفة
+      generatedBarcodes.push(barcodeValue);
+
+      // وضع القيمة في الحقل
+      document.querySelector('input[name="barcode"]').value = barcodeValue;
+      
+      // إظهار تنبيه للمستخدم
+      alert('تم توليد الباركود: ' + barcodeValue);
+  });
+</script>
+
+
+
+{% endblock content %}
+
+{% block scripts %}
+<script>
+let csrf = '{{ csrf_token }}';
+ $("#id_form").on("submit",function(e){
+  e.preventDefault();
+    var form_upload = $("#id_form")[0];
+    var form_data = new FormData(form_upload);
+      $.ajax({
+        method: "post",
+        data: form_data ,
+        url:$(this).attr('action'),
+        type: 'post',
+        dataType: 'json',
+        cache: false,
+        processData: false,
+        contentType: false,
+        
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("X-CSRFToken", csrf);
+          },
+        success: function(data) {
+          
+          if(data.status=="1")
+          {
+            alert(data.message);
+            $('.datatable').DataTable().ajax.reload();
+            $('#modal-lg').modal('hide');
+            $('#id_form').trigger("reset");
+          }
+            else{
+            alert(data.error);
+            }
+        }
+      })
+ 
+    }) 
+    
+$(document).on('click','.edit_row',function(){
+ 
+    $.ajax({
+          url: $(this).data('url'),
+          data: {'id':$(this).data('id')},
+          type: 'GET',
+          success: function (data) {
+              let resp=JSON.parse(data.data);
+              if(data.status==1){
+                  console.log(resp[0].fields)
+                  $(`input[name="id"]`).val(resp[0].pk);
+                  $('#modal-lg').modal('show');
+                  $.each(resp[0].fields,function(i,value_){
+                  if(i!="image")
+                  {
+                    $(`input[name="${i}"]`).val(value_);
+                    $(`select[name="${i}"] option[value="${value_}"]`).attr('selected','selected');
+                  }
+            });
+
+          }
+         else{
+          console.log(data.error);
+         }
+     },
+     error:function(data){
+     }
+ });
+});
+
+$(document).on('click','.delete_row',function(){
+
+ if(confirm('{% trans "هل حقا تريد الحذف؟" %}')){
+    let id_row=$(this).data('id');
+    $.ajax({
+        url: $(this).data('url'),
+        data: {
+         'id':id_row,
+     },
+     method: 'DELETE',
+     beforeSend: function (xhr) {
+             xhr.setRequestHeader("X-CSRFToken",csrf);
+         },
+     success: function (data) {
+        
+         if(data.status==1){
+          alert(data.message)   
+       
+          $('.datatable').DataTable().ajax.reload();
+          
+        }
+        if(data.status==0)
+          alert(data.message)   
+
+      
+     },
+     error:function(data){
+     }
+ });
+}
+});
+
+$(document).ready(function () {
+    var oTable = $('.datatable').dataTable({
+        // ...
+        "processing": true,
+        "serverSide": true,
+        "ajax": "{% url 'ItemsJson' %}"
+    });
+    // ...
+});
+
+</script>
+
+{% endblock scripts %}

@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+    {% trans "شاشة الطابعات الرئيسية" %}
+{% endblock title %}
+
+{% block content %}
+<br>
+<br>
+<h4>  {% trans  " إعدادات الطابعة " %}  </h4>
+
+<hr>
+<form method="POST">
+    {% csrf_token %}
+    <div class="form-container">
+        {{ form.as_p }}  <!-- عرض الحقول الخاصة بالنموذج -->
+    </div>
+    <br>
+    <br>
+    <br>
+    <!-- زر الحفظ -->
+    <button type="submit" class="btn btn-primary btn-lg mt-3">{% trans "حفظ" %}</button>
+</form>
+
+{% if messages %}
+    <ul class="messages mt-3">
+        {% for message in messages %}
+            <li class="alert alert-info">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<style>
+    /* تنسيق الحقول داخل النموذج */
+    .form-container {
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+        width: 40%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+        margin-top: 10px;
+        font-size: 1em;
+    }
+
+    .form-container input:focus,
+    .form-container select:focus,
+    .form-container textarea:focus {
+        outline: none;
+        border-color: #0056b3;
+    }
+
+    /* تنسيق الأزرار */
+    .btn {
+        width: 30%;
+        padding: 12px;
+        border-radius: 5px;
+        font-size: 1.2em;
+        cursor: pointer;
+    }
+
+    /* تنسيق الرسائل */
+    .messages {
+        margin-top: 20px;
+        padding: 10px;
+        list-style-type: none;
+    }
+
+    .alert-info {
+        background-color: #d9edf7;
+        border-color: #bce8f1;
+    }
+</style>
+
+{% endblock %}

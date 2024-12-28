@@ -1,0 +1,22 @@
+{% extends "users/base.html" %}
+{% load i18n %}  <!-- تحميل الترجمة -->
+
+{% block title %} {% trans "الصفحة الرئيسية" %} {% endblock title %}
+
+{% block content %}
+    <div class="jumbotron">
+        <h1 class="display-4">{% trans "مرحبا, " %}{{ user.first_name.title|default:'Guest' }}</h1>
+        <p class="lead">
+            {% trans "This is" %} <b>{% trans "نظام تسجيل المستخدم وتسجيل الدخول" %}</b>
+        </p>
+        <hr class="my-4">
+        <p class="lead">
+            {% if user.is_authenticated %}
+                <a class="btn btn-primary btn-lg" href="{% url 'logout' %}" role="button">{% trans "تسجيل الخروج" %}</a>
+            {% else %}
+                <a class="btn btn-primary btn-lg" href="{% url 'login' %}" role="button">{% trans "تسجيل الدخول" %}</a>
+            {% endif %}
+        </p>
+    </div>
+
+{% endblock content %}

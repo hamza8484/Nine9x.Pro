@@ -1,0 +1,99 @@
+  {% extends "base.html" %}
+
+  {% load static %}
+  {% load i18n %}
+
+  {% block title %}
+      {% trans "شاشة الأقسام" %}
+  {% endblock title %}
+
+  {% block content %}
+    <h2>إضافة قسم جديد</h2>
+
+    <form method="POST" class="category-form">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label for="name_lo" class="form-label">اسم القسم</label>
+        {{ category_form.name_lo }}
+      </div>
+
+      <div class="mb-3">
+        <label for="name_fk" class="form-label">اسم القسم (باللغة الأجنبية)</label>
+        {{ category_form.name_fk }}
+      </div>
+
+      <div class="mb-3">
+        <label for="is_stop" class="form-label">إيقاف القسم</label>
+        {{ category_form.is_stop }}
+      </div>
+
+      <div class="mb-3">
+        <label for="printer" class="form-label">اختيار الطابعة</label>
+        {{ category_form.printer }}
+      </div>
+
+      <button type="submit" name="add_category" class="btn btn-primary">حفظ القسم</button>
+    </form>
+
+    {% if category_form.non_field_errors %}
+      <div class="error">
+        {% for error in category_form.non_field_errors %}
+          <p class="error-message">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    
+    <br>
+    <h5>الأقسام المحفوظة</h5>
+
+    <table class="category-table">
+      <thead>
+        <tr>
+          <th>الرقم التسلسلي</th>
+          <th>اسم القسم</th>
+          <th>اسم الطابعة</th>
+        
+          <th>الحذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for category in categories %}
+          <tr>
+            <td>{{ forloop.counter }}</td>  <!-- الرقم التسلسلي -->
+            <td>{{ category.name_lo }}</td>
+
+            <!-- عرض الطابعة أو حقل اختيار الطابعة عند التعديل -->
+            <td>
+              {% if category.printer %}
+                {{ category.printer.name_lo }}
+              {% else %}
+                لا توجد طابعة
+              {% endif %}
+              
+              <!-- قائمة منسدلة للطابعة عند التعديل -->
+              <form method="POST" style="display:inline;">
+                {% csrf_token %}
+                <select name="printer" class="printer-select" required>
+                  {% for printer in printers %}
+                    <option value="{{ printer.id }}" {% if category.printer and category.printer.id == printer.id %}selected{% endif %}>{{ printer }}</option>
+                  {% endfor %}
+                </select>
+                <button type="submit" name="edit_category" value="{{ category.id }}" class="btn btn-warning">تعديل</button>
+              </form>
+            </td>
+
+            <!-- زر حذف -->
+            <td>
+              <form method="POST" style="display:inline;" onsubmit="return confirm('هل أنت متأكد من أنك تريد حذف هذا القسم؟');">
+                {% csrf_token %}
+                <button type="submit" name="delete_category" value="{{ category.id }}" class="btn btn-danger">حذف</button>
+              </form>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    
+  {% endblock content %}

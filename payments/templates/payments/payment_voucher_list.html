@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load widget_tweaks %}
+
+{% load i18n %}
+
+{% block title %}
+    {%  trans "قائمة السندات المدفوعة" %}
+{% endblock %}
+
+{% block content %}
+    <h5 style="text-align: center; margin-bottom: 20px;">{% trans  "قائمة السندات المدفوعة" %}</h5> <!-- توسيط العنوان -->
+
+    <table class="payment-voucher-table" style="width: 90%; margin: 0 auto; border-collapse: collapse;">
+        <thead>
+            <tr style="background-color: #f2f2f2; text-align: center;">
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "تسلسل" %}</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "رقم السند " %} </th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "المورد" %}</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "المبلغ" %}</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans " تاريخ الدفع " %}  </th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "الوصف" %}</th>
+                <th style="padding: 12px; border: 1px solid #ddd;">{% trans "إجراءات" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for voucher in payment_vouchers %}
+                <tr style="background-color: #fff;" data-voucher-number="{{ voucher.voucher_number }}">
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">{{ forloop.counter }}</td>  <!-- تسلسل -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">{{ voucher.voucher_number }}</td> <!-- رقم السند -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">{{ voucher.supplier.name_lo }}</td> <!-- المورد -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;" class="voucher-amount">{{ voucher.amount }}</td> <!-- المبلغ -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">{{ voucher.date_created|date:"Y-m-d" }}</td> <!-- تاريخ الدفع -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">{{ voucher.description }}</td> <!-- الوصف -->
+                    <td style="padding: 12px; border: 1px solid #ddd; text-align: center;">
+                        <!-- زر لعرض تفاصيل السند للمورد -->
+                        <a href="{% url 'supplier_voucher_detail' voucher_number=voucher.voucher_number %}" class="btn btn-primary btn-lg" style="padding: 8px 20px; font-size: 14px; text-decoration: none;">
+                            {% trans "عرض تفاصيل السند" %}
+                        </a>
+                        
+                        <!-- زر طباعة داخل الصف -->
+                        <button onclick="printVoucher('{{ voucher.voucher_number }}')" class="btn btn-success btn-lg" style="padding: 8px 20px; font-size: 14px; border: none; cursor: pointer; margin-left: 10px;">
+                            {% trans "طباعة السند" %}
+                        </button>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="7" style="padding: 12px; text-align: center; border: 1px solid #ddd; background-color: #f9f9f9;">
+                       {% trans " لا توجد سندات دفع حالياً." %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- إضافة حقل المجموع أسفل الجدول -->
+    <div style="text-align: center; margin-top: 20px; padding: 15px; background-color: #f8f8f8; border: 2px solid #ddd; border-radius: 8px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <strong style="font-size: 18px; color: #333;">{% trans "مجموع المبالغ" %}: </strong>
+        <span id="totalAmount" style="font-size: 20px; font-weight: bold; color: #4CAF50;">
+            0.00 <span style="font-size: 16px; color: #333;">{% trans "ريال" %}</span>
+        </span>
+    </div>
+
+    <script>
+        // دالة لحساب مجموع المبالغ
+        function calculateTotalAmount() {
+            var totalAmount = 0;
+            var amounts = document.querySelectorAll('.voucher-amount');
+            
+            amounts.forEach(function(amountCell) {
+                var amount = parseFloat(amountCell.innerText);
+                if (!isNaN(amount)) {
+                    totalAmount += amount;
+                }
+            });
+
+            // تحديث المجموع في الصفحة مع العملة
+            var totalAmountElement = document.getElementById('totalAmount');
+            totalAmountElement.innerHTML = totalAmount.toFixed(2) + ' <span style="font-size: 16px; color: #333;">{{ _("ريال") }}</span>';
+        }
+
+        // حساب المجموع عند تحميل الصفحة
+        window.onload = calculateTotalAmount;
+
+        // دالة لطباعة السند
+        function printVoucher(voucherNumber) {
+            // العثور على الصف بناءً على رقم السند
+            var voucherRow = document.querySelector('tr[data-voucher-number="' + voucherNumber + '"]');
+            
+            // فتح نافذة جديدة تحتوي فقط على السند المراد طباعته
+            var printWindow = window.open('', '', 'height=600,width=800');
+            
+            // إعداد محتوى الطباعة للصف الحالي (استبعاد الزر من المحتوى)
+            var voucherContent = voucherRow.innerHTML;
+            
+            // إزالة زر الطباعة من المحتوى
+            voucherContent = voucherContent.replace('<button onclick="printVoucher(\'' + voucherNumber + '\')" style="padding: 5px 10px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">{{ _("طباعة السند") }}</button>', '');
+    
+            // كتابة محتوى النافذة للطباعة مع إضافة التنسيق من اليمين لليسار
+            printWindow.document.write('<html><head><title>' + voucherNumber + '</title>');
+            printWindow.document.write('<style>');
+            printWindow.document.write('body { direction: rtl; text-align: center; font-family: Arial, sans-serif; }'); // توسيط النصوص في الجسم
+            printWindow.document.write('h2 { text-align: center; }'); // توسيط العنوان
+            printWindow.document.write('table { width: 80%; border-collapse: collapse; margin: 0 auto; }'); // توسيط الجدول
+            printWindow.document.write('th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }'); // توسيط النص داخل الخلايا
+            printWindow.document.write('</style></head><body>');
+            printWindow.document.write('<h2>' + 'سند الدفع رقم: ' + voucherNumber + '</h2>');
+            printWindow.document.write('<table>');
+            printWindow.document.write('<thead><tr><th>تسلسل</th><th>رقم السند</th><th>المورد</th><th>المبلغ</th><th>تاريخ الدفع</th><th>الوصف</th></tr></thead>');
+            printWindow.document.write('<tbody>' + voucherContent + '</tbody>');
+            printWindow.document.write('</table>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close(); // إنهاء المحتوى
+            printWindow.print(); // تفعيل نافذة الطباعة
+        }
+    </script>
+    
+{% endblock %}

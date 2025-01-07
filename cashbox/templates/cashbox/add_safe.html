@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("إضافة خزنة جديدة") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<body>
+    <h1>      </h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="name">{% trans "اسم الخزنة:" %}</label>
+        <input type="text" name="name" required><br><br>
+        <label for="creation_date">{% trans "تاريخ الإنشاء:" %}</label>
+        <input type="date" name="creation_date" required><br><br>
+        <label for="balance_added">{% trans "الرصيد المضاف:" %}</label>
+        <input type="number" step="0.01" name="balance_added" required><br><br>
+        <label for="notes">{% trans "الملاحظات:" %}</label>
+        <textarea name="notes"></textarea><br><br>
+        <button type="submit">{% trans "إضافة" %}</button>
+    </form>
+    <a href="{% url 'safe_list' %}">{% trans "الرجوع إلى قائمة الخزائن" %}</a>
+</body>
+</html>
+{% endblock content %}

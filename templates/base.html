@@ -113,133 +113,159 @@
             
             
             
-                <!-- رسالة حالة الاتصال بالإنترنت -->          
-                
-                <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+             
+        <!-- رسالة حالة الاتصال بالإنترنت -->          
+        <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 
-                <script>
-                // دالة للتحقق من حالة الاتصال بالإنترنت والخادم
-                function checkConnectionStatus() {
-                    // التحقق من حالة الاتصال بالإنترنت
-                    if (navigator.onLine) {
-                        // إذا كان متصلاً بالإنترنت، تحقق من حالة الخادم
-                        fetch("{% url 'check_server_connection' %}")
-                            .then(response => response.json())
-                            .then(data => {
-                                if (data.status === "online") {
-                                    // إذا كان الخادم متصلًا
+        <script>
+            // متغيرات لتتبع حالة الرسائل
+            var connectionMessageShown = false;
+            var serverMessageShown = false;
+
+            // دالة للتحقق من حالة الاتصال بالإنترنت والخادم
+            function checkConnectionStatus() {
+                // التحقق من حالة الاتصال بالإنترنت
+                if (navigator.onLine) {
+                    // إذا كان متصلاً بالإنترنت، تحقق من حالة الخادم
+                    fetch("{% url 'check_server_connection' %}")
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === "online") {
+                                // إذا كان الخادم متصلًا
+                                if (!serverMessageShown) {
                                     showToast("السيرفر متصل", "green");
-                                } else {
-                                    // إذا كان الخادم غير متصل
-                                    showToast("السيرفر غير متصل", "red");
+                                    serverMessageShown = true; // تتبع أن الرسالة قد ظهرت
                                 }
-                            })
-                            .catch(error => {
-                                // إذا كان هناك خطأ في التحقق من الاتصال بالخادم
+                            } else {
+                                // إذا كان الخادم غير متصل
+                                if (!serverMessageShown) {
+                                    showToast("السيرفر غير متصل", "red");
+                                    serverMessageShown = true; // تتبع أن الرسالة قد ظهرت
+                                }
+                            }
+                        })
+                        .catch(error => {
+                            // إذا كان هناك خطأ في التحقق من الاتصال بالخادم
+                            if (!serverMessageShown) {
                                 showToast("حدث خطأ أثناء التحقق من الاتصال بالسيرفر", "orange");
-                            });
-                    } else {
-                        // إذا كان الجهاز غير متصل بالإنترنت
+                                serverMessageShown = true; // تتبع أن الرسالة قد ظهرت
+                            }
+                        });
+                } else {
+                    // إذا كان الجهاز غير متصل بالإنترنت
+                    if (!connectionMessageShown) {
                         showToast("جهازك غير متصل بالإنترنت", "red");
+                        connectionMessageShown = true; // تتبع أن الرسالة قد ظهرت
                     }
                 }
-            
-                // دالة لعرض التنبيهات (Toast) باستخدام مكتبة Toastify
-                function showToast(message, color) {
-                    Toastify({
-                        text: message,
-                        backgroundColor: color,
-                        duration: 10000,  // مدة ظهور التنبيه (3 ثوانٍ)
-                        position: "left",  // موقع التنبيه على الجهة اليسرى             
-                        gravity: "top",  // تحديد الموقع في الأسفل
-                        offset: {
-                            x: 5,  // المسافة من اليسار
-                            y: 10   // المسافة من الأسفل
-                        }
-                    }).showToast();
+            }
+
+            // دالة لعرض التنبيهات (Toast) باستخدام مكتبة Toastify
+            function showToast(message, color) {
+                Toastify({
+                    text: message,
+                    backgroundColor: color,
+                    duration: 3000,  // مدة ظهور التنبيه (3 ثوانٍ)
+                    position: "left",  // موقع التنبيه على الجهة اليسرى             
+                    gravity: "top",  // تحديد الموقع في الأعلى
+                    offset: {
+                        x: 5,  // المسافة من اليسار
+                        y: 10   // المسافة من الأعلى
+                    }
+                }).showToast();
+            }
+
+            // التحقق من الاتصال عند تحميل الصفحة لأول مرة فقط
+            window.onload = function() {
+                if (!connectionMessageShown && !serverMessageShown) {
+                    checkConnectionStatus();
                 }
-            
-                // التحقق من الاتصال عند تحميل الصفحة
-                window.onload = checkConnectionStatus;
-            
-                // الاستماع لتغييرات حالة الاتصال
-                window.addEventListener('online', () => {
+            };
+
+            // الاستماع لتغييرات حالة الاتصال
+            window.addEventListener('online', () => {
+                // عرض رسالة عند الاتصال بالإنترنت لأول مرة فقط
+                if (!connectionMessageShown) {
                     showToast("جهازك متصل بالإنترنت", "green");
-                    checkConnectionStatus();
-                });
-            
-                window.addEventListener('offline', () => {
+                    connectionMessageShown = true;
+                }
+                checkConnectionStatus(); // التحقق من حالة السيرفر
+            });
+
+            window.addEventListener('offline', () => {
+                // عرض رسالة عند انقطاع الاتصال بالإنترنت لأول مرة فقط
+                if (!connectionMessageShown) {
                     showToast("جهازك غير متصل بالإنترنت", "red");
-                    checkConnectionStatus();
-                });
-            </script>
-            
+                    connectionMessageShown = true;
+                }
+                checkConnectionStatus(); // التحقق من حالة السيرفر
+            });
+        </script>
 
-            <!-- إضافة النصوص المترجمة باستخدام Django -->
-            <script>
-                var internetMessage = "{% trans 'جهازك متصل بالإنترنت.' %}";
-                var noInternetMessage = "{% trans 'جهازك غير متصل بالإنترنت.' %}";
-                var serverErrorMessage = "{% trans 'خطأ في الاتصال بالخادم:' %}";
-                var onlineMessage = "{% trans 'جهازك متصل الآن.' %}";
-                var offlineMessage = "{% trans 'جهازك غير متصل الآن.' %}";
-            </script>
+        <!-- إضافة النصوص المترجمة باستخدام Django -->
+        <script>
+            var internetMessage = "{% trans 'جهازك متصل بالإنترنت.' %}";
+            var noInternetMessage = "{% trans 'جهازك غير متصل بالإنترنت.' %}";
+            var serverErrorMessage = "{% trans 'خطأ في الاتصال بالخادم:' %}";
+            var onlineMessage = "{% trans 'جهازك متصل الآن.' %}";
+            var offlineMessage = "{% trans 'جهازك غير متصل الآن.' %}";
+        </script>
 
-            <!-- رسالة حالة الاتصال بالإنترنت -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-blue elevation-4">
+            <!-- Brand Logo -->
+            <a href="{% url 'index' %}" class="brand-link">
+                <img src="/static/logomain1.jpg" alt="" class="brand-image img-circle elevation-3" style="opacity: .9">
+                <span class="brand-text font-weight-light" style="color: #ffffff;">{% trans 'نظام ناينوكس' %}</span>
+            </a>
+            {% include "sidebar.html" %}
+        </aside>
 
-            
-                <!-- Main Sidebar Container -->
-                <aside class="main-sidebar sidebar-blue elevation-4">
-                    <!-- Brand Logo -->
-                    <a href="{% url 'index' %}" class="brand-link">
-                        <img src="/static/logomain1.jpg" alt="" class="brand-image img-circle elevation-3" style="opacity: .9">
-                        <span class="brand-text font-weight-light" style="color: #ffffff;">{% trans 'نظام ناينوكس' %}</span>
-                    </a>
-                    {% include "sidebar.html" %}
-                </aside>
+        <style>
+            /* تغيير اللون الأزرق للشريط الجانبي */
+            .main-sidebar {
+                background-color: #0568d1 !important;  /* اللون الأزرق */
+                color: #ffffff;  /* النصوص باللون الأبيض */
+            }
 
-                <style>
-                    /* تغيير اللون الأزرق للشريط الجانبي */
-                    .main-sidebar {
-                        background-color: #0568d1 !important;  /* اللون الأزرق */
-                        color: #ffffff;  /* النصوص باللون الأبيض */
-                    }
+            /* تغيير لون النصوص في الشريط الجانبي */
+            .main-sidebar .nav-link {
+                color: #ffffff !important;  /* النصوص باللون الأبيض */
+            }
 
-                    /* تغيير لون النصوص في الشريط الجانبي */
-                    .main-sidebar .nav-link {
-                        color: #ffffff !important;  /* النصوص باللون الأبيض */
-                    }
+            /* تغيير اللون عند التمرير على الروابط */
+            .main-sidebar .nav-link:hover {
+                color: #3e3bff !important;  /* لون النص عند التمرير (لون فاتح) */
+            }
 
-                    /* تغيير اللون عند التمرير على الروابط */
-                    .main-sidebar .nav-link:hover {
-                        color: #3e3bff !important;  /* لون النص عند التمرير (لون فاتح) */
-                    }
+            /* تغيير اللون الأزرق للأيقونات */
+            .main-sidebar .nav-icon {
+                color: #ffffff !important;  /* الأيقونات باللون الأبيض */
+            }
 
-                    /* تغيير اللون الأزرق للأيقونات */
-                    .main-sidebar .nav-icon {
-                        color: #ffffff !important;  /* الأيقونات باللون الأبيض */
-                    }
+            /* تغيير لون النصوص في قائمة "النوافذ المنسدلة" */
+            .main-sidebar .nav-treeview .nav-link {
+                color: #3e3bff !important;  /* النصوص باللون الأبيض في القوائم المنسدلة */
+            }
 
-                    /* تغيير لون النصوص في قائمة "النوافذ المنسدلة" */
-                    .main-sidebar .nav-treeview .nav-link {
-                        color: #3e3bff !important;  /* النصوص باللون الأبيض في القوائم المنسدلة */
-                    }
+            /* تغيير اللون عند التمرير على العناصر في القوائم المنسدلة */
+            .main-sidebar .nav-treeview .nav-link:hover {
+                color: #4e44da !important;  /* لون النص عند التمرير في القوائم المنسدلة */
+            }
 
-                    /* تغيير اللون عند التمرير على العناصر في القوائم المنسدلة */
-                    .main-sidebar .nav-treeview .nav-link:hover {
-                        color: #4e44da !important;  /* لون النص عند التمرير في القوائم المنسدلة */
-                    }
+            /* تغيير خلفية العناصر في الشريط الجانبي عند التمرير */
+            .main-sidebar .nav-link.active {
+                background-color: #0056b3 !important;  /* خلفية داكنة عند التمرير على العنصر النشط */
+            }
 
-                    /* تغيير خلفية العناصر في الشريط الجانبي عند التمرير */
-                    .main-sidebar .nav-link.active {
-                        background-color: #0056b3 !important;  /* خلفية داكنة عند التمرير على العنصر النشط */
-                    }
+            /* تغيير خلفية العناوين داخل الشريط الجانبي */
+            .main-sidebar .nav-header {
+                background-color: #004085 !important;  /* خلفية أغمق للعناوين */
+                color: #5949ee !important;  /* النص باللون الأبيض */
+            }
+        </style>
 
-                    /* تغيير خلفية العناوين داخل الشريط الجانبي */
-                    .main-sidebar .nav-header {
-                        background-color: #004085 !important;  /* خلفية أغمق للعناوين */
-                        color: #5949ee !important;  /* النص باللون الأبيض */
-                    }
-                </style>
+
 
         
           <!-- Content Wrapper. Contains page content -->

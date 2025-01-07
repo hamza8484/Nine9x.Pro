@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("تسليم الراتب") }}
+{% endblock title %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="form-container">
+         <!-- عرض الرسائل (نجاح أو خطأ) -->
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- نموذج تسليم الراتب -->
+        <form class="mb-3" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+        <div class="row ">
+            <div class=" col-md-6 mb-3">
+                <label for="id_employee" class="form-label">{% trans "الموظف" %}</label>
+                {{ form.employee|add_class:"form-control" }}
+            </div>
+       
+            <div class=" col-md-3 mb-3">
+                <label for="id_salary" class="form-label">{% trans "الراتب الأساسي" %}</label>
+                {{ form.salary|add_class:"form-control" }}
+            </div>
+
+            <div class=" col-md-3 mb-3">
+                <label for="id_allowances" class="form-label">{% trans "البدلات" %}</label>
+                {{ form.allowances|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-3 mb-3">
+                <label for="id_accruals" class="form-label">{% trans "الاستحقاق" %}</label>
+                {{ form.accruals|add_class:"form-control" }}
+            </div>
+            <div class=" col-md-3 mb-3">
+                <label for="id_accrual_date" class="form-label">{% trans "تاريخ الاستحقاق" %}</label>
+                {{ form.accrual_date|add_class:"form-control" }}
+            </div>
+            <div class=" col-md-6 mb-3">
+                <label for="id_accrual_reason" class="form-label">{% trans "سبب الاستحقاق" %}</label>
+                {{ form.accrual_reason|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-3 mb-3">
+                <label for="id_deductions" class="form-label">{% trans "الاستقطاع" %}</label>
+                {{ form.deductions|add_class:"form-control" }}
+            </div>
+            <div class=" col-md-3 mb-3">
+                <label for="id_deduction_date" class="form-label">{% trans "تاريخ الاستقطاع" %}</label>
+                {{ form.deduction_date|add_class:"form-control" }}
+            </div>
+            <div class=" col-md-6 mb-3">
+                <label for="id_deduction_reason" class="form-label">{% trans "سبب الاستقطاع" %}</label>
+                {{ form.deduction_reason|add_class:"form-control" }}
+            </div>
+        </div>
+        <div class="row">
+            <div class=" col-md-3 mb-3">
+                <label for="id_payment_date" class="form-label">{% trans "تاريخ الدفع" %}</label>
+                {{ form.payment_date|add_class:"form-control" }}
+            </div>
+
+            <div class="col-md-3 mb-3">
+                <div class=" form-check-lg">
+                    {{ form.paid|add_class:"form-check-input fs-5" }}  <!-- تكبير الـ checkbox -->
+                    <label for="id_paid" class="form-check-label fs-5">{% trans "تم الدفع" %}</label>  <!-- تكبير النص -->
+                </div>
+            </div>
+            
+        </div>
+        <div class="row">
+            <div class=" col-md-3 mb-3">
+                <label for="id_total_salary" class="form-label">{% trans "الراتب الإجمالي" %}</label>
+                <input type="text" id="id_total_salary" class="form-control" readonly>
+            </div>
+        </div>
+        
+        <br>
+        <hr>
+        <div class="row">
+            <div class="mb-3">
+                <button style="width: 300px; height: 50px;" type="submit" class="btn btn-primary">{% trans "حفظ" %}</button>
+            </div>
+            <!-- إضافة مسافة باستخدام فئة margin-left -->
+            <a href="{% url 'salary_payment_list' %}" style="width: 400px; height: 50px;" class="btn btn-primary ml-3">{% trans "الرجوع إلى قائمة تسليم الرواتب" %}</a>
+        </div>
+        
+        </form>
+
+       
+    </div>
+</div>
+
+<script>
+    document.getElementById('id_employee').addEventListener('change', function() {
+        var employeeId = this.value;  // الحصول على ID الموظف
+        if (employeeId) {
+            // إرسال طلب AJAX للحصول على الراتب والبدلات
+            fetch(`/employees/get_salary_and_allowances/${employeeId}/`)
+                .then(response => response.json())
+                .then(data => {
+                    // تحديث الحقول بناءً على البيانات المستلمة
+                    document.getElementById('id_salary').value = data.salary;
+                    document.getElementById('id_allowances').value = data.allowances;
+                    updateTotalSalary();  // تحديث الراتب الإجمالي بعد استلام البيانات
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    });
+
+    // وظيفة لحساب الراتب الإجمالي
+    function updateTotalSalary() {
+        var salary = parseFloat(document.getElementById('id_salary').value) || 0;
+        var allowances = parseFloat(document.getElementById('id_allowances').value) || 0;
+        var accruals = parseFloat(document.getElementById('id_accruals').value) || 0;
+        var deductions = parseFloat(document.getElementById('id_deductions').value) || 0;
+
+        // حساب الراتب الإجمالي
+        var totalSalary = salary + allowances + accruals - deductions;
+        
+        // تحديث الحقل الذي يعرض الراتب الإجمالي
+        document.getElementById('id_total_salary').value = totalSalary.toFixed(2);
+    }
+
+    // إضافة مستمعات الأحداث للحقول التي تؤثر على الراتب الإجمالي
+    document.getElementById('id_salary').addEventListener('input', updateTotalSalary);
+    document.getElementById('id_allowances').addEventListener('input', updateTotalSalary);
+    document.getElementById('id_accruals').addEventListener('input', updateTotalSalary);
+    document.getElementById('id_deductions').addEventListener('input', updateTotalSalary);
+</script>
+
+{% endblock content %}

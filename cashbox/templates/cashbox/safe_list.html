@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("قائمة الخزائن ") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<body>
+    <!-- جدول الخزائن -->
+    <table border="1" cellpadding="10" cellspacing="0" width="100%" style="text-align:center; border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th>{% trans "تسلسل" %}</th>
+                <th>{% trans "اسم الخزنة" %}</th>
+                <th>{% trans "تاريخ الإنشاء" %}</th>
+                <th>{% trans "الرصيد المضاف" %}</th>
+                <th>{% trans "الرصيد المتواجد" %}</th>
+                <th>{% trans "الملاحظات" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for safe in safes %}
+                <tr>
+                    <td >{{ forloop.counter }}</td>
+                    <td>{{ safe.name }}</td>
+                    <td>{{ safe.creation_date }}</td>
+                    <td>{{ safe.balance_added }}</td>
+                    <td>{{ safe.balance }}</td>
+                    <td>{{ safe.notes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- رابط إضافة خزنة جديدة -->
+    <br>
+    <a href="{% url 'add_safe' %}" style="display: inline-block; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; text-align: center;">{% trans "إضافة خزنة جديدة" %}</a>
+
+</body>
+</html>
+{% endblock content %}

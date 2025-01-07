@@ -5,20 +5,16 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth import authenticate
 from django.contrib.auth import views as auth_views #new
 from .forms import ItemsForm
-from CompanyInfo.models import CompanyInfo 
+from companyinfo.models import CompanyInfo
 from django.utils.translation import gettext_lazy as _, gettext
 from django.core import serializers
 from django.shortcuts import get_object_or_404
 from django.http import QueryDict
 from django_datatables_view.base_datatable_view import BaseDatatableView
-from input.models import Category
+
 from django.db.models import Sum
 from django.contrib import messages
 from input.models import Items, Category, InventoryItem, StoryItem
-
-
-
-
 
 # دالة للحصول على جميع الأصناف
 def get_items(request):
@@ -337,3 +333,63 @@ def get_item_details(request, item_id):
     except Items.DoesNotExist:
         return JsonResponse({'status': 0, 'message': 'Item not found'})
 
+
+def get_company_info(request):
+    try:
+        # جلب جميع سجلات الشركات من قاعدة البيانات
+        companies = CompanyInfo.objects.all()
+
+        if companies:
+            # إعداد البيانات للرد بها
+            companies_info = [
+                {
+                    "id": company.id,
+                    "company_name": company.company_name,
+                    "tax_number": company.tax_number
+                }
+                for company in companies
+            ]
+            return JsonResponse({"companies": companies_info})
+        else:
+            return JsonResponse({"error": "لم يتم العثور على بيانات المؤسسة."}, status=404)
+    except Exception as e:
+        return JsonResponse({"error": str(e)}, status=500)
+
+from input.models import Items  # التأكد من استيراد النموذج الصحيح
+
+def get_items(request):
+    try:
+        # استرجاع جميع الأصناف من قاعدة البيانات
+        items = Items.objects.all()  # يجب استخدام Items بدلاً من Item
+        
+        if items:
+            # إعداد البيانات للرد بها
+            items_data = [
+                {
+                    "id": item.id,
+                    "name_lo": item.name_lo,
+                    "price": item.salse_price,  # إضافة السعر إلى البيانات
+                }
+                for item in items  # يجب التكرار على items وليس companies
+            ]
+            return JsonResponse({"items": items_data})  # إرجاع البيانات بشكل صحيح
+        else:
+            return JsonResponse({"error": "لم يتم العثور على بيانات الأصناف."}, status=404)
+    
+    except Exception as e:
+        print(f"Error retrieving items: {e}")
+        return JsonResponse({"error": "Unable to retrieve items."}, status=500)
+
+def get_item_price(request, item_id):
+    try:
+        # البحث عن الصنف باستخدام ID
+        item = Items.objects.get(id=item_id)
+        # إرجاع السعر
+        return JsonResponse({"salse_price": item.salse_price})
+
+    except Items.DoesNotExist:
+        return JsonResponse({"error": "لم يتم العثور على الصنف."}, status=404)
+
+    except Exception as e:
+        print(f"Error retrieving item price: {e}")
+        return JsonResponse({"error": "Unable to retrieve item price."}, status=500)

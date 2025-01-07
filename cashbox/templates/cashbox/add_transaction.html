@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("إضافة خزنة جديدة ") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<body>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "إضافة" %}</button>
+    </form>
+    <a href="{% url 'transaction_list' %}">{% trans "الرجوع إلى قائمة الحركات" %}</a>
+</body>
+</html>
+{% endblock content %}

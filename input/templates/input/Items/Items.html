@@ -12,6 +12,11 @@
     {% trans "إضافة صنف جديد" %}
 </button>
 
+<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#barcode-modal">
+    {% trans "إنشاء ملصقات باركود" %}
+</button>
+<hr>
+
 <table id="example" class="display datatable" style="width:100%">
     <thead>
         <tr>
@@ -33,12 +38,10 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="card card-warning">
-                <div class="modal-header">
-                    <div class="card-header">
-                        <h3 class="card-title">{% trans "إضافة الاصناف" %}</h3>
-                    </div>
+                <div class="modal-header">   
+                    <h3 class="card-title">{% trans "إضافة الاصناف" %}</h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
+                        <span aria-hidden="true">إغلاق</span>
                     </button>
                 </div>
                 <div class="card-body">
@@ -149,150 +152,404 @@
     </div>
 </div>
 
+<!-- نافذة منبثقة لإنشاء ملصقات الباركود -->
+<div class="modal fade" id="barcode-modal" tabindex="-1" aria-labelledby="barcode-modal-label" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="barcode-modal-label">{% trans "ملصقات الباركود" %}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">إغلاق</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="barcode-form">
+                    <div class="row">
+                        <!-- حقل اسم المؤسسة (قائمة منسدلة) -->
+                        <div class="form-group col-sm-6">
+                            <label for="company-name">{% trans "اسم المؤسسة" %}</label>
+                            <select class="form-control" id="company-name" name="company_name" required>
+                                <option value="">{% trans "اختر اسم المؤسسة" %}</option>
+                                <!-- سيتم ملء الخيارات هنا عبر AJAX -->
+                            </select>
+                        </div>
+
+                        <!-- حقل الرقم الضريبي (قائمة منسدلة) -->
+                        <div class="form-group col-sm-6">
+                            <label for="tax-number">{% trans "الرقم الضريبي" %}</label>
+                            <select class="form-control" id="tax-number" name="tax_number" required>
+                                <option value="">{% trans "اختر الرقم الضريبي" %}</option>
+                                <!-- سيتم ملء الخيارات هنا عبر AJAX -->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">  
+                        <!-- حقل اسم الصنف -->
+                        <div class="form-group col-sm-8">
+                            <label for="item-name">{% trans "اسم الصنف" %}</label>
+                            <select class="form-control" id="item-name" name="item_name" required>
+                                <option value="">{% trans "اختر اسم الصنف" %}</option>
+                                <!-- سيتم ملء الخيارات هنا عبر AJAX -->
+                            </select>
+                        </div>
+
+                        <!-- حقل السعر -->
+                        <div class="form-group col-sm-2">
+                            <label for="item-price">{% trans "السعر" %}</label>
+                            <input type="number" class="form-control" id="item-price" name="item_price" step="0.01" required>
+                        </div>
+
+                        <!-- حقل عدد الملصقات -->
+                        <div class="form-group col-sm-2">
+                            <label for="barcode-count">{% trans "عدد الملصقات" %}</label>
+                            <input type="number" class="form-control" id="barcode-count" name="count" value="1" min="1">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- حقل نوع الملصق -->
+                        <div class="form-group col-sm-8">
+                            <label for="print-labels-type">{% trans "نوع الملصق" %}</label>
+                            <select class="form-control" id="print-labels-type" name="printLabelsType" required>
+                                <option value="ZEBRA_1_14X1">{% trans "Zebra - 1-1/4″ × 1″ (32 مم × 25 مم)" %}</option>
+                                <option value="ZEBRA_2_14X1">{% trans "Zebra - 2″ × 1″ (50 مم × 25 مم)" %}</option>
+                                <option value="ZEBRA_3_14X1">{% trans "Zebra - 3″ × 1″ (76 مم × 25 مم)" %}</option>
+                                <option value="DYMO_1_14X1">{% trans "Dymo - 1-1/4″ × 1″ (32 مم × 25 مم)" %}</option>
+                                <option value="DYMO_2_14X1">{% trans "Dymo - 2″ × 1″ (50 مم × 25 مم)" %}</option>
+                                <option value="BROTHER_1_14X1">{% trans "Brother - 1-1/4″ × 1″ (32 مم × 25 مم)" %}</option>
+                                <option value="BROTHER_2_14X1">{% trans "Brother - 2″ × 1″ (50 مم × 25 مم)" %}</option>
+                            </select>
+                        </div>
+                        
+                        <!-- الزر توليد الملصقات -->
+                        <div class="form-group col-sm-4">
+                            <button type="button" class="btn btn-primary btn-block" id="generate-labels" style="height: 70px;">{% trans "توليد الملصقات" %}</button>
+                        </div>
+                    </div>
+                </form>
+                <hr>
+                <div id="barcode-labels-container">
+                    <!-- سيتم عرض الملصقات هنا -->
+                </div>
+                <!-- زر الطباعة -->
+                <div class="form-group">
+                    <button type="button" class="btn btn-success" id="print-barcode" style="width: 100%; height: 60px; display: none;">
+                        {% trans "طباعة الباركود" %}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- إضافة CSS الخاص بمكتبة Select2 -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+
+<!-- إضافة JavaScript الخاص بمكتبة Select2 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // عند فتح نافذة الباركود، جلب بيانات المؤسسة
+        $('#barcode-modal').on('show.bs.modal', function () {
+            $.ajax({
+                url: '/get-company-info/',  // عنوان API لجلب البيانات
+                type: 'GET',
+                success: function(response) {
+                    if (response && response.companies && Array.isArray(response.companies)) {
+                        $('#company-name').empty().append('<option value="">{% trans "اختر اسم المؤسسة" %}</option>');
+                        $('#tax-number').empty().append('<option value="">{% trans "اختر الرقم الضريبي" %}</option>');
+                        response.companies.forEach(function(company) {
+                            $('#company-name').append(new Option(company.company_name, company.id));
+                            $('#tax-number').append(new Option(company.tax_number, company.id));
+                        });
+                    } else {
+                        alert("{% trans 'لم يتم العثور على بيانات المؤسسة.' %}");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    alert("{% trans 'حدث خطأ أثناء جلب البيانات.' %}");
+                }
+            });
+        });
+    
+        // جلب بيانات الأصناف
+        $.ajax({
+            url: '/get-items/',  // عنوان API لجلب الأصناف
+            type: 'GET',
+            success: function(response) {
+                if (response && response.items && Array.isArray(response.items)) {
+                    $('#item-name').empty().append('<option value="">{% trans "اختر اسم الصنف" %}</option>');
+                    response.items.forEach(function(item) {
+                        $('#item-name').append(new Option(item.name_lo, item.id));
+                    });
+                } else {
+                    alert("{% trans 'لم يتم العثور على بيانات الأصناف.' %}");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("خطأ في الاتصال بالـ API:", status, error);
+                alert("{% trans 'حدث خطأ أثناء جلب البيانات من السيرفر.' %}");
+            }
+        });
+    
+        // عند تغيير الصنف، جلب السعر المرتبط به
+        $('#item-name').on('change', function() {
+            var itemId = $(this).val();  // الحصول على ID الصنف المختار
+            if (itemId) {
+                $.ajax({
+                    url: '/get-item-price/' + itemId,  // المسار لجلب السعر بناءً على ID الصنف
+                    type: 'GET',
+                    success: function(response) {
+                        if (response && response.salse_price) {
+                            $('#item-price').val(response.salse_price);
+                        } else {
+                            alert("{% trans 'لم يتم العثور على السعر للصنف المحدد.' %}");
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("خطأ في جلب السعر:", status, error);
+                        alert("{% trans 'حدث خطأ أثناء جلب السعر.' %}");
+                    }
+                });
+            } else {
+                $('#item-price').val('');
+            }
+        });
+    
+         // توليد الملصقات عند الضغط على زر "توليد الملصقات"
+         $('#generate-labels').on('click', function() {
+            var companyName = $('#company-name').val();  // الحصول على اسم المؤسسة
+            var taxNumber = $('#tax-number').val();     // الحصول على الرقم الضريبي
+            var itemName = $('#item-name').val();       // الحصول على اسم الصنف
+            var itemPrice = $('#item-price').val();
+            var barcodeCount = $('#barcode-count').val();
+
+            // جلب الـ ID من المؤسسة و الصنف
+            var companyId = $('#company-name option:selected').attr('data-id');
+            var taxNumberId = $('#tax-number option:selected').attr('data-id');
+            var itemId = $('#item-name option:selected').attr('data-id');
+    
+            if (companyName && taxNumber && itemName && itemPrice > 0 && barcodeCount > 0) {
+                $('#barcode-labels-container').empty(); // مسح الحاوية
+    
+                // إنشاء الملصقات
+                for (var i = 0; i < barcodeCount; i++) {
+                    var barcodeData = `${companyName} - ${taxNumber} - ${itemName} - ${itemPrice}`;
+                    var barcodeDiv = $('<div class="barcode-label"></div>');
+                    var barcodeCanvas = $('<canvas></canvas>');
+                    barcodeDiv.append(barcodeCanvas);
+    
+                    // توليد الباركود باستخدام مكتبة JsBarcode
+                    JsBarcode(barcodeCanvas[0], barcodeData, {
+                        format: "CODE128",
+                        width: 2,
+                        height: 40,
+                        displayValue: true
+                    });
+    
+                    // إضافة النصوص أسفل الباركود
+                    barcodeDiv.append('<div class="name">اسم المؤسسة: ' + companyName + '</div>');
+                    barcodeDiv.append('<div class="tax-number">الرقم الضريبي: ' + taxNumber + '</div>');
+                    barcodeDiv.append('<div class="item-name">اسم الصنف: ' + itemName + '</div>');
+                    barcodeDiv.append('<div class="price">السعر: ' + itemPrice + '</div>');
+    
+                    $('#barcode-labels-container').append(barcodeDiv); // إضافة الملصق
+                }
+                $('#print-barcode').show();  // إظهار زر الطباعة بعد توليد الملصقات
+            } else {
+                alert("{% trans 'يرجى ملء جميع الحقول بشكل صحيح' %}");
+            }
+        });
+    
+        // دالة للطباعة عند الضغط على زر الطباعة
+        $('#print-barcode').on('click', function() {
+            var barcodeData = $('#barcode-labels-container').html();
+            var printWindow = window.open('', '_blank');
+            printWindow.document.write(`
+                <html>
+                    <head>
+                        <title>طباعة الباركود</title>
+                        <style>
+                            body {
+                                font-family: Arial, sans-serif;
+                                margin: 0;
+                                padding: 0;
+                            }
+                            .barcode-label {
+                                width: 320px;
+                                height: auto;
+                                border: 1px solid #ccc;
+                                margin: 10px;
+                                padding: 10px;
+                                text-align: center;
+                            }
+                            .price, .name, .tax-number, .item-name {
+                                margin: 5px 0;
+                            }
+                            .name { font-size: 14px; }
+                            .price { font-size: 18px; font-weight: bold; }
+                            @media print {
+                                .barcode-label {
+                                    page-break-inside: avoid;
+                                }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="barcode-labels-container">
+                            ${barcodeData}
+                        </div>
+                    </body>
+                </html>
+            `);
+            printWindow.document.close();
+            printWindow.print();
+        });
+    });
+    </script>
+    
 
 
 <!-- JavaScript لتوليد الباركود غير المكرر -->
 <script>
-  // متغير لتخزين الرقم التسلسلي
-  var currentBarcodeValue = 1000000; // القيمة الأولى للباركود
+    // متغير لتخزين الرقم التسلسلي
+    var currentBarcodeValue = 1000000; // القيمة الأولى للباركود
+    
+    // مصفوفة لتخزين الأرقام التي تم توليدها مسبقًا
+    var generatedBarcodes = [];
   
-  // مصفوفة لتخزين الأرقام التي تم توليدها مسبقًا
-  var generatedBarcodes = [];
-
-  document.getElementById('generate-barcode').addEventListener('click', function() {
-      // توليد الرقم التسلسلي للباركود
-      var barcodeValue = currentBarcodeValue;
-      
-      // التأكد من أن الباركود غير مكرر
-      while (generatedBarcodes.includes(barcodeValue)) {
-          currentBarcodeValue++; // زيادة الرقم التسلسلي
-          barcodeValue = currentBarcodeValue;
-      }
-
-      // إضافة الرقم الذي تم توليده إلى المصفوفة
-      generatedBarcodes.push(barcodeValue);
-
-      // وضع القيمة في الحقل
-      document.querySelector('input[name="barcode"]').value = barcodeValue;
-      
-      // إظهار تنبيه للمستخدم
-      alert('تم توليد الباركود: ' + barcodeValue);
-  });
-</script>
-
+    document.getElementById('generate-barcode').addEventListener('click', function() {
+        // توليد الرقم التسلسلي للباركود
+        var barcodeValue = currentBarcodeValue;
+        
+        // التأكد من أن الباركود غير مكرر
+        while (generatedBarcodes.includes(barcodeValue)) {
+            currentBarcodeValue++; // زيادة الرقم التسلسلي
+            barcodeValue = currentBarcodeValue;
+        }
+  
+        // إضافة الرقم الذي تم توليده إلى المصفوفة
+        generatedBarcodes.push(barcodeValue);
+  
+        // وضع القيمة في الحقل
+        document.querySelector('input[name="barcode"]').value = barcodeValue;
+        
+        // إظهار تنبيه للمستخدم
+        alert('تم توليد الباركود: ' + barcodeValue);
+    });
+  </script>
+  
 
 
 {% endblock content %}
 
 {% block scripts %}
 <script>
-let csrf = '{{ csrf_token }}';
- $("#id_form").on("submit",function(e){
-  e.preventDefault();
-    var form_upload = $("#id_form")[0];
-    var form_data = new FormData(form_upload);
-      $.ajax({
-        method: "post",
-        data: form_data ,
-        url:$(this).attr('action'),
-        type: 'post',
-        dataType: 'json',
-        cache: false,
-        processData: false,
-        contentType: false,
-        
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("X-CSRFToken", csrf);
-          },
-        success: function(data) {
-          
-          if(data.status=="1")
-          {
-            alert(data.message);
-            $('.datatable').DataTable().ajax.reload();
-            $('#modal-lg').modal('hide');
-            $('#id_form').trigger("reset");
-          }
-            else{
-            alert(data.error);
+    let csrf = '{{ csrf_token }}';
+    $("#id_form").on("submit",function(e){
+    e.preventDefault();
+        var form_upload = $("#id_form")[0];
+        var form_data = new FormData(form_upload);
+        $.ajax({
+            method: "post",
+            data: form_data ,
+            url:$(this).attr('action'),
+            type: 'post',
+            dataType: 'json',
+            cache: false,
+            processData: false,
+            contentType: false,
+            
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrf);
+            },
+            success: function(data) {
+            
+            if(data.status=="1")
+            {
+                alert(data.message);
+                $('.datatable').DataTable().ajax.reload();
+                $('#modal-lg').modal('hide');
+                $('#id_form').trigger("reset");
             }
-        }
-      })
- 
-    }) 
+                else{
+                alert(data.error);
+                }
+            }
+        })
     
-$(document).on('click','.edit_row',function(){
- 
-    $.ajax({
-          url: $(this).data('url'),
-          data: {'id':$(this).data('id')},
-          type: 'GET',
-          success: function (data) {
-              let resp=JSON.parse(data.data);
-              if(data.status==1){
-                  console.log(resp[0].fields)
-                  $(`input[name="id"]`).val(resp[0].pk);
-                  $('#modal-lg').modal('show');
-                  $.each(resp[0].fields,function(i,value_){
-                  if(i!="image")
-                  {
-                    $(`input[name="${i}"]`).val(value_);
-                    $(`select[name="${i}"] option[value="${value_}"]`).attr('selected','selected');
-                  }
-            });
+    }) 
 
-          }
-         else{
-          console.log(data.error);
-         }
-     },
-     error:function(data){
-     }
- });
-});
+    $(document).on('click','.edit_row',function(){
+    
+        $.ajax({
+            url: $(this).data('url'),
+            data: {'id':$(this).data('id')},
+            type: 'GET',
+            success: function (data) {
+                let resp=JSON.parse(data.data);
+                if(data.status==1){
+                    console.log(resp[0].fields)
+                    $(`input[name="id"]`).val(resp[0].pk);
+                    $('#modal-lg').modal('show');
+                    $.each(resp[0].fields,function(i,value_){
+                    if(i!="image")
+                    {
+                        $(`input[name="${i}"]`).val(value_);
+                        $(`select[name="${i}"] option[value="${value_}"]`).attr('selected','selected');
+                    }
+                });
 
-$(document).on('click','.delete_row',function(){
-
- if(confirm('{% trans "هل حقا تريد الحذف؟" %}')){
-    let id_row=$(this).data('id');
-    $.ajax({
-        url: $(this).data('url'),
-        data: {
-         'id':id_row,
-     },
-     method: 'DELETE',
-     beforeSend: function (xhr) {
-             xhr.setRequestHeader("X-CSRFToken",csrf);
-         },
-     success: function (data) {
-        
-         if(data.status==1){
-          alert(data.message)   
-       
-          $('.datatable').DataTable().ajax.reload();
-          
+            }
+            else{
+            console.log(data.error);
+            }
+        },
+        error:function(data){
         }
-        if(data.status==0)
-          alert(data.message)   
-
-      
-     },
-     error:function(data){
-     }
- });
-}
-});
-
-$(document).ready(function () {
-    var oTable = $('.datatable').dataTable({
-        // ...
-        "processing": true,
-        "serverSide": true,
-        "ajax": "{% url 'ItemsJson' %}"
     });
-    // ...
-});
+    });
 
+    $(document).on('click','.delete_row',function(){
+
+    if(confirm('{% trans "هل حقا تريد الحذف؟" %}')){
+        let id_row=$(this).data('id');
+        $.ajax({
+            url: $(this).data('url'),
+            data: {
+            'id':id_row,
+        },
+        method: 'DELETE',
+        beforeSend: function (xhr) {
+                xhr.setRequestHeader("X-CSRFToken",csrf);
+            },
+        success: function (data) {
+            
+            if(data.status==1){
+            alert(data.message)   
+        
+            $('.datatable').DataTable().ajax.reload();
+            
+            }
+            if(data.status==0)
+            alert(data.message)   
+        },
+        error:function(data){
+        }
+    });
+    }
+    });
+
+    $(document).ready(function () {
+        var oTable = $('.datatable').dataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url 'ItemsJson' %}"
+        });
+    });
 </script>
 
 {% endblock scripts %}

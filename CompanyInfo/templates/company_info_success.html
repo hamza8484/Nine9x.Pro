@@ -52,7 +52,7 @@
     <div class="container">
         <h1>{% trans "تم حفظ معلومات المؤسسة بنجاح!" %}</h1>
         <!-- رابط العودة إلى صفحة إضافة أو تعديل المعلومات -->
-        <a href="/company/add/">{% trans "عودة إلى صفحة إضافة أو تعديل المعلومات" %}</a>
+        <a href="{% url 'companyinfo:add_company_info' %}">{% trans "عودة إلى صفحة إضافة أو تعديل المعلومات" %}</a>
     </div>
 </body>
 </html>

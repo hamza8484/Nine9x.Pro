@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("قائمة سندات القبض") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <form method="get">
+        <label for="customer">{% trans "بحث بالعميل" %}:</label>
+        <input type="text" name="customer" id="customer" value="{{ request.GET.customer }}">
+        <label for="date_from">{% trans "من" %}:</label>
+        <input type="date" name="date_from" id="date_from" value="{{ request.GET.date_from }}">
+        <label for="date_to">{% trans "إلى" %}:</label>
+        <input type="date" name="date_to" id="date_to" value="{{ request.GET.date_to }}">
+        <button type="submit">{% trans "بحث" %}</button>
+    </form>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>{% trans "رقم السند" %}</th>
+                <th>{% trans "العميل" %}</th>
+                <th>{% trans "رصيد العميل" %}</th>
+                <th>{% trans "المبلغ القبض" %}</th>
+                <th>{% trans "طريقة الدفع" %}</th>
+                <th>{% trans "تاريخ القبض" %}</th>
+                <th>{% trans "المستخدم" %}</th>
+                <th>{% trans "ملاحظات" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for receipt in receipts %}
+            <tr>
+                <td>{{ receipt.receipt_number }}</td>
+                <td>{{ receipt.customer.name_lo }}</td>
+                <td>{{ receipt.customer_balance }}</td>
+                <td>{{ receipt.amount_received }}</td>
+                <td>{{ receipt.payment_method }}</td>
+                <td>{{ receipt.receipt_date }}</td>
+                <td>{{ receipt.user.username }}</td>
+                <td>{{ receipt.notes }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div>
+        <a href="{% url 'receipt_form' %}">{% trans "إضافة سند قبض جديد" %}</a>
+    </div>
+</body>
+</html>
+{% endblock content %}

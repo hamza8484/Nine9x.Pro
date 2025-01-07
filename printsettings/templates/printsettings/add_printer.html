@@ -85,7 +85,11 @@
         <td>{{ printer.model }}</td>
         <td><span class="printer-ip">{{ printer.ip_address }}</span></td>
         <td class="printer-status">
-          {{ printer.is_connected|yesno:{% trans "متصل,غير متصل" % } }}
+          {% if printer.is_connected %}
+            {% trans "متصل" %}
+          {% else %}
+              {% trans "غير متصل" %}
+          {% endif %}
         </td>
         <td><button class="btn btn-info test-btn" data-id="{{ printer.id }}">{% trans  "اختبار" %}</button></td>
         <td><button class="btn btn-success save-btn" style="display: none;">{% trans  "حفظ" %}</button></td>

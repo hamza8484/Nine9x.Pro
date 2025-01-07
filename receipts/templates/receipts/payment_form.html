@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("إضافة سند صرف") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<body>
+    <h1>{% trans "إضافة سند صرف" %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <!-- حقل رصيد المورد -->
+        <label for="supplier_balance">{% trans "رصيد المورد" %}:</label>
+        <input type="text" id="supplier_balance" name="supplier_balance" readonly>
+
+        <button type="submit">{% trans "حفظ" %}</button>
+    </form>
+
+    <br>
+    <a href="{% url 'payment_list' %}">{% trans "رجوع إلى قائمة سندات الصرف" %}</a>
+</body>
+</html>
+
+<script>
+    // دالة لجلب رصيد المورد عند اختيار المورد
+    $('#id_supplier').on('change', function() {
+        var supplierId = $(this).val();  // الحصول على ID المورد من الحقل
+
+        if (supplierId) {
+            // إرسال طلب AJAX لجلب الرصيد
+            $.ajax({
+                url: '{% url "get_supplier_balance" 0 %}'.replace('0', supplierId),  // استبدال 0 بـ ID المورد
+                method: 'GET',
+                success: function(data) {
+                    if (data.supplier_balance) {
+                        // تحديث حقل الرصيد في النموذج
+                        $('#supplier_balance').val(data.supplier_balance);
+                    } else {
+                        alert('{% trans "لم يتم العثور على رصيد المورد" %}');
+                    }
+                },
+                error: function() {
+                    alert('{% trans "حدث خطأ أثناء جلب الرصيد" %}');
+                }
+            });
+        }
+    });
+</script>
+{% endblock content %}

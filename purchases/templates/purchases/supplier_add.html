@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% load i18n %}  <!-- تحميل الترجمة -->
+
+{% block title %}
+    {% trans "شاشة الموردين" %}
+{% endblock title %}
+
+{% block content %}
+   
+  <!-- /.card-header -->
+  <div class="card-body">
+    <form method="POST" role="form" id="id_form" action="{% url 'add_supplier' %}">
+        <input type="text" name="id" class="hidden" style="display: contents;">
+        {% csrf_token %}
+
+        {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+                <div id="form_errors">
+                    {% for key, value in form.errors.items %}
+                        <strong>{{ value }}</strong>
+                    {% endfor %}
+                </div>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+        <!-- الاسم المحلي و الاسم الاجنبي -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الاسم ع" %}</label>
+                    {{ form.name_lo }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الاسم E" %}</label>
+                    {{ form.name_fk }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- الرقم الضريبي -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الرقم الضريبي" %}</label>
+                    {{ form.VatNumber }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- الهاتف والجوال -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الهاتف" %}</label>
+                    {{ form.TelPhone }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الجوال" %}</label>
+                    {{ form.phone }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الرصيد" %}</label>
+                    {{ form.balance }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- العنوان -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "العنوان" %}</label>
+                    {{ form.Address }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- الحالة -->
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>{% trans "الحالة" %}</label>
+                    {{ form.is_stop }}  <!-- تعديل هنا -->
+                </div>
+            </div>
+        </div>
+
+        <!-- زر حفظ -->
+        <div class="form-group col-sm-6 ">
+            <button type="submit" id="btnsubmit" class="col-md-12 btn btn-primary">{% trans "حفظ" %}</button><br><br>
+        </div>
+        <br>
+        <a href="{% url 'suppliers_list' %}"> {% trans "  الذهاب إلى قائمة الموردين  " %}  </a>
+    </form>
+</div>
+    
+              
+
+{% endblock content %}
+
+
+{% block scripts %}
+
+<script>
+    let csrf = '{{ csrf_token }}';
+
+    // Submit the form via AJAX for creating/updating a supplier
+    $("#id_form").on("submit", function(e) {
+        e.preventDefault(); // منع الإرسال التقليدي للنموذج
+        $.ajax({
+            method: "POST",  // إرسال البيانات عبر POST
+            data: $(this).serialize(),  // تجميع البيانات من النموذج
+            url: $(this).attr('action'),  // تحديد الـ URL للتعامل مع الـ POST
+            beforeSend: function(xhr) {
+                xhr.setRequestHeader("X-CSRFToken", csrf); // إضافة CSRF Token
+            },
+            success: function(data) {
+                console.log("AJAX Success Response:", data);  // طباعة الاستجابة في الـ console لتفحصها
+                if (data.status == "1") {
+                    alert(data.message); // إذا كانت عملية الإضافة ناجحة
+                    $('.datatable').DataTable().ajax.reload();  // تحديث الجدول
+                    $('#modal-lg').modal('hide'); // إغلاق نافذة المودال
+                    $('#id_form').trigger("reset"); // إعادة تعيين النموذج
+                } else {
+                    alert(data.error || 'حدث خطأ في إضافة المورد');  // إذا حدث خطأ في الإضافة
+                }
+            },
+            error: function(xhr, status, error) {
+                console.log("Error in AJAX Request:", status, error);  // طباعة الأخطاء في الـ console
+                alert("حدث خطأ أثناء محاولة الإضافة. حاول مرة أخرى.");
+            }
+        });
+    });
+
+    // Edit row via AJAX
+    $(document).on('click', '.edit_row', function() {
+        $.ajax({
+            url: $(this).data('url'),
+            data: {'id': $(this).data('id')},
+            type: 'GET',
+            success: function(data) {
+                console.log("Edit Success Response:", data);  // طباعة الاستجابة في الـ console
+                if (data.status == 1) {
+                    let resp = JSON.parse(data.data);
+                    $(`input[name="id"]`).val(resp[0].pk); // تعبئة ID المورد
+                    $.each(resp[0].fields, function(i, value) {
+                        $(`input[name="${i}"]`).val(value); // تعبئة الحقول النصية
+                        if ($(`select[name="${i}"]`).length > 0) {
+                            $(`select[name="${i}"] option[value="${value}"]`).attr('selected', 'selected'); // تعبئة الحقول المكونة من Select
+                        }
+                    });
+                    $('#modal-lg').modal('show'); // إظهار نافذة التعديل
+                } else {
+                    console.log(data.error);
+                }
+            },
+            error: function(data) {
+                console.log("Error in Edit AJAX Request:", data);  // طباعة الأخطاء في الـ console
+            }
+        });
+    });
+
+    // Delete row via AJAX
+    $(document).on('click', '.delete_row', function() {
+        if (confirm('{% trans "هل حقا تريد الحذف؟" %}')) {
+            let id_row = $(this).data('id');
+            $.ajax({
+                url: $(this).data('url'),
+                data: {
+                    'id': id_row
+                },
+                type: 'POST',
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader("X-CSRFToken", csrf);
+                },
+                success: function(response) {
+                    console.log("Delete Success Response:", response);  // طباعة الاستجابة في الـ console
+                    alert(response.message);
+                    $('.datatable').DataTable().ajax.reload(); // إعادة تحميل البيانات في الجدول
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error in Delete AJAX Request:", error);  // طباعة الأخطاء في الـ console
+                }
+            });
+        }
+    });
+
+    // إعداد DataTable مع تحميل البيانات عبر الـ AJAX
+    $(document).ready(function() {
+        $('#example').DataTable({
+            "processing": true,
+            "serverSide": true,
+            "ajax": "{% url 'SupplierJson' %}",
+            "columns": [
+                { "data": "id", "name": "id", "searchable": false },
+                { "data": "name_lo", "name": "name_lo" },
+                { "data": "name_fk", "name": "name_fk" },
+                { "data": "VatNumber", "name": "VatNumber" },
+                { "data": "TelPhone", "name": "TelPhone" },
+                { "data": "phone", "name": "phone" },
+                { "data": "Address", "name": "Address" },
+                { "data": "balance", "name": "balance" },
+                { "data": "is_stop", "name": "is_stop" },
+                { "data": "actions", "name": "actions", "sortable": false }
+            ]
+        });
+    });
+</script>
+
+
+{% endblock scripts %}

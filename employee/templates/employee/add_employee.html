@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("إضافة موظف جديد") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<body>
+    <div class="container mt-12">
+         <!-- عرض رسالة التأكيد بعد الحفظ -->
+         {% if employee_number %}
+         <div class="alert alert-success">
+             {{ _("تم حفظ الموظف بنجاح. رقم الموظف هو: ") }} {{ employee_number }}
+         </div>
+         {% endif %}
+      <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <!-- عرض الأخطاء الخاصة بالنموذج -->
+        {% if form.errors %}
+            <div class="alert alert-danger">
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+            <!-- استخدم form-row و col لتنسيق الحقول بجانب بعضها -->
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="name">{% trans "الاسم" %}</label>
+                    {{ form.name|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="email">{% trans "البريد الالكتروني" %}</label>
+                    {{ form.email|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="age">{% trans "العمر" %}</label>
+                    {{ form.age|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="phone_number">{% trans "الهاتف" %}</label>
+                    {{ form.phone_number|add_class:"form-control" }}
+                </div>
+
+                <div class="form-group col-md-3">
+                    <label for="mobile">{% trans "الجوال" %}</label>
+                    {{ form.mobile_number|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="id_card_number">{% trans "رقم الهوية" %}</label>
+                    {{ form.id_card_number|add_class:"form-control" }}
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <label for="job_title">{% trans "الوظيفة" %}</label>
+                    {{ form.job_title|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="birth_date">{% trans "تاريخ الميلاد" %}</label>
+                    {{ form.birth_date|add_class:"form-control" }}
+                </div>
+                
+                <div class="form-group col-md-2">
+                    <label for="marital_status">{% trans "الحالة الاجتماعية" %}</label>
+                    {{ form.marital_status|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="gender">{% trans "الجنس" %}</label>
+                    {{ form.gender|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="nationality">{% trans "الجنسية" %}</label>
+                    {{ form.nationality|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="hiring_date">{% trans "تاريخ التوظيف" %}</label>
+                    {{ form.hiring_date|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="department">{% trans "القسم" %}</label>
+                    {{ form.department|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="base_salary">{% trans "الراتب" %}</label>
+                    {{ form.base_salary|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="allowances">{% trans "البدلات" %}</label>
+                    {{ form.allowances|add_class:"form-control" }}
+                </div>
+                <div class="form-group col-md-2">
+                    <label for="employment_status">{% trans "حالة الموظف" %}</label>
+                    {{ form.employment_status|add_class:"form-control" }}
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="photo">{% trans "صورة الموظف" %}</label>
+                        {{ form.photo|add_class:"form-control" }}
+                    </div>
+                </div>
+            </div>    
+       
+        <div class="form-row">
+            <button type="submit" class="btn btn-primary">{% trans "حفظ" %}</button>
+        </div>
+        <div class="form-row">
+            <a href="{% url 'employee_list' %}" class="btn btn-secondary mt-3">{% trans "إلى قائمة الموظفين" %}</a>
+        </div>
+    </form>
+    </div> 
+</body>
+
+{% endblock content %}

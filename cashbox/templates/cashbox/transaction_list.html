@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("قائمة الحركات المالية") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+<body>
+    <!-- جدول الحركات المالية -->
+    <table border="1" cellpadding="8" cellspacing="0" width="100%" dir="rtl">
+        <thead>
+            <tr>
+                <th>{% trans "تسلسل" %}</th>
+                <th>{% trans "اسم الخزنة" %}</th>
+                <th>{% trans "نوع المعاملة" %}</th>
+                <th>{% trans "المبلغ" %}</th>
+                <th>{% trans "التاريخ" %}</th>
+                <th>{% trans "الوصف" %}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for transaction in transactions %}
+                <tr>
+                    <td align="center">{{ forloop.counter }}</td>
+                    <td>{{ transaction.safe.name }}</td>
+                    <td>{{ transaction.get_transaction_type_display }}</td>
+                    <td align="right">{{ transaction.amount }}</td>
+                    <td>{{ transaction.date }}</td>
+                    <td>{{ transaction.description }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- رابط لإضافة حركة مالية جديدة -->
+    <br>
+    <a href="{% url 'add_transaction' %}">{% trans "إضافة حركة مالية جديدة" %}</a>
+
+</body>
+</html>
+{% endblock content %}

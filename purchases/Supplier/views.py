@@ -1,71 +1,81 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django_datatables_view.base_datatable_view import BaseDatatableView
-from django.utils.html import escape
-from django.views.generic.edit import CreateView
-from django.http import JsonResponse, HttpResponse
-from django.contrib.auth import authenticate
-from django.contrib.auth import views as auth_views
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse, JsonResponse
 from django.views import View
-from django.utils.translation import gettext_lazy as _  # استيراد _() للترجمة
-from purchases.models import Supplier
-from .forms import SupplierForm
 from django.core import serializers
-from django.shortcuts import get_object_or_404
-from django.http import QueryDict
-from django.db.models import Q
+from .models import Supplier
+from .forms import SupplierForm
 
+# عرض قائمة الموردين
+def supplier_list(request):
+    suppliers = Supplier.objects.all()  # جلب كل الموردين من قاعدة البيانات
+    return render(request, 'purchases/Supplier/suppliers_list.html', {'suppliers': suppliers})
 
-
-
-class Supplier_view(CreateView):
-   
-    def get(self, request, *args, **kwargs):
-        if 'id' in request.GET.keys():
-            supplier_id = request.GET.get('id')
-            supplier = Supplier.objects.filter(pk=supplier_id)
-            result = {'status': 1, 'data': serializers.serialize('json', supplier)}
-            return JsonResponse(result)
+# عرض وتعديل بيانات الموردين أو إضافة مورد جديد
+class SupplierView(View):
+    def get(self, request, id=None):
+        if id:
+            # إذا كان هناك id في الطلب، عرض تفاصيل المورد
+            supplier = get_object_or_404(Supplier, id=id)
+            return render(request, 'purchases/Supplier/supplier_detail.html', {'supplier': supplier})
         else:
+            # إذا لم يكن هناك id، عرض قائمة الموردين
             suppliers = Supplier.objects.all()
-            form = SupplierForm()
-            context = {
-                "Items": suppliers,
-                "filed": form
-            }
-            return render(request, 'purchases/Supplier/Supplier.html', context)
+            return render(request, 'purchases/Supplier/suppliers_list.html', {'suppliers': suppliers})
 
-    def post(self, request, *args, **kwargs):
-        # تحقق من تكرار الاسم قبل الحفظ أو التعديل
-        name_lo = request.POST.get('name_lo')
-        if Supplier.objects.filter(name_lo=name_lo).exists() and not request.POST.get('id'):
-            return JsonResponse({'status': 0, 'error': _('اسم المورد موجود بالفعل!')})
-        
-        if request.POST.get('id'):
-            supplier = get_object_or_404(Supplier, pk=int(request.POST.get('id')))
+    def post(self, request, id=None):
+        # إذا كان id موجودًا، قم بتعديل المورد، وإذا لم يكن موجودًا، قم بإضافة مورد جديد
+        if id:
+            supplier = get_object_or_404(Supplier, id=id)
             form = SupplierForm(request.POST, instance=supplier)
         else:
             form = SupplierForm(request.POST)
-        
-    
+
         if form.is_valid():
-            supplier = form.save()
-            return JsonResponse({'status': 1, 'message': _('تمت عملية الحفظ')})
-        else:
-            return JsonResponse({'status': 0, 'error': form.errors.as_json()})
+            form.save()
+            return redirect('supplier_list')  # بعد الحفظ، ارجع إلى قائمة الموردين
+        return render(request, 'purchases/Supplier/supplier_form.html', {'form': form})
 
-    def delete(self, request, *args, **kwargs):
-        pk = int(request.body.decode('utf-8').split('=')[-1])
-        if pk:
+    def delete(self, request, id=None):
+        if id:
             try:
-                supplier = get_object_or_404(Supplier, pk=pk)
+                supplier = get_object_or_404(Supplier, id=id)
                 supplier.delete()
-                return JsonResponse({'status': 1, 'message': _('تمت عملية الحذف')})
+                return JsonResponse({'status': 1, 'message': 'تمت عملية الحذف'})
             except Supplier.DoesNotExist:
-                return JsonResponse({'status': 0, 'message': _('المورد غير موجود')})
-        return JsonResponse({'status': 0, 'message': _('لا يوجد مورد')})
+                return JsonResponse({'status': 0, 'message': 'المورد غير موجود'})
+        return JsonResponse({'status': 0, 'message': 'لا يوجد مورد'})
 
+# جلب بيانات الموردين بتنسيق JSON
+class SupplierJson(View):
+    def get(self, request):
+        suppliers = Supplier.objects.all()
+        suppliers_data = list(suppliers.values())  # تحويل البيانات إلى قائمة
+        return JsonResponse(suppliers_data, safe=False)
 
+# دالة إضافة الرصيد
+def add_balance_view(request, supplier_id, amount):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    supplier.add_balance(amount)  # تأكد أن هذه الدالة موجودة في النموذج
+    return HttpResponse(f"تم إضافة {amount} ريال إلى رصيد {supplier.name_lo}.")
+
+# دالة خصم الرصيد
+def subtract_balance_view(request, supplier_id, amount):
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    supplier.subtract_balance(amount)  # تأكد أن هذه الدالة موجودة في النموذج
+    return HttpResponse(f"تم خصم {amount} ريال من رصيد {supplier.name_lo}.")
+
+# الدالة الخاصة بنموذج إضافة رصيد
+def add_balance_form_view(request):
+    if request.method == 'POST':
+        form = AddBalanceForm(request.POST)
+        if form.is_valid():
+            supplier = form.add_balance()
+            return redirect('supplier_detail', supplier_id=supplier.id)
+    else:
+        form = AddBalanceForm()
+    return render(request, 'add_balance.html', {'form': form})
+
+# دالة عرض الموردين باستخدام الجداول
 class SupplierJson(BaseDatatableView):
     model = Supplier
 
@@ -114,30 +124,4 @@ class SupplierJson(BaseDatatableView):
             '''
         # يمكن إضافة حالات أخرى لأعمدة أخرى إذا لزم الأمر
         return super().render_column(row, column)
-
-# دالة إضافة الرصيد
-def add_balance_view(request, supplier_id, amount):
-    supplier = get_object_or_404(Supplier, id=supplier_id)
-    supplier.add_balance(amount)
-    return HttpResponse(f"تم إضافة {amount} ريال إلى رصيد {supplier.name_lo}.")
-
-# دالة خصم الرصيد
-def subtract_balance_view(request, supplier_id, amount):
-    supplier = get_object_or_404(Supplier, id=supplier_id)
-    supplier.subtract_balance(amount)
-    return HttpResponse(f"تم خصم {amount} ريال من رصيد {supplier.name_lo}.")
-
-# الدالة الخاصة بنموذج إضافة رصيد
-def add_balance_form_view(request):
-    if request.method == 'POST':
-        form = AddBalanceForm(request.POST)
-        if form.is_valid():
-            supplier = form.add_balance()
-            return redirect('supplier_detail', supplier_id=supplier.id)
-    else:
-        form = AddBalanceForm()
-    return render(request, 'add_balance.html', {'form': form})
-
-def supplier_list(request):
-    suppliers = Supplier.objects.all()
-    return render(request, 'purchases/Supplier/supplier_list.html', {'suppliers': suppliers})
+    

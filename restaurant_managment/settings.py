@@ -38,17 +38,19 @@ INSTALLED_APPS = [
     "sales",
     "parent",  
     "printsettings",
-    "CompanyInfo", 
+    'companyinfo.apps.CompanyInfoConfig',
     "widget_tweaks",  
     "TaxApp", 
     "expense", 
     "support",
     "channels",
     "corsheaders",
-    "payments",
+    'employee',
     "rest_framework",
-    #"employees",
-     
+    "cashbox",
+    "receipts",
+    
+    
 ]
 
 MIDDLEWARE = [

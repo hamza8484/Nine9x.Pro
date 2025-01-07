@@ -1,21 +1,12 @@
 from django.urls import path
-from .views import Supplier_view, SupplierJson
-from . import views
-
+from .views import SupplierView, supplier_list, SupplierJson, add_balance_view, subtract_balance_view, add_balance_form_view
 
 urlpatterns = [
-    path('list/', views.supplier_list, name='supplier_list'),
-    # صفحة المورد
-    path('supplier/', Supplier_view.as_view(), name='Supplier'),
-    
-    # رابط جلب البيانات بتنسيق JSON
-    path('SupplierJson/', SupplierJson.as_view(), name='SupplierJson'),
-    
-    # رابط التعديل: يجب أن يتطابق مع الرابط في الجافاسكربت
-    path('supplier/edit/<int:id>/', Supplier_view.as_view(), name='edit_supplier'),
-    
-    # رابط الحذف: يجب أن يتطابق مع الرابط في الجافاسكربت
-    path('supplier/delete/<int:id>/', Supplier_view.as_view(), name='delete_supplier'),
-    
-    
+    path('supplier/add/', SupplierView.as_view(), name='Supplier'),  # إضافة مورد
+    path('supplier/<int:id>/', SupplierView.as_view(), name='supplier_detail'),  # عرض وتعديل مورد
+    path('supplier/<int:id>/delete/', SupplierView.as_view(), name='supplier_delete'),  # حذف مورد
+    path('supplier/json/', SupplierJson.as_view(), name='supplier_json'),  # جلب الموردين بتنسيق JSON
+    path('supplier/add_balance/<int:supplier_id>/<int:amount>/', add_balance_view, name='add_balance'),  # إضافة رصيد
+    path('supplier/subtract_balance/<int:supplier_id>/<int:amount>/', subtract_balance_view, name='subtract_balance'),  # خصم رصيد
+    path('supplier/add_balance_form/', add_balance_form_view, name='add_balance_form'),  # نموذج إضافة رصيد
 ]

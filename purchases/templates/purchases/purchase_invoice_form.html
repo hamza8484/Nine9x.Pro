@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء فاتورة مشتريات</title>
+</head>
+<body>
+    <h1>إنشاء فاتورة مشتريات</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ invoice_form.as_p }}
+        
+        <h3>تفاصيل الفاتورة:</h3>
+        <div id="invoice-details">
+            <div class="detail-item">
+                <label>الصنف:</label>
+                <select name="items">
+                    {% for item in items %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+                <!-- Add other fields like unit, quantity, price, discount here -->
+            </div>
+        </div>
+        
+        <button type="submit">حفظ الفاتورة</button>
+    </form>
+</body>
+</html>

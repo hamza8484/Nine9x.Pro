@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("تفاصيل الموظف") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+
+    <style>
+        /* تنسيق صفحة الطباعة */
+        @media print {
+            /* إخفاء الأزرار و footer أثناء الطباعة */
+            .print-button, .footer ,.Back{
+                display: none;
+            }
+        }
+
+     
+    </style>
+
+<body style="font-family: Arial, sans-serif; direction: rtl; background-color: #f9f9f9; margin: 0; padding: 0;">
+
+    <div style="max-width: 1200px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+        <div style="display: flex; justify-content: space-between;">
+
+            <!-- قسم عرض تفاصيل الموظف -->
+            <div style="width: 80%; padding: 20px;">
+                <table border="1" style="width: 100%; border-collapse: collapse; text-align: right; border-radius: 5px;">
+                    <tr>
+                        <th style="padding: 10px; background-color: #3c8dbc; color: white;">{% trans "رقم الموظف" %}</th>
+                        <td style="padding: 10px;">{{ employee.employee_number }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "اسم الموظف" %}</th>
+                        <td style="padding: 10px;">{{ employee.name }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "العمر" %}</th>
+                        <td style="padding: 10px;">{{ employee.age }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "رقم الجوال" %}</th>
+                        <td style="padding: 10px;">{{ employee.mobile_number }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "رقم الهاتف" %}</th>
+                        <td style="padding: 10px;">{{ employee.phone_number }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "البريد الإلكتروني" %}</th>
+                        <td style="padding: 10px;">{{ employee.email }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "المسمى الوظيفي" %}</th>
+                        <td style="padding: 10px;">{{ employee.job_title }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "تاريخ الميلاد" %}</th>
+                        <td style="padding: 10px;">{{ employee.birth_date }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "رقم البطاقة/الإقامة" %}</th>
+                        <td style="padding: 10px;">{{ employee.id_card_number }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "الحالة الاجتماعية" %}</th>
+                        <td style="padding: 10px;">{{ employee.marital_status }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "الجنس" %}</th>
+                        <td style="padding: 10px;">{{ employee.gender }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "الجنسية" %}</th>
+                        <td style="padding: 10px;">{{ employee.nationality }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "تاريخ التعيين" %}</th>
+                        <td style="padding: 10px;">{{ employee.hiring_date }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "القسم" %}</th>
+                        <td style="padding: 10px;">{{ employee.department }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "الراتب الأساسي" %}</th>
+                        <td style="padding: 10px;">{{ employee.base_salary }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "البدلات" %}</th>
+                        <td style="padding: 10px;">{{ employee.allowances }}</td>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; background-color: #f2f2f2;">{% trans "حالة الموظف" %}</th>
+                        <td style="padding: 10px;">{{ employee.employment_status }}</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- قسم عرض صورة الموظف -->
+            <div style="width: 25%; height: 100%; text-align: center; padding: 10px; border: 2px solid #ddd; border-radius: 8px; overflow: hidden; background-color: #f9f9f9; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                <h3>{% trans "صورة الموظف" %}</h3>
+                {% if employee.photo %}
+                    <img src="{{ employee.photo.url }}" alt="{% trans "صورة الموظف" %}" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                    <span>{% trans "لا توجد صورة" %}</span>
+                {% endif %}
+            </div>
+
+        </div>
+        
+        <!-- زر الطباعة -->
+        <div class="print-button">
+            <button onclick="window.print()" style="padding: 10px 20px; background-color: #3c8dbc; color: white; border: none; border-radius: 5px;">
+                {% trans "طباعة النموذج" %}
+            </button>
+        </div>
+
+        <div class="Back" style="text-align: center; margin-top: 20px;">
+            <a href="{% url 'employee_list' %}" style="text-decoration: none; padding: 10px 20px; background-color: #3c8dbc; color: white; border-radius: 5px;">{% trans "الرجوع إلى قائمة الموظفين" %}</a>
+        </div>
+    </div>
+
+</body>
+
+{% endblock content %}

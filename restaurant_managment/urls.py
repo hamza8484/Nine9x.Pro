@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from . import views
 from django.contrib.auth import views as auth_views
 from users.views import CustomLoginView, ResetPasswordView, ChangePasswordView
-# from CompanyInfo import views
+
 from users.forms import LoginForm
 
 
@@ -15,15 +15,18 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('', include('configrate.urls')),
     path('', include('input.urls')),
-    path('', include('purchases.urls')),
-    path('api/', include('payments.urls')),
+   
+    path('purchases/', include('purchases.urls')),
     path('', include('sales.urls')),
     path('', include('pos.urls')),
     path('api/', include('TaxApp.urls', namespace='taxapp')),
     path('support/', include('support.urls')),
-    #path('employees/', include('employees.urls')),
+    path('employees/', include('employee.urls')),
+    path('cashbox/', include('cashbox.urls')),
     
-    path('company/', include('CompanyInfo.urls', namespace='CompanyInfo')),  
+    
+    path('company/', include('companyinfo.urls',namespace='CompanyInfo')),
+    path('receipts/', include('receipts.urls')),
     path('tax/', include('TaxApp.urls', namespace='TaxApp')), 
     path('expense/', include('expense.urls')),  # إضافة روابط المصروفات
     path('support/', include('support.urls')),

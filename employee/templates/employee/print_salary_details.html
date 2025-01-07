@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}
+    {{ _("تسليم الراتب") }}
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <h4>{% trans 'تفاصيل تسليم الراتب' %}</h4>
+        <table class="table table-bordered">
+            <tr>
+                <th>{% trans 'اسم الموظف' %}</th>
+                <td>{{ payment.employee.name }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'الراتب الأساسي' %}</th>
+                <td>{{ payment.salary }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'البدلات' %}</th>
+                <td>{{ payment.allowances }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'الاستحقاقات' %}</th>
+                <td>{{ payment.accruals }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'الاستقطاعات' %}</th>
+                <td>{{ payment.deductions }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'إجمالي الراتب' %}</th>
+                <td>{{ payment.total_salary }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'تاريخ الدفع' %}</th>
+                <td>{{ payment.payment_date }}</td>
+            </tr>
+            <tr>
+                <th>{% trans 'تم الدفع' %}</th>
+                <td>{% if payment.paid %}{% trans 'نعم' %}{% else %}{% trans 'لا' %}{% endif %}</td>
+            </tr>
+        </table>
+
+        <!-- زر للطباعة -->
+        <button onclick="window.print()" class="btn btn-success">{% trans 'طباعة' %}</button>
+    </div>
+{% endblock %}

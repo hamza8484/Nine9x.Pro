@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("قائمة تسليم الرواتب") }}
+{% endblock title %}
+
+{% block content %}
+
+    <!-- جدول تسليم الرواتب -->
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>{% trans 'تسلسل' %}</th>
+                <th>{% trans 'الموظف' %}</th>
+                <th>{% trans 'الراتب' %}</th>
+                <th>{% trans 'البدلات' %}</th>
+                <th>{% trans 'استحقاق' %}</th>
+                <th>{% trans 'استقطاع' %}</th>
+                <th>{% trans 'اجمالي الراتب' %}</th>
+                <th>{% trans 'تاريخ الدفع' %}</th>
+                <th>{% trans 'الحالة' %}</th>
+                <th>{% trans 'طباعة' %}</th> <!-- عمود الطباعة -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for payment in page_obj %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ payment.employee.name }}</td>
+                    <td>{{ payment.salary }}</td>
+                    <td>{{ payment.allowances }}</td>
+                    <td>{{ payment.accruals }}</td>
+                    <td>{{ payment.deductions }}</td>
+                    <td>{{ payment.total_salary }}</td>
+                    <td>{{ payment.payment_date }}</td>
+                    <td>{% if payment.paid %}{% trans 'نعم' %}{% else %}{% trans 'لا' %}{% endif %}</td>
+                    <td>
+                        <!-- زر الطباعة -->
+                        <a href="{% url 'print_salary_details' payment.id %}" class="btn btn-primary btn-sm">{% trans 'طباعة' %}</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="10">{% trans 'لا توجد بيانات لعرضها' %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Pagination Controls -->
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; {% trans 'الأول' %}</a>
+                <a href="?page={{ page_obj.previous_page_number }}">{% trans 'السابق' %}</a>
+            {% endif %}
+
+            <span class="current">
+                {% trans 'الصفحة' %} {{ page_obj.number }} {% trans 'من' %} {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">{% trans 'التالي' %}</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">{% trans 'الأخير' %} &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endblock %}

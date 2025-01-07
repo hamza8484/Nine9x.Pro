@@ -2,6 +2,7 @@ from django import forms
 from purchases.models import Supplier
 from django.utils.translation import gettext_lazy as _  # استيراد _() للترجمة
 
+
 class SupplierForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(SupplierForm, self).__init__(*args, **kwargs)
@@ -22,7 +23,7 @@ class SupplierForm(forms.ModelForm):
             'class': 'formset-field form-control'})
         self.fields['balance'].widget.attrs.update({
             'class': 'formset-field form-control'})
-       
+    
         
         # تطبيق الترجمة على أسماء الحقول (labels)
         self.fields['name_lo'].label = _('اسم المورد (باللغة المحلية)')
@@ -37,6 +38,7 @@ class SupplierForm(forms.ModelForm):
     class Meta:
         model = Supplier
         fields = "__all__"
+
 
 class AddBalanceForm(forms.Form):
     supplier_id = forms.IntegerField()

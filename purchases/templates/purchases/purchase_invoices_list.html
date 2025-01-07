@@ -1,0 +1,29 @@
+<!-- purchase_invoices_list.html -->
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>عرض فواتير المشتريات</title>
+</head>
+<body>
+    <h1>عرض فواتير المشتريات</h1>
+    <table>
+        <tr>
+            <th>رقم الفاتورة</th>
+            <th>تاريخ الفاتورة</th>
+            <th>المورد</th>
+            <th>إجمالي الفاتورة</th>
+            <th>عرض التفاصيل</th>
+        </tr>
+        {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice.invoice_code }}</td>
+            <td>{{ invoice.date }}</td>
+            <td>{{ invoice.supplier.name }}</td>
+            <td>{{ invoice.total_value }}</td>
+            <td><a href="{% url 'purchase_invoice_success' invoice_code=invoice.invoice_code %}">عرض التفاصيل</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

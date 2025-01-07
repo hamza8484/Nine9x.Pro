@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>فاتورة مشتريات</title>
+</head>
+<body>
+    <h1>فاتورة مشتريات</h1>
+    
+    <p>رقم الفاتورة: {{ invoice.invoice_code }}</p>
+    <p>تاريخ الفاتورة: {{ invoice.date }}</p>
+    <p>المورد: {{ invoice.supplier.name }}</p>
+    <p>طريقة الدفع: {{ invoice.get_payment_method_display }}</p>
+    <p>إجمالي الفاتورة: {{ invoice.total_value }}</p>
+
+    <h3>تفاصيل الفاتورة:</h3>
+    <table>
+        <tr>
+            <th>الصنف</th>
+            <th>الكمية</th>
+            <th>السعر</th>
+            <th>الخصم</th>
+            <th>المجموع</th>
+        </tr>
+        {% for detail in details %}
+        <tr>
+            <td>{{ detail.Items.name }}</td>
+            <td>{{ detail.quantity }}</td>
+            <td>{{ detail.price }}</td>
+            <td>{{ detail.discount }}</td>
+            <td>{{ detail.total }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

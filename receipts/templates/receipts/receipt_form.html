@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load widget_tweaks %}
+{% load i18n %}
+
+{% block title %}
+    {{ _("إضافة سند قبض") }}
+{% endblock title %}
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% trans "حفظ" %}</button>
+    </form>
+
+    <br>
+    <a href="{% url 'receipt_list' %}">{% trans "رجوع إلى قائمة سندات القبض" %}</a>
+</body>
+</html>
+{% endblock content %}

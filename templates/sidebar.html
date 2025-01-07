@@ -20,6 +20,17 @@
         </ul>
       </li>
 
+      <!-- الخزنة -->
+      <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-print"></i><p>{% trans "إدارة الخزنة" %}<i class="fas fa-angle-left right"></i></p></a>
+        <ul class="nav nav-treeview">
+          <li class="nav-item"><a href="{% url 'add_safe' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "إضافة الخزنة" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'safe_list' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "عرض الخزائن" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'add_transaction' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "إضافة حركة مالية" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'transaction_list' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans "عرض العمليات" %}</p></a></li>
+        </ul>
+      </li>
+
       <!-- الطابعات -->
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link"><i class="nav-icon fas fa-print"></i><p>{% trans "الطابعات" %}<i class="fas fa-angle-left right"></i></p></a>
@@ -33,8 +44,10 @@
        <li class="nav-item has-treeview">
         <a href="#" class="nav-link"><i class="nav-icon fas fa-print"></i><p>{% trans "الموظفين" %}<i class="fas fa-angle-left right"></i></p></a>
         <ul class="nav nav-treeview">
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " إضافة موظف " %}</p></a></li>
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " قائمة الموظفين " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'add_employee' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " إضافة موظف " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'employee_list' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " قائمة الموظفين " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'create_salary_payment' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " تسليم الرواتب  " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'salary_payment_list' %}" class="nav-link"><i class="fas fa-print nav-icon"></i><p>{% trans " قائمة تسليم الرواتب  " %}</p></a></li>
         </ul>
       </li>
 
@@ -57,15 +70,6 @@
           <li class="nav-item"><a href="{% url 'category_view' %}" class="nav-link"><i class="fas fa-tags nav-icon"></i><p>{% trans "إضافة الأقسام" %}</p></a></li>
         </ul>
       </li>
-
-      <!-- إعدادات الباركود -->
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link"><i class="nav-icon fas fa-barcode"></i><p>{% trans "إعدادات الباركود" %}<i class="fas fa-angle-left right"></i></p></a>
-        <ul class="nav nav-treeview">
-          <li class="nav-item"><a href="#" class="nav-link"><i class="fas fa-cogs nav-icon"></i><p>{% trans "إعدادات طباعة الباركود" %}</p></a></li>
-        </ul>
-      </li>
-
       <!-- الموردين والعملاء -->
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link">
@@ -73,33 +77,32 @@
           <p>{% trans "الموردين/العملاء" %}<i class="fas fa-angle-left right"></i></p>
         </a>
         <ul class="nav nav-treeview">
-          <li class="nav-item"><a href="{% url 'Supplier' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "الموردين" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'add_supplier' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "الموردين" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'suppliers_list' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "عرض الموردين" %}</p></a></li>
+          
           <li class="nav-item"><a href="{% url 'add_customer' %}" class="nav-link"><i class="fas fa-user nav-icon"></i><p>{% trans "إضافة العميل" %}</p></a></li>
           <li class="nav-item"><a href="{% url 'customer_list' %}" class="nav-link"><i class="fas fa-users nav-icon"></i><p>{% trans "عرض العملاء" %}</p></a></li>
         </ul>
       </li>
-
-      <!-- السندات -->
-      <li class="nav-item has-treeview">
-        <a href="#" class="nav-link">
-          <i class="nav-icon fas fa-money-check-alt"></i>
-          <p>{% trans "السندات" %}<i class="fas fa-angle-left right"></i></p>
-        </a>
+       <!-- السندات -->
+       <li class="nav-item has-treeview">
+        <a href="#" class="nav-link"><i class="nav-icon fas fa-warehouse"></i><p>{% trans "السندات" %}<i class="fas fa-angle-left right"></i></p></a>
         <ul class="nav nav-treeview">
-          <li class="nav-item"><a href="{% url 'add_payment_voucher' %}" class="nav-link"><i class="fas fa-money-check-alt nav-icon"></i><p>{% trans " سند دفع للمورد" %}</p></a></li>
-          <li class="nav-item"><a href="{% url 'payment_voucher_list' %}" class="nav-link"><i class="fas fa-credit-card nav-icon"></i><p>{% trans "عرض سندات المورد" %}</p></a></li>
-          <li class="nav-item"><a href="{% url 'voucher_list' %}" class="nav-link"><i class="fas fa-truck nav-icon"></i><p>{% trans "عرض جميع السندات " %}</p></a></li>
-          <li class="nav-item"><a href="{% url 'add_receipt_voucher' %}" class="nav-link"><i class="fas fa-receipt nav-icon"></i><p>{% trans " سند قبض للعميل" %}</p></a></li>
-          <li class="nav-item"><a href="{% url 'receipt_voucher_list' %}" class="nav-link"><i class="fas fa-hand-holding-usd nav-icon"></i><p>{% trans "عرض سندات العميل" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'payment_form' %}" class="nav-link"><i class="fas fa-box nav-icon"></i><p>{% trans "سند دفع" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'payment_list' %}" class="nav-link"><i class="fas fa-box nav-icon"></i><p>{% trans "عرض سندات الدفع " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'receipt_form' %}" class="nav-link"><i class="fas fa-box nav-icon"></i><p>{% trans "سند قبض " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'receipt_list' %}" class="nav-link"><i class="fas fa-box nav-icon"></i><p>{% trans "عرض سندات القبض" %}</p></a></li>
         </ul>
       </li>
+
+     
 
       <!-- المشتريات -->
       <li class="nav-item has-treeview">
         <a href="#" class="nav-link"><i class="nav-icon fas fa-shopping-cart"></i><p>{% trans "المشتريات" %}<i class="fas fa-angle-left right"></i></p></a>
         <ul class="nav nav-treeview">
-          <li class="nav-item"><a href="{% url 'create_invoice' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "فاتورة المشتريات" %}</p></a></li>
-          <li class="nav-item"><a href="{% url 'invoice_list' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "عرض فواتير المشتريات " %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'create_purchase_invoice' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "فاتورة المشتريات" %}</p></a></li>
+          <li class="nav-item"><a href="{% url 'purchase_invoice_success' invoice_code='some_invoice_code' %}" class="nav-link"><i class="fas fa-file-invoice nav-icon"></i><p>{% trans "عرض فواتير المشتريات " %}</p></a></li>
         </ul>
       </li>
 
